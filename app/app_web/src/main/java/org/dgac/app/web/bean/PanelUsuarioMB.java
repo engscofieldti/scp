@@ -959,7 +959,7 @@ public class PanelUsuarioMB implements Serializable {
 			
 			getUniResum().addAll(service.getZonaResumPorAsig(codAsig));
 			}
-			System.out.println("entro y salio del metodo : cargaZonasPorAsignacion()");
+			System.out.println("entro y salio del metodo xzasdasdasdaassad : cargaZonasPorAsignacion()");
 				
 			}
 	public void cargaZonasPorAsignacionxx(AjaxBehaviorEvent event) {
