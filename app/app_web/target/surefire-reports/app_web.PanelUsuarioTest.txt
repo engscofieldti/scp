@@ -1,12 +1,12 @@
 -------------------------------------------------------------------------------
 Test set: app_web.PanelUsuarioTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.063 sec <<< FAILURE!
-getCurrentMonthTest(app_web.PanelUsuarioTest)  Time elapsed: 0.022 sec  <<< ERROR!
+Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.094 sec <<< FAILURE!
+getCurrentMonthTest(app_web.PanelUsuarioTest)  Time elapsed: 0.035 sec  <<< ERROR!
 java.lang.NullPointerException
 	at org.dgac.app.web.bean.Filtro.versionPF(Filtro.java:125)
 	at org.dgac.app.web.bean.Filtro.<init>(Filtro.java:43)
-	at org.dgac.app.web.bean.PanelUsuarioMB.<init>(PanelUsuarioMB.java:216)
+	at org.dgac.app.web.bean.PanelUsuarioMB.<init>(PanelUsuarioMB.java:219)
 	at app_web.PanelUsuarioTest.setUp(PanelUsuarioTest.java:17)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
@@ -41,7 +41,7 @@ getCurrentYearTest(app_web.PanelUsuarioTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException
 	at org.dgac.app.web.bean.Filtro.versionPF(Filtro.java:125)
 	at org.dgac.app.web.bean.Filtro.<init>(Filtro.java:43)
-	at org.dgac.app.web.bean.PanelUsuarioMB.<init>(PanelUsuarioMB.java:216)
+	at org.dgac.app.web.bean.PanelUsuarioMB.<init>(PanelUsuarioMB.java:219)
 	at app_web.PanelUsuarioTest.setUp(PanelUsuarioTest.java:17)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)

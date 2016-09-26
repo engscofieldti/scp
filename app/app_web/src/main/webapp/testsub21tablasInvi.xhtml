@@ -195,11 +195,10 @@ vertical-align: center;
                                            itemDisabled="#{panelUsuarioMB.asignacionDisabled(asignacion.descAsig)}"
                                            />
                                				
-                                              <p:ajax process="asignacionCheck" event="change" listener="#{panelUsuarioMB.cargaZonasPorAsignacion}" 
-                                           update="asignacionCheck itemCheck zonaResum ueCheck"/>  
+                                              <p:ajax process="@this" event="change" listener="#{panelUsuarioMB.cargaZonasPorAsignacion}" 
+                                           update="itemCheck zonaResum ueCheck"/>  
                                         
-                                         
-                                           <ui:remove> <p:ajax  process="asignacionCheck" event="change" listener="#{panelUsuarioMB.asignacionDisabled2(asignacion.descAsig)}" 
+                                          <ui:remove> <p:ajax  process="asignacionCheck" event="change" listener="#{panelUsuarioMB.asignacionDisabled2(asignacion.descAsig)}" 
                                            update="asignacionCheck zonaResum"/>
                                            <p:ajax process="asignacionCheck" event="valueChange" listener="#{panelUsuarioMB.cargaZonasPorAsignacion}" 
                                            update="asignacionCheck itemCheck zonaResum ueCheck"/>  
@@ -212,7 +211,8 @@ vertical-align: center;
                                          <f:ajax listener="#{panelUsuarioMB.cargaZonasPorAsignacionxx}" event="valueChange" execute="@this"  />  
                                      <p:ajax process="asignacionCheck" event="changeAgregarsinofuncionaalgo" listener="#{panelUsuarioMB.inicializaResum}" update="itemCheck,zonaResum,ueCheck"/>                              
                                        
-                                      </ui:remove>                                                        
+                                      </ui:remove>                                                     
+                                             
                                                                                                                                                            
                         </p:selectManyCheckbox>
                         <p:tooltip id="toolTipAsignacion" for="asignacionCheck" value="Seleccione una asignacion y luego Zonas..."
