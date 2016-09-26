@@ -195,9 +195,9 @@ vertical-align: center;
                                            itemDisabled="#{panelUsuarioMB.asignacionDisabled(asignacion.descAsig)}"
                                            />
                                				
-                                             
-                                         <p:ajax process="asignacionCheck" event="valueChange" listener="#{panelUsuarioMB.cargaZonasPorAsignacion}" 
+                                              <p:ajax process="asignacionCheck" event="change" listener="#{panelUsuarioMB.cargaZonasPorAsignacion}" 
                                            update="asignacionCheck itemCheck zonaResum ueCheck"/>  
+                                        
                                          
                                            <ui:remove> <p:ajax  process="asignacionCheck" event="change" listener="#{panelUsuarioMB.asignacionDisabled2(asignacion.descAsig)}" 
                                            update="asignacionCheck zonaResum"/>
