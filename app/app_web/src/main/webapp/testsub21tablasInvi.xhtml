@@ -195,8 +195,9 @@ vertical-align: center;
                                            itemDisabled="#{panelUsuarioMB.asignacionDisabled(asignacion.descAsig)}"
                                            />
                                				
-                                             <f:ajax listener="#{panelUsuarioMB.cargaZonasPorAsignacionxx}" event="valueChange" execute="@this"  />
-                                         
+                                             
+                                         <p:ajax process="asignacionCheck" event="valueChange" listener="#{panelUsuarioMB.cargaZonasPorAsignacion}" 
+                                           update="asignacionCheck itemCheck zonaResum ueCheck"/>  
                                          
                                            <ui:remove> <p:ajax  process="asignacionCheck" event="change" listener="#{panelUsuarioMB.asignacionDisabled2(asignacion.descAsig)}" 
                                            update="asignacionCheck zonaResum"/>
@@ -208,7 +209,7 @@ vertical-align: center;
                                       update="id_grid_primera_etapa"/>
                                         <p:ajax process="@this" event="change" listener="#{panelUsuarioMB.selectedValues.renderFiltro}"
                                            update="id_grid_primera_etapa id_zonas"/>
-                                           
+                                         <f:ajax listener="#{panelUsuarioMB.cargaZonasPorAsignacionxx}" event="valueChange" execute="@this"  />  
                                      <p:ajax process="asignacionCheck" event="changeAgregarsinofuncionaalgo" listener="#{panelUsuarioMB.inicializaResum}" update="itemCheck,zonaResum,ueCheck"/>                              
                                        
                                       </ui:remove>                                                        
