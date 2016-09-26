@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="HHEETURNOSCONNOMINA" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="be9bba7c-3364-40b0-befe-94b859192966">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<style name="condicion">
+		<conditionalStyle>
+			<style/>
+		</conditionalStyle>
+	</style>
+	<style name="style2">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{calcPorcEjec} > 16.6)]]></conditionExpression>
+			<style forecolor="#B00000" isBold="true">
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid" lineColor="#99FF00"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#99FF00"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#99FF00"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#99FF00"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#99FF00"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{calcPorcEjec} >= 14.0)&new Boolean($V{calcPorcEjec} <= 16.5)]]></conditionExpression>
+			<style forecolor="#FFFF1A" isBold="true">
+				<box>
+					<pen lineWidth="1.0" lineColor="#99FF00"/>
+					<topPen lineWidth="1.0" lineColor="#99FF00"/>
+					<leftPen lineWidth="1.0" lineColor="#99FF00"/>
+					<bottomPen lineWidth="1.0" lineColor="#99FF00"/>
+					<rightPen lineWidth="1.0" lineColor="#99FF00"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{calcPorcEjec} <= 14.0)]]></conditionExpression>
+			<style forecolor="#00FF00" isBold="true">
+				<box>
+					<pen lineWidth="1.0" lineColor="#99FF00"/>
+					<topPen lineWidth="1.0" lineColor="#99FF00"/>
+					<leftPen lineWidth="1.0" lineColor="#99FF00"/>
+					<bottomPen lineWidth="1.0" lineColor="#99FF00"/>
+					<rightPen lineWidth="1.0" lineColor="#99FF00"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==1]]></conditionExpression>
+			<style backcolor="#FDFDAF">
+				<box>
+					<pen lineWidth="0.5" lineColor="#99FF00"/>
+					<topPen lineWidth="0.5" lineColor="#99FF00"/>
+					<leftPen lineWidth="0.5" lineColor="#99FF00"/>
+					<bottomPen lineWidth="0.5" lineColor="#99FF00"/>
+					<rightPen lineWidth="0.5" lineColor="#99FF00"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==0]]></conditionExpression>
+			<style backcolor="#FEFEE1">
+				<box>
+					<pen lineWidth="0.5" lineColor="#99FF00"/>
+					<topPen lineWidth="0.5" lineColor="#99FF00"/>
+					<leftPen lineWidth="0.5" lineColor="#99FF00"/>
+					<bottomPen lineWidth="0.5" lineColor="#99FF00"/>
+					<rightPen lineWidth="0.5" lineColor="#99FF00"/>
+				</box>
+			</style>
+		</conditionalStyle>
+	</style>
+	<style name="zebra">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==1]]></conditionExpression>
+			<style backcolor="#FDFDAF">
+				<box>
+					<pen lineWidth="1.0" lineColor="#99FF00"/>
+					<topPen lineWidth="1.0" lineColor="#99FF00"/>
+					<leftPen lineWidth="1.0" lineColor="#99FF00"/>
+					<bottomPen lineWidth="1.0" lineColor="#99FF00"/>
+					<rightPen lineWidth="1.0" lineColor="#99FF00"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==0]]></conditionExpression>
+			<style backcolor="#FEFEE1">
+				<box>
+					<pen lineWidth="1.0" lineColor="#99FF00"/>
+					<topPen lineWidth="1.0" lineColor="#99FF00"/>
+					<leftPen lineWidth="1.0" lineColor="#99FF00"/>
+					<bottomPen lineWidth="1.0" lineColor="#99FF00"/>
+					<rightPen lineWidth="1.0" lineColor="#99FF00"/>
+				</box>
+			</style>
+		</conditionalStyle>
+	</style>
+	<style name="estiloCabecera">
+		<box>
+			<pen lineWidth="1.0" lineColor="#33FFFF"/>
+			<topPen lineWidth="1.0" lineColor="#33FFFF"/>
+			<leftPen lineWidth="1.0" lineColor="#33FFFF"/>
+			<bottomPen lineWidth="1.0" lineColor="#33FFFF"/>
+			<rightPen lineWidth="1.0" lineColor="#33FFFF"/>
+		</box>
+	</style>
+	<queryString>
+		<![CDATA[SELECT CODIGO_UNIDAD,
+       NOMBRE_UNIDAD,
+       SUM(ENERO)      AS ENERO,
+       SUM(FEBRERO)    AS FEBRERO,
+       SUM(MARZO)      AS MARZO,
+       SUM(ABRIL)      AS ABRIL,
+       SUM(MAYO)       AS MAYO,
+       SUM(JUNIO)      AS JUNIO,
+       SUM(JULIO)      AS JULIO,
+       SUM(AGOSTO)     AS AGOSTO,
+       SUM(SEPTIEMBRE) AS SEPTIEMBRE,
+       SUM(OCTUBRE)    AS OCTUBRE,
+       SUM(NOVIEMBRE)  AS NOVIEMBRE,
+       SUM(DICIEMBRE)  AS DICIEMBRE
+FROM (SELECT CODIGO_UNIDAD,
+             NOMBRE_UNIDAD,
+             DECODE(MES, 1,  PAGO_DEL_MES, 0) AS ENERO,
+             DECODE(MES, 2,  PAGO_DEL_MES, 0) AS FEBRERO,
+             DECODE(MES, 3,  PAGO_DEL_MES, 0) AS MARZO,
+             DECODE(MES, 4,  PAGO_DEL_MES, 0) AS ABRIL,
+             DECODE(MES, 5,  PAGO_DEL_MES, 0) AS MAYO,
+             DECODE(MES, 6,  PAGO_DEL_MES, 0) AS JUNIO,
+             DECODE(MES, 7,  PAGO_DEL_MES, 0) AS JULIO,
+             DECODE(MES, 8,  PAGO_DEL_MES, 0) AS AGOSTO,
+             DECODE(MES, 9,  PAGO_DEL_MES, 0) AS SEPTIEMBRE,
+             DECODE(MES, 10, PAGO_DEL_MES, 0) AS OCTUBRE,
+             DECODE(MES, 11, PAGO_DEL_MES, 0) AS NOVIEMBRE,
+             DECODE(MES, 12, PAGO_DEL_MES, 0) AS DICIEMBRE
+      FROM NOMINA_DGAC.V_PAGOS_HPRO_2016) UNI
+WHERE
+CODIGO_UNIDAD=11701000 OR -- CHACALLUTA
+CODIGO_UNIDAD=11702000 OR -- DIEGO ARACENA
+CODIGO_UNIDAD=11703000 OR -- AERODROMO EL LOA
+CODIGO_UNIDAD=20005060 OR -- ANDRES SABELLA
+CODIGO_UNIDAD=11700000 OR -- SUBDEPTO ZONA AERO NORTE COMERCIAL
+CODIGO_UNIDAD=11708000 OR -- AERODROMO DESIERTO DE ATACAMA
+CODIGO_UNIDAD=11802000 OR -- AERODROMO LA FLORIDA
+CODIGO_UNIDAD=11803000 OR -- AERODROMO MATAVERI
+CODIGO_UNIDAD=11806000 OR -- AERODROMO VIÑA DEL MAR
+CODIGO_UNIDAD=11800000 OR -- SUBDEPTO ZONA AERO CENTRAL
+CODIGO_UNIDAD=11808000 OR -- AERODROMO EULOGIO SANCHEZ
+CODIGO_UNIDAD=11813000 OR -- AERODROMO CARRIEL SUR(CONCEPCION)
+CODIGO_UNIDAD=20005057 OR -- AERODROMO ROBINSON CRUSOE
+CODIGO_UNIDAD=10700000 OR -- DEPARTAMENTO METEOROLOGICA DE CHILE (DMC)
+CODIGO_UNIDAD=11001000 OR -- AEROPUERTO ARTURO MERINO BENITEZ(AMB)
+CODIGO_UNIDAD=10801400 OR -- SANTIAGO LOGISTICA
+CODIGO_UNIDAD=11000000 OR -- DASA
+CODIGO_UNIDAD=11900000 OR -- SECCION ZONA AEROPORTUARIA SUR
+CODIGO_UNIDAD=20005027 OR -- AERODROMO LA ARAUCANIA
+CODIGO_UNIDAD=11902000 OR -- AERODROMO PICHOY
+CODIGO_UNIDAD=11903000 OR -- AERODROMO CAÑAL BAJO
+CODIGO_UNIDAD=11904000 OR -- AEROPUERTO EL TEPUAL
+CODIGO_UNIDAD=11913000 OR -- AERODROMO BALMACEDA
+CODIGO_UNIDAD=12000000 OR -- SECCION ZONA AEROPORTUARIA AUSTRAL
+CODIGO_UNIDAD=12001000 OR -- AEROPUERTO CARLOS IBAÑEZ DEL CAMPO
+CODIGO_UNIDAD=10904300 OR -- OFICINA BIENESTAR B.SOCIAL
+CODIGO_UNIDAD=10902200    -- OFICINA DOCENTE ETA
+GROUP BY CODIGO_UNIDAD, NOMBRE_UNIDAD
+
+ORDER BY CASE WHEN CODIGO_UNIDAD = 11701000 THEN 1 --CHACALLUTA
+WHEN CODIGO_UNIDAD = 11702000 THEN 2 -- DIEGO ARACENA
+WHEN CODIGO_UNIDAD = 11703000 THEN 3 -- EL LOA
+WHEN CODIGO_UNIDAD = 20005060 THEN 4 -- ANDRES SABELLA
+WHEN CODIGO_UNIDAD = 11700000 THEN 5 -- ZONA AERO NORTE
+WHEN CODIGO_UNIDAD = 11708000 THEN 6 -- DESIERTO DE ATACAMA
+WHEN CODIGO_UNIDAD = 11802000 THEN 7 -- AERODROMO LA FLORIDA
+WHEN CODIGO_UNIDAD = 11803000 THEN 8 -- AERODROMO MATAVERI
+WHEN CODIGO_UNIDAD = 11806000 THEN 9 -- AERODROMO VIÑA DEL MAR
+WHEN CODIGO_UNIDAD = 11800000 THEN 10 -- ZONA AERO CENTRAL
+WHEN CODIGO_UNIDAD = 11808000 THEN 11 -- AERODROMO EULOGIO SANCHEZ
+WHEN CODIGO_UNIDAD = 11813000 THEN 12 -- AERODROMO CARRIEL SUR CONCEPCION
+WHEN CODIGO_UNIDAD = 20005057 THEN 13 -- AERODROMO ROBINSON CRUSOE
+WHEN CODIGO_UNIDAD = 10700000 THEN 14 -- DMC
+WHEN CODIGO_UNIDAD = 11001000 THEN 15 -- AMB
+WHEN CODIGO_UNIDAD = 10801400 THEN 16 -- SANTIAGO LOGISTICA
+WHEN CODIGO_UNIDAD = 11000000 THEN 17 -- DASA
+WHEN CODIGO_UNIDAD = 11900000 THEN 18 -- ZONA AEROPORTUARIA SUR
+WHEN CODIGO_UNIDAD = 20005027 THEN 19 -- AERODROMO LA ARAUCANIA
+WHEN CODIGO_UNIDAD = 11902000 THEN 20 -- AERODROMO PICHOY
+WHEN CODIGO_UNIDAD = 11903000 THEN 21 -- AERODROMO CAÑAL BAJO
+WHEN CODIGO_UNIDAD = 11904000 THEN 22 -- AEROPUERTO EL TEPUAL
+WHEN CODIGO_UNIDAD = 11913000 THEN 23 -- AERODROMO BALMACEDA
+WHEN CODIGO_UNIDAD = 12000000 THEN 24 -- ZONA AEROPORT AUSTRAL
+WHEN CODIGO_UNIDAD = 12001000 THEN 25 -- AEROPUERTO CARLOS IBAÑEZ DEL CAMPO
+WHEN CODIGO_UNIDAD = 10904300 THEN 26 -- OFICINA BIENESTAR SOCIAL
+WHEN CODIGO_UNIDAD = 10902200 THEN 27 -- OFICINA DOCENTE ETA
+END]]>
+	</queryString>
+	<field name="CODIGO_UNIDAD" class="java.math.BigDecimal"/>
+	<field name="NOMBRE_UNIDAD" class="java.lang.String"/>
+	<field name="ENERO" class="java.math.BigDecimal"/>
+	<field name="FEBRERO" class="java.math.BigDecimal"/>
+	<field name="MARZO" class="java.math.BigDecimal"/>
+	<field name="ABRIL" class="java.math.BigDecimal"/>
+	<field name="MAYO" class="java.math.BigDecimal"/>
+	<field name="JUNIO" class="java.math.BigDecimal"/>
+	<field name="JULIO" class="java.math.BigDecimal"/>
+	<field name="AGOSTO" class="java.math.BigDecimal"/>
+	<field name="SEPTIEMBRE" class="java.math.BigDecimal"/>
+	<field name="OCTUBRE" class="java.math.BigDecimal"/>
+	<field name="NOVIEMBRE" class="java.math.BigDecimal"/>
+	<field name="DICIEMBRE" class="java.math.BigDecimal"/>
+	<variable name="presupuestoUnidad" class="java.lang.Long" incrementType="Report">
+		<variableExpression><![CDATA[($F{CODIGO_UNIDAD}.compareTo( 11701000 ))?$V{presupuestoUnidad}:250000]]></variableExpression>
+	</variable>
+	<variable name="prueba" class="java.lang.Long">
+		<variableExpression><![CDATA[$F{NOMBRE_UNIDAD}.equalsIgnoreCase("AEROPUERTO CHACALLUTA")? 209736623 :
+   ($F{NOMBRE_UNIDAD}.equals("AERODROMO MATAVERI")? 41000000 :
+     $F{NOMBRE_UNIDAD}.equals("AEROPUERTO GENERAL DIEGO ARACENA")? 317197564 :
+      $F{NOMBRE_UNIDAD}.equals("AERODROMO EL LOA")? 146016907 :
+       $F{NOMBRE_UNIDAD}.equals("AEROPUERTO ANDRES SABELLA")? 199074034 :
+        $F{NOMBRE_UNIDAD}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")? 25531122 :
+         $F{NOMBRE_UNIDAD}.equals("AERODROMO DESIERTO DE ATACAMA")? 94895849 :
+          $F{NOMBRE_UNIDAD}.equals("AERODROMO LA FLORIDA")? 78000000 :
+           $F{NOMBRE_UNIDAD}.equals("AERODROMO MATAVERI")? 41000000 :
+             $F{NOMBRE_UNIDAD}.equals("AERODROMO VIÑA DEL MAR")? 11000000 :
+              $F{NOMBRE_UNIDAD}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")? 50936826 :
+               $F{NOMBRE_UNIDAD}.equals("AERODROMO EULOGIO SANCHEZ")? 16000000 :
+                $F{NOMBRE_UNIDAD}.equals("AERODROMO CARRIEL SUR")? 153000000 :
+               $F{NOMBRE_UNIDAD}.equals("AERODROMO ROBINSON CRUSOE")? 7000000 :
+              $F{NOMBRE_UNIDAD}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")? 75329817 :
+             $F{NOMBRE_UNIDAD}.equals("AEROPUERTO ARTURO MERINO BENITEZ")? 1001440533 :
+            $F{NOMBRE_UNIDAD}.equals("SECCION SERVICIOS GENERALES LOGISTICA")? 12354857 :
+           $F{NOMBRE_UNIDAD}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")? 284302305 :
+          $F{NOMBRE_UNIDAD}.equals("SECCION ZONA AEROPORTUARIA SUR")? 27513712 :
+         $F{NOMBRE_UNIDAD}.equals("AERODROMO LA ARAUCANIA")? 90832921 :
+        $F{NOMBRE_UNIDAD}.equals("AERODROMO PICHOY")? 26484828 :
+       $F{NOMBRE_UNIDAD}.equals("AERODROMO CAÑAL BAJO")? 25096286 :
+      $F{NOMBRE_UNIDAD}.equals("AEROPUERTO EL TEPUAL")? 210509479 :
+     $F{NOMBRE_UNIDAD}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL")? 28323811 :
+    $F{NOMBRE_UNIDAD}.equals("AEROPUERTO CARLOS IBAÑEZ DEL CAMPO")? 177327935 :
+  ($F{NOMBRE_UNIDAD}.equals("AERODROMO BALMACEDA")? 11998672 :0)
+)]]></variableExpression>
+	</variable>
+	<variable name="variable1" class="java.lang.Long">
+		<variableExpression><![CDATA[$F{NOMBRE_UNIDAD}.equals("AEROPUERTO CHACALLUTA")? 500000 :
+($F{NOMBRE_UNIDAD}.equals("AERODROMO MATAVERI")? 700000 :
+($F{NOMBRE_UNIDAD}.equals("AERODROMO BALMACEDA")? 900000 :1300000)
+)]]></variableExpression>
+	</variable>
+	<variable name="sumEjecPres" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{ENERO}  +
+$F{FEBRERO}+
+$F{MARZO}  +
+$F{ABRIL}]]></variableExpression>
+	</variable>
+	<variable name="calcPorcEjec" class="java.lang.Double" calculation="Average">
+		<variableExpression><![CDATA[($V{sumEjecPres}*100)/$V{prueba}]]></variableExpression>
+	</variable>
+	<variable name="saldoReal" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{prueba}-$V{sumEjecPres}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="85" splitType="Stretch">
+			<staticText>
+				<reportElement style="SubTitle" x="320" y="62" width="217" height="22" uuid="fdadc009-3185-41a4-a806-fee278371a9f"/>
+				<textElement>
+					<font fontName="Times New Roman" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Informe de Horas Promedio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="6" width="235" height="56" uuid="cbb180c6-67c3-4abd-8e64-175176149ab6"/>
+				<text><![CDATA[Oficina de Presupuesto
+Sección Planificación y Control
+Departamento de Recursos Humanos
+Dirección General de Aeronáutica Civil
+			]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="632" y="34" width="161" height="14" uuid="e4c32a57-349e-461f-9117-69745ce87b8c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Asignación :Horas Extra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="632" y="20" width="161" height="14" uuid="7b778f0b-085e-4cbd-9f48-cae7dd11ab12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ítem :Remuneración Variable]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="632" y="6" width="161" height="14" uuid="73fa7c2a-e8b0-446a-ad4e-b3b3f4bcbf05"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SubtÍtulo:21]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="632" y="48" width="161" height="14" uuid="43c10f55-6069-45e1-8893-d476e9bf76d7"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período :Enero-Mayo 2016]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="29" y="11" width="39" height="36" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="9206335b-6b1a-4561-998b-eee002813093"/>
+				<textElement verticalAlignment="Top">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODiGO UNIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="67" y="11" width="101" height="36" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="9addf0a6-a924-40f3-95c0-40f66a5030aa"/>
+				<textElement verticalAlignment="Top">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE UNIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="266" y="11" width="66" height="36" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="03a56f6d-0b63-4d1f-8f6f-f36a1c09c43d"/>
+				<textElement verticalAlignment="Top">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GASTO ENERO $]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="454" y="11" width="61" height="36" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="d3baa9c5-3b24-46e4-bee3-7b432d7eeca6"/>
+				<textElement verticalAlignment="Top">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GASTO ABRIL $]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="330" y="11" width="62" height="36" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="0e20f2ee-7428-434b-bc07-820dced8a1d1"/>
+				<textElement verticalAlignment="Top">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GASTO FEBRERO $]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="573" y="11" width="73" height="36" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="cf64c5ab-8270-4d18-9405-dd403192edf8"/>
+				<textElement verticalAlignment="Top">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EJECUCIÓN PRESUPUESTARIA $]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="392" y="11" width="62" height="36" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="8d74fc72-7794-4b18-8481-809e4c54f872"/>
+				<textElement verticalAlignment="Top">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GASTO MARZO $]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="713" y="11" width="55" height="36" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="dde20537-9a68-41d7-b3d2-796f6c7a94f1"/>
+				<textElement verticalAlignment="Top">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SALDO REAL $]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="646" y="11" width="67" height="36" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="ff055b70-0505-498d-ae9a-4ebee6f8087c"/>
+				<textElement verticalAlignment="Top">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EJECUCIÓN PRESUPUESTARIA %]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="167" y="11" width="99" height="36" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="219314d4-1e21-4d29-af4a-898b3da28290"/>
+				<textElement verticalAlignment="Top">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRESUPUESTO $]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="515" y="11" width="58" height="36" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="7eeff65d-2bc4-4503-b5cf-c5866d47e839"/>
+				<textElement verticalAlignment="Top">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GASTO MAYO $]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement style="zebra" mode="Opaque" x="29" y="0" width="38" height="30" uuid="355bd193-d499-4269-ade8-6f57b7b116ee"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CODIGO_UNIDAD}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="266" y="0" width="65" height="30" uuid="53b90b46-9d28-4099-a756-ba73bece2cb6"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ENERO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos;$ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="331" y="0" width="62" height="30" uuid="05fb3d3d-32aa-4812-96a4-791190d014f0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FEBRERO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="393" y="0" width="62" height="30" uuid="2e4d46b7-fee8-44a4-8743-765ca088b872"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MARZO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="455" y="0" width="60" height="30" uuid="85f9e69e-7e21-46ca-a4a9-26dfd0c238b2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ABRIL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="zebra" mode="Opaque" x="67" y="0" width="100" height="30" uuid="e9475ca6-18f1-4bad-9ab7-3a3735d8a35d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRE_UNIDAD}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0 ">
+				<reportElement style="zebra" mode="Opaque" x="168" y="0" width="98" height="30" uuid="89a4f63e-876f-41ac-b990-4fd9052f9d66"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{prueba}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00 &apos;%&apos;">
+				<reportElement style="style2" mode="Opaque" x="645" y="0" width="68" height="30" uuid="b263c635-98d8-45a1-9709-9ae211b44351"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{calcPorcEjec}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="713" y="0" width="55" height="30" uuid="4b13f1c9-1efd-4a3d-ab01-b03cdde389e9"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{saldoReal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="515" y="0" width="58" height="30" uuid="aea7f97a-3699-4a27-91c3-cc338f26eec6"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MAYO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="573" y="0" width="73" height="30" uuid="82ce97af-316f-421a-be72-5812a37eef1e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumEjecPres}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="6" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="802" height="1" uuid="ecc35624-04a0-47af-a75a-6bff68b15f4d"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="63" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-14" y="0" width="843" height="24" forecolor="#D0B48E" backcolor="#F2EBDF" uuid="df52e8a8-38e9-4d8b-9bcd-84ab7c52a5bd"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="783" y="1" width="40" height="20" forecolor="#736343" uuid="7f820de6-12eb-4d07-b4cb-6dd01264346c"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="703" y="1" width="80" height="20" forecolor="#736343" uuid="eafefcfd-cf28-4634-a44a-fd81a79bb0ab"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343" uuid="d20c2ced-2a33-41bc-afe5-2d5c11825311"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="445" y="3" width="45" height="20" forecolor="#FFFFFF" backcolor="#FFFF1A" uuid="f44fe474-2e9c-4c91-9a12-f909ce80330f"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Riesgo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="535" y="3" width="45" height="20" forecolor="#FFFFFF" backcolor="#B00000" uuid="65a17c67-b20e-4e9e-9bfa-0e36a41a76c3"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Alerta]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="196" y="4" width="140" height="20" uuid="ba9a73d5-0c75-4f9a-a16d-a572f3f7d628"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Ejec. presupuestaria % según colores :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="353" y="4" width="45" height="20" forecolor="#FFFFFF" backcolor="#00FF00" uuid="c9557a97-5b0e-4f43-b7a3-c44428d79d3d"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Aceptable]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="hheeEspecialidades2016" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="883dd46d-5729-415b-a6db-6ae78626f1ff">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="mes" class="java.util.Collection" nestedType="java.lang.Integer"/>
+	<parameter name="unidadesZonas" class="java.util.Collection" nestedType="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="especialidad" class="java.util.Collection" nestedType="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="user" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT UNI.ANO, UNI.MES, UNI.UNIDAD AS CODIGO_UNIDAD,
+       UNI.UNIDAD_DESC AS NOMBRE_UNIDAD,
+       UNI.CARGO AS ESPECIALIDAD,
+       SUM(UNI.MONTO_DIFER) AS PAGO_DEL_MES
+FROM (SELECT TRAB.ANO, TRAB.MES, TRAB.RUT, TRAB.NOMBRE,
+             DECODE(TRAB.TIPO_CONTRATO, 1, 'PLANTA',
+                                        2, 'C.SIMPLE',
+                                        10, 'C.GLOBAL', TRAB.TIPO_CONTRATO) AS C_JURIDICA,
+             TRAB.ID_CONTRATO,
+             TRAB.UNIDAD,
+             UNI.UNIDAD_DESC,
+             FN.DESCRIP AS CARGO,
+             Row_Number() Over(Partition By TRAB.RUT, TRAB.ID_CONTRATO
+                               Order By TRAB.RUT, TRAB.ID_CONTRATO, TRAB.ID_CONTRATO,
+                                        RET.ANO_CALCULO, RET.MES_CALCULO) AS SEC,
+
+
+             NVL(RESU.HCGHLYF_R, 0) +
+             NVL(RESU.HCSHLYF_R, 0) +
+             NVL(RESU.HPTHLYF_R, 0) AS HORAS_PROMEDIO,
+             RET.ANO_CALCULO AS ANO_C,
+             RET.MES_CALCULO AS MES_C,
+             RET.MONTO_ANTER, RET.MONTO_NUEVO, RET.MONTO_DIFER
+      FROM NOMINA_DGAC.PROCESOS_TRABAJADORES TRAB,
+           NOMINA_DGAC.PROCESOS_RESULTADOS RESU,
+          (SELECT CODIGO, DESCRIP FROM NOMINA_DGAC.TABLAS WHERE ID_TABLA = 189) FN,
+          (SELECT RP.RUT,
+                  RP.ID_EMPRESA,
+                  RP.ID_CONTRATO,
+                  DIF.ANO_CALCULO,
+                  DIF.MES_CALCULO,
+                  DIF.FIELD_NAME,
+                  DIF.MONTO_ANTER,
+                  DIF.MONTO_NUEVO,
+                  DIF.MONTO_DIFER,
+                  RP.ANO_PROCESO,
+                  RP.MES_PROCESO
+          FROM NOMINA_DGAC.REM_RELIQ_PROCESOS RP, NOMINA_DGAC.REM_RELIQ_PROCESOS_DIFER DIF
+          WHERE RP.ID_PROCESO = DIF.ID_PROCESO
+          AND   RP.ANO_PROCESO = 2015
+          AND   RP.MES_PROCESO IN ($P!{mes})
+          AND   DIF.FIELD_NAME IN ('hpthtcom', 'hcshtcom', 'hcghtcom','hcghlyf', 'hcshlyf', 'hpthlyf')) RET,
+         (SELECT CODIGO, TRIM(DESCRIP) AS UNIDAD_DESC FROM NOMINA_DGAC.TABLAS WHERE ID_TABLA = 69) UNI
+          WHERE TRAB.RUT         = RESU.RUT
+          AND   TRAB.ID_EMPRESA  = RESU.ID_EMPRESA
+          AND   TRAB.ID_CONTRATO = RESU.ID_CONTRATO
+          AND   TRAB.ID_PROCESO  = RESU.ID_PROCESO
+          AND   TRAB.ANO         = RESU.ANO
+          AND   TRAB.MES         = RESU.MES
+          AND   TRAB.ANO         = 2015
+          AND   TRAB.MES        IN ($P!{mes})
+          AND   TRAB.ID_PROCESO  = 0
+          AND   TRAB.RUT         = RET.RUT
+          AND   TRAB.ID_EMPRESA  = RET.ID_EMPRESA
+          AND   TRAB.ID_CONTRATO = RET.ID_CONTRATO
+          AND   TRAB.ANO         = RET.ANO_PROCESO
+          AND   TRAB.MES         = RET.MES_PROCESO
+          AND   TRAB.UNIDAD      = UNI.CODIGO(+)
+          AND   TRAB.ID_CARGO    = FN.CODIGO(+)
+          AND   TRAB.ID_EMPRESA  = 1
+          AND   TRAB.ACTIVO      = 1
+
+          AND   (NVL(RESU.HCGHLYF_R, 0) +
+                 NVL(RESU.HCSHLYF_R, 0) +
+                 NVL(RESU.HPTHLYF_R, 0)) != 0
+          ORDER BY TRAB.ANO, TRAB.MES, TRAB.NOMBRE, TRAB.TIPO_CONTRATO, TRAB.ID_CONTRATO) UNI
+GROUP BY UNI.ANO, UNI.MES, UNI.UNIDAD, UNI.UNIDAD_DESC, UNI.CARGO
+ORDER BY 1, 2, 3]]>
+	</queryString>
+	<field name="ANO" class="java.math.BigDecimal"/>
+	<field name="MES" class="java.math.BigDecimal"/>
+	<field name="CODIGO_UNIDAD" class="java.math.BigDecimal"/>
+	<field name="NOMBRE_UNIDAD" class="java.lang.String"/>
+	<field name="ESPECIALIDAD" class="java.lang.String"/>
+	<field name="PAGO_DEL_MES" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="581" y="35" width="54" height="20" uuid="b4aa4160-d93a-4af0-8ee7-66f50430bfeb"/>
+				<text><![CDATA[user:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="652" y="35" width="100" height="20" uuid="b38a4a6f-f6f3-4ad8-ac62-2e58f4f764e0"/>
+				<textFieldExpression><![CDATA[$P{user}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="444" y="0" width="133" height="20" uuid="2e9fe7f9-e5a2-4cca-bd4e-03a5c6bd6d3a"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ANO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="577" y="0" width="75" height="20" uuid="c7e2c9e4-bfc8-4493-ab03-04becf8b7112"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[MES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="236" y="0" width="70" height="20" uuid="a8b3b9f4-589a-405b-b3ce-32fbd549b79b"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[CODIGO_UNIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="311" y="0" width="133" height="20" uuid="07e4a99c-60dc-4529-9a04-89924117085f"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[NOMBRE_UNIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-16" y="0" width="252" height="20" uuid="3ca57650-b24c-45c2-a78e-d672c5c91cfb"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ESPECIALIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="665" y="0" width="133" height="20" uuid="e459abc4-b8be-426a-8a8b-bfc4316d1912"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[PAGO_DEL_MES]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<textField>
+				<reportElement x="444" y="0" width="133" height="20" uuid="a1c02cc8-b3e9-4aa5-a78f-c63e103c833b"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ANO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="577" y="0" width="75" height="20" uuid="7e28f82d-a629-4909-ae95-84357f6d669b"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MES}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="236" y="0" width="70" height="20" uuid="3ceb8f50-e23e-426f-ac57-200fb1500016"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CODIGO_UNIDAD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="311" y="0" width="133" height="20" uuid="7e17585b-4df5-49c0-bdfc-41b63f9b4679"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRE_UNIDAD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-16" y="0" width="252" height="20" uuid="3a087133-560d-4a1d-b4a9-15e315d2e7a6"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ESPECIALIDAD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="665" y="0" width="133" height="20" uuid="467b5ef9-8ad8-464e-95cf-939f38c6d7ab"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PAGO_DEL_MES}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

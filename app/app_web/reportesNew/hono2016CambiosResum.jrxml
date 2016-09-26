@@ -1,0 +1,710 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="hono2016CambiosResum" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="05c670a5-b772-44fb-87c9-0777d260ecaa">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="zebra">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==1]]></conditionExpression>
+			<style backcolor="#F0F8FF">
+				<box>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+					<topPen lineWidth="0.25" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineColor="#000000"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==0]]></conditionExpression>
+			<style backcolor="#FFFFFF">
+				<box>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+					<topPen lineWidth="0.25" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineColor="#000000"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<style mode="Opaque" forecolor="#000000" backcolor="#000000" fill="Solid" fontName="DejaVu Sans"/>
+		</conditionalStyle>
+	</style>
+	<style name="zebra2">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==1]]></conditionExpression>
+			<style backcolor="#9999FF">
+				<box>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+					<topPen lineWidth="0.25" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineColor="#000000"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==0]]></conditionExpression>
+			<style backcolor="#9999FF">
+				<box>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+					<topPen lineWidth="0.25" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineColor="#000000"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<style mode="Opaque" forecolor="#000000" backcolor="#000000" fill="Solid" fontName="DejaVu Sans"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="ano" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="mes" class="java.util.Collection"/>
+	<parameter name="user" class="java.lang.String"/>
+	<parameter name="asignaciones" class="java.lang.Collection"/>
+	<parameter name="subtitulo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT UNI.RUT,
+       UNI.NOMBRE,
+       UNI.ID_CONTRATO,
+       UNI.UNIDAD_EJECUTOR,
+       UNI.FECHA_INICIO,
+       UNI.FECHA_TERMINO,
+       UNI.UNIDAD,
+       UNI.DESCRIP AS DEPTO_AREA,
+       UNI.FUNCION AS ESPECIALIDAD,
+       SUM(UNI.MES_01) AS ENE,
+       SUM(UNI.MES_02) AS FEB,
+       SUM(UNI.MES_03) AS MAR,
+       SUM(UNI.MES_04) AS ABR,
+       SUM(UNI.MES_05) AS MAY,
+       SUM(UNI.MES_06) AS JUN,
+       SUM(UNI.MES_07) AS JUL,
+       SUM(UNI.MES_08) AS AGO,
+       SUM(UNI.MES_09) AS SEP,
+       SUM(UNI.MES_10) AS OCT,
+       SUM(UNI.MES_11) AS NOV,
+       SUM(UNI.MES_12) AS DIC
+FROM (SELECT TRAB.RUT,
+             TRAB.NOMBRE,
+             TRAB.ID_CONTRATO,
+             TRAB.UNIDAD,
+             TRAB.UNIDAD_EJECUTOR,
+             CT.FECHA_INICIO,
+             CT.FECHA_TERMINO,
+             TAB.DESCRIP,
+             ESPE.DESCRIP AS FUNCION,
+             DECODE(TRAB.MES, 01, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_01,
+             DECODE(TRAB.MES, 02, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_02,
+             DECODE(TRAB.MES, 03, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_03,
+             DECODE(TRAB.MES, 04, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_04,
+             DECODE(TRAB.MES, 05, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_05,
+             DECODE(TRAB.MES, 06, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_06,
+             DECODE(TRAB.MES, 07, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_07,
+             DECODE(TRAB.MES, 08, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_08,
+             DECODE(TRAB.MES, 09, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_09,
+             DECODE(TRAB.MES, 10, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_10,
+             DECODE(TRAB.MES, 11, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_11,
+             DECODE(TRAB.MES, 12, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_12
+      FROM NOMINA_DGAC.PROCESOS_TRABAJADORES TRAB,
+           NOMINA_DGAC.PROCESOS_RESULTADOS RESU,
+          (SELECT CODIGO, DESCRIP FROM NOMINA_DGAC.TABLAS WHERE ID_TABLA = 69) TAB,
+          (SELECT CODIGO,DESCRIP FROM NOMINA_DGAC.TABLAS WHERE ID_TABLA = 189) ESPE,
+           NOMINA_DGAC.AIRH_CONTRATOS_TRAB CT
+      WHERE TRAB.RUT         = RESU.RUT
+      AND   TRAB.ID_EMPRESA  = RESU.ID_EMPRESA
+      AND   TRAB.ID_CONTRATO = RESU.ID_CONTRATO
+      AND   TRAB.ID_PROCESO  = RESU.ID_PROCESO
+      AND   TRAB.ANO         = RESU.ANO
+      AND   TRAB.MES         = RESU.MES
+      AND   TRAB.ANO         = $P{ano}
+      AND   TRAB.MES IN ($P!{mes})
+      AND   TRAB.RUT         = CT.RUT
+      AND   TRAB.ID_EMPRESA  = CT.ID_EMPRESA
+      AND   TRAB.ID_CONTRATO = CT.ID_CONTRATO
+      AND   RESU.RUT         = CT.RUT
+      AND   RESU.ID_EMPRESA  = CT.ID_EMPRESA
+      AND   RESU.ID_CONTRATO = CT.ID_CONTRATO
+      AND   TRAB.ID_PROCESO  = 0
+      AND   TRAB.ID_EMPRESA  = 1
+      AND   TRAB.ACTIVO      = 1
+      AND   TRAB.UNIDAD      = TAB.CODIGO(+)
+      AND   TRAB.FUNCION     = ESPE.CODIGO(+)
+      AND  (NVL(RESU.hhohono, 0) +
+            NVL(RESU.hhohono_r, 0)) != 0
+      AND   TRAB.TIPO_CONTRATO IN (3)
+      AND TRAB.MES IN ($P!{mes})
+      AND   TRAB.ANO    = $P{ano}
+      ORDER BY TRAB.NOMBRE, TRAB.ID_CONTRATO,TRAB.UNIDAD_EJECUTOR) UNI--,TAB.DESCRIP) UNI
+GROUP BY UNI.RUT,
+         UNI.NOMBRE,
+         UNI.ID_CONTRATO,
+         UNI.UNIDAD,
+         UNI.UNIDAD_EJECUTOR,
+         UNI.DESCRIP,
+         UNI.FUNCION,
+         UNI.FECHA_INICIO,
+         UNI.FECHA_TERMINO
+ORDER BY UNI.NOMBRE, UNI.ID_CONTRATO]]>
+	</queryString>
+	<field name="RUT" class="java.lang.String"/>
+	<field name="NOMBRE" class="java.lang.String"/>
+	<field name="ID_CONTRATO" class="java.math.BigDecimal"/>
+	<field name="UNIDAD_EJECUTOR" class="java.math.BigDecimal"/>
+	<field name="FECHA_INICIO" class="java.sql.Timestamp"/>
+	<field name="FECHA_TERMINO" class="java.sql.Timestamp"/>
+	<field name="UNIDAD" class="java.math.BigDecimal"/>
+	<field name="DEPTO_AREA" class="java.lang.String"/>
+	<field name="ESPECIALIDAD" class="java.lang.String"/>
+	<field name="ENE" class="java.math.BigDecimal"/>
+	<field name="FEB" class="java.math.BigDecimal"/>
+	<field name="MAR" class="java.math.BigDecimal"/>
+	<field name="ABR" class="java.math.BigDecimal"/>
+	<field name="MAY" class="java.math.BigDecimal"/>
+	<field name="JUN" class="java.math.BigDecimal"/>
+	<field name="JUL" class="java.math.BigDecimal"/>
+	<field name="AGO" class="java.math.BigDecimal"/>
+	<field name="SEP" class="java.math.BigDecimal"/>
+	<field name="OCT" class="java.math.BigDecimal"/>
+	<field name="NOV" class="java.math.BigDecimal"/>
+	<field name="DIC" class="java.math.BigDecimal"/>
+	<variable name="ejec_hono" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{ENE}+$F{FEB}+$F{MAR}+$F{ABR}+$F{MAY}+$F{JUN}
++$F{JUL}+$F{AGO}+$F{SEP}+$F{OCT}+$F{NOV}+$F{DIC}]]></variableExpression>
+	</variable>
+	<variable name="ejec_hono_summary" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$V{ejec_hono}]]></variableExpression>
+	</variable>
+	<variable name="ejecSummaryTitle" class="java.lang.Long" incrementType="Report">
+		<variableExpression><![CDATA[$V{ejec_hono_summary}]]></variableExpression>
+	</variable>
+	<variable name="saldoTitulo" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{presupEstatico}-$V{ejecSummaryTitle}]]></variableExpression>
+	</variable>
+	<variable name="presupEstatico" class="java.lang.Long">
+		<variableExpression><![CDATA[218040000]]></variableExpression>
+	</variable>
+	<variable name="estimado" class="java.lang.Long">
+		<variableExpression><![CDATA[153946562]]></variableExpression>
+	</variable>
+	<variable name="porcEjeTitle" class="java.lang.Double" incrementType="Report" calculation="Average">
+		<variableExpression><![CDATA[$V{ejecSummaryTitle}/$V{presupEstatico}]]></variableExpression>
+	</variable>
+	<variable name="sumEne" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{ENE}]]></variableExpression>
+	</variable>
+	<variable name="sumFeb" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{FEB}]]></variableExpression>
+	</variable>
+	<variable name="sumMar" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{MAR}]]></variableExpression>
+	</variable>
+	<variable name="sumAbr" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{FEB}]]></variableExpression>
+	</variable>
+	<variable name="sumMay" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{FEB}]]></variableExpression>
+	</variable>
+	<variable name="sumJun" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{JUN}]]></variableExpression>
+	</variable>
+	<variable name="sumJul" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{JUL}]]></variableExpression>
+	</variable>
+	<variable name="sumAgo" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{AGO}]]></variableExpression>
+	</variable>
+	<variable name="sumSep" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{SEP}]]></variableExpression>
+	</variable>
+	<variable name="sumOct" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{OCT}]]></variableExpression>
+	</variable>
+	<variable name="sumNov" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{NOV}]]></variableExpression>
+	</variable>
+	<variable name="sumDic" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{DIC}]]></variableExpression>
+	</variable>
+	<variable name="saldoFinalTitle" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{presupEstatico}-$V{estimado}]]></variableExpression>
+	</variable>
+	<variable name="costoMensual" class="java.lang.Long">
+		<variableExpression><![CDATA[$F{RUT}.equals("0171093538")? 925332:
+$F{RUT}.equals("0176622938")? 1555555:
+$F{RUT}.equals("013672570K")? 919551:
+$F{RUT}.equals("0123581091")? 1419936:
+$F{RUT}.equals("0055228876")? 1390430:
+$F{RUT}.equals("0172516726")? 679296:
+$F{RUT}.equals("0086605139")? 1444444:
+$F{RUT}.equals("0172516726")? 679296:
+$F{RUT}.equals("0174165440")? 636167:
+$F{RUT}.equals("0150081785")? 1041000:
+$F{RUT}.equals("0049460244")? 1839100:
+$F{RUT}.equals("009516949K")? 1300000:
+$F{RUT}.equals("0138321231")? 518626:0]]></variableExpression>
+	</variable>
+	<variable name="cantMeses" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[($F{FECHA_TERMINO}-$F{FECHA_INICIO})/30]]></variableExpression>
+	</variable>
+	<variable name="gastoPorMes" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{costoMensual}*$V{cantMeses}]]></variableExpression>
+	</variable>
+	<variable name="cantContrata" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{NOMBRE}]]></variableExpression>
+	</variable>
+	<variable name="varEspecialidad" class="java.lang.String">
+		<variableExpression><![CDATA[(!($F{ESPECIALIDAD}.equals(null))
+? $F{ESPECIALIDAD}:"NO DEFINIDO")]]></variableExpression>
+	</variable>
+	<variable name="sumEjecProyecc" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$V{gastoPorMes}]]></variableExpression>
+	</variable>
+	<variable name="saldoamenosc" class="java.lang.Long">
+		<variableExpression><![CDATA[$V{presupEstatico}-$V{sumEjecProyecc}]]></variableExpression>
+	</variable>
+	<variable name="setFecha" class="java.util.Date">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="porcSaldoFinal" class="java.lang.Double">
+		<variableExpression><![CDATA[($V{saldoFinalTitle}/$V{presupEstatico})*100]]></variableExpression>
+	</variable>
+	<variable name="porcEstimadoDic" class="java.lang.Double" incrementType="Report" calculation="Average">
+		<variableExpression><![CDATA[($V{estimado}/$V{presupEstatico})*100]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-22" y="-18" width="836" height="134" backcolor="#FFFFFF" uuid="17731698-dbb5-495f-ad98-5db4dc575931"/>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="195" y="16" width="366" height="100" backcolor="#FFFFFF" uuid="599bbf56-df19-4650-84ed-460bf70d1ba3"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="218" y="70" width="162" height="20" forecolor="#000000" backcolor="#000080" uuid="ba78e318-2656-4cfa-b213-748135f3de3f"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<text><![CDATA[(*) Gasto estimado a Diciembre:]]></text>
+			</staticText>
+			<textField evaluationTime="Report" pattern="&apos; $ &apos;#,##0">
+				<reportElement x="381" y="49" width="82" height="20" forecolor="#000000" backcolor="#000080" uuid="b4c476c0-c05b-4c52-9f16-bdce55996958"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{presupEstatico}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="217" y="90" width="100" height="20" forecolor="#000000" backcolor="#000080" uuid="7b3fc967-4045-442c-8b4e-148d74e315c4"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Saldo:]]></text>
+			</staticText>
+			<textField evaluationTime="Report" pattern="&apos; $ &apos;#,##0">
+				<reportElement x="382" y="70" width="82" height="20" forecolor="#000000" backcolor="#000080" uuid="1ef6804e-215f-4216-9092-09737882ec99"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{estimado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="217" y="49" width="100" height="20" forecolor="#000000" backcolor="#000080" uuid="be43dd3a-8b5a-44ba-bc50-28598c9f06d2"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Presupuesto :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="216" y="28" width="139" height="20" forecolor="#000000" backcolor="#000080" uuid="442c54cc-6758-4730-8db5-8535c5dbdfdd"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Honorarios a la fecha : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="243" y="116" width="281" height="20" forecolor="#FFFFFF" backcolor="#333333" uuid="cfb4f035-519e-4ddc-aae4-90501e59c5fd"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Informe Gasto Proyectado a Diciembre ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-13" y="12" width="133" height="16" forecolor="#000000" uuid="aeb333e4-347a-4889-af02-3807462be394"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Asignación : Honorarios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-13" y="-3" width="133" height="16" forecolor="#000000" uuid="695883e9-bfb3-4b9a-b6ba-6dc3126261f7"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item: Otras Remuneraciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-13" y="-18" width="91" height="16" forecolor="#000000" uuid="47aef80a-a399-4370-be33-6297f41853ec"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Subtítulo :21]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-13" y="44" width="91" height="16" forecolor="#000000" uuid="a66c62f0-5483-4993-b528-b46718080c62"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período : 2016]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-13" y="28" width="91" height="16" forecolor="#000000" uuid="5d191cd5-a395-4ce0-8435-71836a243c12"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuario conectado: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="305" y="-16" width="144" height="33" forecolor="#000000" uuid="d8a3bae2-4e68-4690-ac45-2d6caee65415"/>
+				<textElement>
+					<font fontName="Calibri" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Honorarios]]></text>
+			</staticText>
+			<textField evaluationTime="Report" pattern="&apos; $ &apos;#,##0">
+				<reportElement x="382" y="90" width="82" height="20" forecolor="#000000" uuid="a739ca9c-0e58-4b34-a2fd-686a1889f71b"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{saldoFinalTitle}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="28" width="100" height="16" forecolor="#000000" uuid="ea53eb33-2984-4c2a-a170-8172d272a9b1"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{user}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="-13" y="60" width="93" height="16" forecolor="#000000" uuid="4a70eb68-c50c-451c-9185-4185c95b955f"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidad Ejecutora:]]></text>
+			</staticText>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="81" y="60" width="52" height="16" forecolor="#000000" backcolor="#4C4C93" uuid="433a9abc-ad8a-4b08-92c0-8afdf747eb5f"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{UNIDAD_EJECUTOR}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM-yy">
+				<reportElement mode="Transparent" x="380" y="28" width="139" height="20" forecolor="#000000" uuid="b4254d75-441b-452c-82f5-904668ffea00"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(new SimpleDateFormat("MMMM-yyyy")).format(new java.util.Date()).toString().toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" pattern="#0.00 &apos;%&apos;">
+				<reportElement x="467" y="90" width="59" height="20" uuid="7b1d1100-ba7f-41d7-9dfb-acbf0142b56e"/>
+				<textElement>
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{porcSaldoFinal}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" pattern="#0.00 &apos;%&apos;">
+				<reportElement x="467" y="70" width="59" height="20" uuid="99378639-db46-4dc2-be0f-696f06d8cf2f"/>
+				<textElement>
+					<font fontName="Calibri" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{porcEstimadoDic}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="571" y="-11" width="243" height="120" uuid="07a12cdb-0973-4b5b-86ce-59f89944e838"/>
+				<imageExpression><![CDATA["C:\\Users\\michael.solis\\Desktop\\docs escritorio\\docsEscritorio030816\\imagenesReporte\\4.png"]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="78" y="76" width="100" height="16" uuid="a0991edd-6c0f-4470-b37a-d7f1514e3112"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-13" y="76" width="90" height="16" forecolor="#000000" uuid="e1431b09-fb99-4cc9-b689-be193f3ea0a8"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha extracción:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="-13" y="0" width="168" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="434ee7f8-45f7-4bfd-815c-6a0066d95097"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="154" y="0" width="67" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="c6323782-a227-4fe9-b936-c15b0225041b"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[FECHA INICIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="221" y="0" width="70" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="56b1dfa8-e7c9-464d-9685-3daab9d89d35"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[FECHA TERMINO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="291" y="0" width="182" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="450d8d7b-54c4-47eb-b69c-f4cef7b69e60"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[DEPARTAMENTO AREA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="473" y="0" width="107" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="f0449a31-65ea-406b-a70e-863ae1a1772a"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[ESPECIALIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="580" y="0" width="66" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="c062eb26-84b1-49c8-ab3e-06621da4b16a"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[GASTO MENSUAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="646" y="0" width="65" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="9a8cb284-421b-44c1-90d0-63d99171b35c"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[CANTIDAD DE MESES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="710" y="0" width="66" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="a33a850a-9df3-4074-8f58-9a0d19a30220"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL GASTO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="zebra" mode="Opaque" x="-13" y="0" width="168" height="20" uuid="576fa40e-7c58-4e6e-9d96-69ee266de5a1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yy">
+				<reportElement style="zebra" mode="Opaque" x="154" y="0" width="67" height="20" uuid="71186c57-76bf-4ce0-aa1c-e3d61e87baaf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FECHA_INICIO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yy">
+				<reportElement style="zebra" mode="Opaque" x="221" y="0" width="69" height="20" uuid="6eade002-f3a6-43eb-b4a2-146eb9c4195d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FECHA_TERMINO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="zebra" mode="Opaque" x="290" y="0" width="184" height="20" uuid="9dfbafc0-77b7-4cf6-a99b-8da909339d3c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEPTO_AREA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="580" y="0" width="65" height="20" uuid="0f6587e7-027b-45c2-b99f-ceda32f573d6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{costoMensual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="zebra" mode="Opaque" x="645" y="0" width="65" height="20" uuid="a15a701f-aec0-41ff-9085-b645606a11ed"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cantMeses}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="709" y="0" width="67" height="20" uuid="6776bb19-ecbc-4af0-8cac-60ed18714450"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{gastoPorMes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="zebra" mode="Opaque" x="473" y="0" width="107" height="20" uuid="4c15c1a8-60cd-4b4c-bae8-2016e9fa8884"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{varEspecialidad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="51" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-13" y="-1" width="789" height="35" backcolor="#000000" uuid="573f8c77-1f36-44e2-8b34-83ad8c3fc249"/>
+			</rectangle>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="84" y="0" width="36" height="18" forecolor="#FFFFFF" backcolor="#4C4C93" uuid="49986904-afbd-450b-a785-1dce4e604a02">
+					<printWhenExpression><![CDATA[$F{NOMBRE}=="LALA"]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumEne}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="120" y="0" width="40" height="18" forecolor="#FFFFFF" backcolor="#4C4C93" uuid="223635b6-8bb9-43fe-8ce2-9e628ceff94c">
+					<printWhenExpression><![CDATA[$F{NOMBRE}=="LALA"]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumFeb}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="161" y="0" width="37" height="18" forecolor="#FFFFFF" backcolor="#4C4C93" uuid="aa048e99-94a9-4aea-9aa0-3119cf64ced2">
+					<printWhenExpression><![CDATA[$F{NOMBRE}=="LALA"]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumMar}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="zebra" mode="Opaque" x="199" y="0" width="39" height="18" forecolor="#FFFFFF" backcolor="#4C4C93" uuid="cf755174-1e13-471e-b793-e7416f2771b1">
+					<printWhenExpression><![CDATA[$F{NOMBRE}=="LALA"]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumAbr}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="239" y="0" width="40" height="18" forecolor="#FFFFFF" backcolor="#4C4C93" uuid="2ab587c7-d35e-45db-b4d8-f07fc4ecf122">
+					<printWhenExpression><![CDATA[$F{NOMBRE}=="LALA"]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumMay}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="319" y="0" width="37" height="18" forecolor="#FFFFFF" backcolor="#4C4C93" uuid="6542386d-4a5d-41bb-a409-a6a9a1a46f14">
+					<printWhenExpression><![CDATA[$F{NOMBRE}=="LALA"]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumJul}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="357" y="0" width="40" height="18" forecolor="#FFFFFF" backcolor="#4C4C93" uuid="0433403a-e475-4588-9ebb-c542300b1d36">
+					<printWhenExpression><![CDATA[$F{NOMBRE}=="LALA"]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumAgo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="279" y="0" width="40" height="18" forecolor="#FFFFFF" backcolor="#4C4C93" uuid="4a053220-62f7-4a63-bfc8-38546c5e13dc">
+					<printWhenExpression><![CDATA[$F{NOMBRE}=="LALA"]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumJun}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="zebra" mode="Opaque" x="397" y="0" width="40" height="18" forecolor="#FFFFFF" backcolor="#4C4C93" uuid="34dd09c5-9be7-4a55-9d77-45f1fc24463b">
+					<printWhenExpression><![CDATA[$F{NOMBRE}=="LALA"]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumSep}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="437" y="0" width="40" height="18" forecolor="#FFFFFF" backcolor="#4C4C93" uuid="1ada49ce-6b48-4aa9-a2ea-0c663f8f239a">
+					<printWhenExpression><![CDATA[$F{NOMBRE}=="LALA"]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumOct}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="477" y="0" width="38" height="18" forecolor="#FFFFFF" backcolor="#4C4C93" uuid="19358887-3fbb-4a87-aa0f-4f8a900c3e9e">
+					<printWhenExpression><![CDATA[$F{NOMBRE}=="LALA"]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumNov}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="515" y="0" width="24" height="18" forecolor="#FFFFFF" backcolor="#4C4C93" uuid="5d4ec269-3f06-41d1-ace3-5e8a00a4aa67">
+					<printWhenExpression><![CDATA[$F{NOMBRE}=="LALA"]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumDic}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Opaque" x="669" y="18" width="107" height="14" forecolor="#FFFFFF" backcolor="#000000" uuid="66cb6a99-7016-482b-8c50-82fa456855b6"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumEjecProyecc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-7" y="18" width="138" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="5858e30f-b2bc-444c-94bb-bdb9ec0d5616"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ejecucion Proyectada :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="133" y="36" width="471" height="14" uuid="fe7dd7cd-0ca0-4569-a034-16b4311e1582"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[(*) Nota : El gasto estimado a Diciembre esta sujeto a variaciones según nuevas contrataciones]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

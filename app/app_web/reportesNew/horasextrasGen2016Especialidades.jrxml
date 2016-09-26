@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="horasextrasGen2016Especialidades" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0fc5de41-dc80-4bba-a04e-ffb835ce95cd">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="estiloCabecera">
+		<box>
+			<pen lineWidth="1.0" lineColor="#33FFFF"/>
+			<topPen lineWidth="1.0" lineColor="#33FFFF"/>
+			<leftPen lineWidth="1.0" lineColor="#33FFFF"/>
+			<bottomPen lineWidth="1.0" lineColor="#33FFFF"/>
+			<rightPen lineWidth="1.0" lineColor="#33FFFF"/>
+		</box>
+	</style>
+	<style name="style2">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{calcPorcEjec} > 16.6)]]></conditionExpression>
+			<style forecolor="#B00000" isBold="true">
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid" lineColor="#99FF00"/>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#99FF00"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#99FF00"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#99FF00"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#99FF00"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{calcPorcEjec} >= 14.0)&new Boolean($V{calcPorcEjec} <= 16.5)]]></conditionExpression>
+			<style forecolor="#FFFF1A" isBold="true">
+				<box>
+					<pen lineWidth="0.5" lineColor="#99FF00"/>
+					<topPen lineWidth="0.5" lineColor="#99FF00"/>
+					<leftPen lineWidth="0.5" lineColor="#99FF00"/>
+					<bottomPen lineWidth="0.5" lineColor="#99FF00"/>
+					<rightPen lineWidth="0.5" lineColor="#99FF00"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{calcPorcEjec} <= 14.0)]]></conditionExpression>
+			<style forecolor="#00FF00" isBold="true">
+				<box>
+					<pen lineWidth="0.5" lineColor="#99FF00"/>
+					<topPen lineWidth="0.5" lineColor="#99FF00"/>
+					<leftPen lineWidth="0.5" lineColor="#99FF00"/>
+					<bottomPen lineWidth="0.5" lineColor="#99FF00"/>
+					<rightPen lineWidth="0.5" lineColor="#99FF00"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==1]]></conditionExpression>
+			<style backcolor="#CCFFFF">
+				<box>
+					<pen lineWidth="0.5" lineColor="#99FF00"/>
+					<topPen lineWidth="0.5" lineColor="#99FF00"/>
+					<leftPen lineWidth="0.5" lineColor="#99FF00"/>
+					<bottomPen lineWidth="0.5" lineColor="#99FF00"/>
+					<rightPen lineWidth="0.5" lineColor="#99FF00"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==0]]></conditionExpression>
+			<style backcolor="#00CCFF">
+				<box>
+					<pen lineWidth="0.5" lineColor="#99FF00"/>
+					<topPen lineWidth="0.5" lineColor="#99FF00"/>
+					<leftPen lineWidth="0.5" lineColor="#99FF00"/>
+					<bottomPen lineWidth="0.5" lineColor="#99FF00"/>
+					<rightPen lineWidth="0.5" lineColor="#99FF00"/>
+				</box>
+			</style>
+		</conditionalStyle>
+	</style>
+	<style name="condicion">
+		<conditionalStyle>
+			<style/>
+		</conditionalStyle>
+	</style>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="zebra">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==1]]></conditionExpression>
+			<style backcolor="#CCFFFF">
+				<box>
+					<pen lineWidth="0.5" lineColor="#99FF00"/>
+					<topPen lineWidth="0.5" lineColor="#99FF00"/>
+					<leftPen lineWidth="0.5" lineColor="#99FF00"/>
+					<bottomPen lineWidth="0.5" lineColor="#99FF00"/>
+					<rightPen lineWidth="0.5" lineColor="#99FF00"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==0]]></conditionExpression>
+			<style backcolor="#00CCFF">
+				<box>
+					<pen lineWidth="0.5" lineColor="#99FF00"/>
+					<topPen lineWidth="0.5" lineColor="#99FF00"/>
+					<leftPen lineWidth="0.5" lineColor="#99FF00"/>
+					<bottomPen lineWidth="0.5" lineColor="#99FF00"/>
+					<rightPen lineWidth="0.5" lineColor="#99FF00"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($F{ENERO}<1)|| new Boolean($F{FEBRERO}<1)
+||new Boolean($F{MARZO}<1)|| new Boolean($F{ABRIL}<1)
+||new Boolean($F{MAYO}<1)|| new Boolean($F{JUNIO}<1)
+||new Boolean($F{JULIO}<1)|| new Boolean($F{AGOSTO}<1)
+||new Boolean($F{SEPTIEMBRE}<1)|| new Boolean($F{OCTUBRE}<1)
+||new Boolean($F{NOVIEMBRE}<1)|| new Boolean($F{DICIEMBRE}<1)]]></conditionExpression>
+			<style mode="Transparent" backcolor="#FF0000"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<style mode="Opaque" forecolor="#000000" backcolor="#000000" fill="Solid" fontName="DejaVu Sans"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="mes" class="java.util.Collection" nestedType="java.lang.Integer"/>
+	<parameter name="ano" class="java.lang.Integer"/>
+	<parameter name="unidadesZonas" class="java.util.Collection" nestedType="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subtitulo" class="java.lang.String"/>
+	<parameter name="user" class="java.lang.String"/>
+	<parameter name="especialidades" class="java.util.Collection"/>
+	<queryString>
+		<![CDATA[SELECT UNI.ANO, UNI.MES, UNI.UNIDAD AS CODIGO_UNIDAD,
+       UNI.UNIDAD_DESC AS NOMBRE_UNIDAD,
+       UNI.CARGO AS ESPECIALIDAD,
+       SUM(UNI.MONTO_DIFER) AS PAGO_DEL_MES
+FROM (SELECT TRAB.ANO, TRAB.MES, TRAB.RUT, TRAB.NOMBRE,
+             DECODE(TRAB.TIPO_CONTRATO, 1, 'PLANTA',
+                                        2, 'C.SIMPLE',
+                                        10, 'C.GLOBAL', TRAB.TIPO_CONTRATO) AS C_JURIDICA,
+             TRAB.ID_CONTRATO,
+             TRAB.UNIDAD,
+             UNI.UNIDAD_DESC,
+             FN.DESCRIP AS CARGO,
+             Row_Number() Over(Partition By TRAB.RUT, TRAB.ID_CONTRATO
+                               Order By TRAB.RUT, TRAB.ID_CONTRATO, TRAB.ID_CONTRATO,
+                                        RET.ANO_CALCULO, RET.MES_CALCULO) AS SEC,
+
+
+             NVL(RESU.HCGHLYF_R, 0) +
+             NVL(RESU.HCSHLYF_R, 0) +
+             NVL(RESU.HPTHLYF_R, 0) AS HORAS_PROMEDIO,
+             RET.ANO_CALCULO AS ANO_C,
+             RET.MES_CALCULO AS MES_C,
+             RET.MONTO_ANTER, RET.MONTO_NUEVO, RET.MONTO_DIFER
+      FROM NOMINA_DGAC.PROCESOS_TRABAJADORES TRAB,
+           NOMINA_DGAC.PROCESOS_RESULTADOS RESU,
+          (SELECT CODIGO, DESCRIP FROM NOMINA_DGAC.TABLAS WHERE ID_TABLA = 189) FN,
+          (SELECT RP.RUT,
+                  RP.ID_EMPRESA,
+                  RP.ID_CONTRATO,
+                  DIF.ANO_CALCULO,
+                  DIF.MES_CALCULO,
+                  DIF.FIELD_NAME,
+                  DIF.MONTO_ANTER,
+                  DIF.MONTO_NUEVO,
+                  DIF.MONTO_DIFER,
+                  RP.ANO_PROCESO,
+                  RP.MES_PROCESO
+          FROM NOMINA_DGAC.REM_RELIQ_PROCESOS RP, NOMINA_DGAC.REM_RELIQ_PROCESOS_DIFER DIF
+          WHERE RP.ID_PROCESO = DIF.ID_PROCESO
+          AND   RP.ANO_PROCESO = 2015
+          AND   RP.MES_PROCESO IN (1,2,3,4,5,6,7,8,9,10,11,12)
+          AND   DIF.FIELD_NAME IN ('hpthtcom', 'hcshtcom', 'hcghtcom','hcghlyf', 'hcshlyf', 'hpthlyf')) RET,
+         (SELECT CODIGO, TRIM(DESCRIP) AS UNIDAD_DESC FROM NOMINA_DGAC.TABLAS WHERE ID_TABLA = 69) UNI
+          WHERE TRAB.RUT         = RESU.RUT
+          AND   TRAB.ID_EMPRESA  = RESU.ID_EMPRESA
+          AND   TRAB.ID_CONTRATO = RESU.ID_CONTRATO
+          AND   TRAB.ID_PROCESO  = RESU.ID_PROCESO
+          AND   TRAB.ANO         = RESU.ANO
+          AND   TRAB.MES         = RESU.MES
+          AND   TRAB.ANO         = 2015
+          AND   TRAB.MES        IN (1,2,3,4,5,6,7,8,9,10,11,12)
+          AND   TRAB.ID_PROCESO  = 0
+          AND   TRAB.RUT         = RET.RUT
+          AND   TRAB.ID_EMPRESA  = RET.ID_EMPRESA
+          AND   TRAB.ID_CONTRATO = RET.ID_CONTRATO
+          AND   TRAB.ANO         = RET.ANO_PROCESO
+          AND   TRAB.MES         = RET.MES_PROCESO
+          AND   TRAB.UNIDAD      = UNI.CODIGO(+)
+          AND   TRAB.ID_CARGO    = FN.CODIGO(+)
+          AND   TRAB.ID_EMPRESA  = 1
+          AND   TRAB.ACTIVO      = 1
+
+          AND   (NVL(RESU.HCGHLYF_R, 0) +
+                 NVL(RESU.HCSHLYF_R, 0) +
+                 NVL(RESU.HPTHLYF_R, 0)) != 0
+          ORDER BY TRAB.ANO, TRAB.MES, TRAB.NOMBRE, TRAB.TIPO_CONTRATO, TRAB.ID_CONTRATO) UNI
+GROUP BY UNI.ANO, UNI.MES, UNI.UNIDAD, UNI.UNIDAD_DESC, UNI.CARGO
+ORDER BY 1, 2, 3
+]]>
+	</queryString>
+	<field name="ANO" class="java.math.BigDecimal"/>
+	<field name="MES" class="java.math.BigDecimal"/>
+	<field name="CODIGO_UNIDAD" class="java.math.BigDecimal"/>
+	<field name="NOMBRE_UNIDAD" class="java.lang.String"/>
+	<field name="ESPECIALIDAD" class="java.lang.String"/>
+	<field name="PAGO_DEL_MES" class="java.math.BigDecimal"/>
+	<variable name="sumEjecPres" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{ENERO}  +
+$F{FEBRERO}+
+$F{MARZO}  +
+$F{ABRIL} +
+$F{MAYO} +
+$F{JUNIO} +
+$F{JULIO} +
+$F{AGOSTO} +
+$F{SEPTIEMBRE} +
+$F{OCTUBRE} +
+$F{NOVIEMBRE} +
+$F{DICIEMBRE}]]></variableExpression>
+	</variable>
+	<variable name="calcPorcEjec" class="java.lang.Double" calculation="Average">
+		<variableExpression><![CDATA[($V{sumEjecPres}*100)/$V{prueba}]]></variableExpression>
+	</variable>
+	<variable name="saldoReal" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{prueba}-$V{sumEjecPres}]]></variableExpression>
+	</variable>
+	<variable name="prueba" class="java.lang.Long">
+		<variableExpression><![CDATA[($F{NOMBRE_UNIDAD}.equals("AERODROMO MATAVERI")? 41000000 :
+    $F{NOMBRE_UNIDAD}.equals("AEROPUERTO CHACALLUTA")? 209736623 :
+     $F{NOMBRE_UNIDAD}.equals("AEROPUERTO GENERAL DIEGO ARACENA")? 317197564 :
+      $F{NOMBRE_UNIDAD}.equals("AERODROMO EL LOA")? 146016907 :
+       $F{NOMBRE_UNIDAD}.equals("AEROPUERTO ANDRES SABELLA")? 199074034 :
+         $F{NOMBRE_UNIDAD}.equals("AERODROMO DESIERTO DE ATACAMA")? 94895849 :
+          $F{NOMBRE_UNIDAD}.equals("AERODROMO LA FLORIDA")? 78000000 :
+           $F{NOMBRE_UNIDAD}.equals("AERODROMO RODELILLO")? 1552898 :
+             $F{NOMBRE_UNIDAD}.equals("AERODROMO VIÑA DEL MAR")? 11000000 :
+               $F{NOMBRE_UNIDAD}.equals("AERODROMO EULOGIO SANCHEZ")? 16000000 :
+                $F{NOMBRE_UNIDAD}.equals("AERODROMO CARRIEL SUR")? 153000000 :
+               $F{NOMBRE_UNIDAD}.equals("AERODROMO ROBINSON CRUSOE")? 7000000 :
+                $F{NOMBRE_UNIDAD}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")? 1 :
+                $F{NOMBRE_UNIDAD}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")? 1 :
+              $F{NOMBRE_UNIDAD}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")? 1 :
+              $F{NOMBRE_UNIDAD}.equals("AEROPUERTO ARTURO MERINO BENITEZ")? 1 :
+            $F{NOMBRE_UNIDAD}.equals("SECCION SERVICIOS GENERALES LOGISTICA")? 1 :
+           $F{NOMBRE_UNIDAD}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")? 1 :
+          $F{NOMBRE_UNIDAD}.equals("SECCION ZONA AEROPORTUARIA SUR")? 1 :
+         $F{NOMBRE_UNIDAD}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL")? 1 :
+         $F{NOMBRE_UNIDAD}.equals("AERODROMO LA ARAUCANIA")? 90832921 :
+        $F{NOMBRE_UNIDAD}.equals("AERODROMO PICHOY")? 26484828 :
+       $F{NOMBRE_UNIDAD}.equals("AERODROMO CAÑAL BAJO")? 25096286 :
+      $F{NOMBRE_UNIDAD}.equals("AEROPUERTO EL TEPUAL")? 210509479 :
+    $F{NOMBRE_UNIDAD}.equals("AEROPUERTO CARLOS IBAÑEZ DEL CAMPO")? 177327935 :
+  $F{NOMBRE_UNIDAD}.equals("AERODROMO BALMACEDA")? 11998672 :0)]]></variableExpression>
+	</variable>
+	<variable name="ejecucion" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{ENERO}+$F{FEBRERO}+$F{MARZO}+$F{ABRIL}+$F{MAYO}+$F{JUNIO}+
+$F{JULIO}+$F{AGOSTO}+$F{SEPTIEMBRE}+$F{OCTUBRE}+$F{NOVIEMBRE}+$F{DICIEMBRE}]]></variableExpression>
+	</variable>
+	<variable name="porcEjecucion" class="java.lang.Double" calculation="Average">
+		<variableExpression><![CDATA[($V{ejecucion}*100)/$V{prueba}]]></variableExpression>
+	</variable>
+	<variable name="saldo" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{prueba}-$V{ejecucion}]]></variableExpression>
+	</variable>
+	<variable name="sumaHorasTurno" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_UNIDAD}=="AEROPUERTO CHACALLUTA" || $F{NOMBRE_UNIDAD}=="AERODROMO MATAVERI"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO GENERAL DIEGO ARACENA" ||$F{NOMBRE_UNIDAD}=="AERODROMO EL LOA"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO ANDRES SABELLA" || $F{NOMBRE_UNIDAD}== "AERODROMO DESIERTO DE ATACAMA"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA FLORIDA" || $F{NOMBRE_UNIDAD}=="AERODROMO RODELILLO"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO VIÑA DEL MAR" || $F{NOMBRE_UNIDAD}=="AERODROMO EULOGIO SANCHEZ"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CARRIEL SUR" || $F{NOMBRE_UNIDAD}=="AERODROMO ROBINSON CRUSOE"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA ARAUCANIA" || $F{NOMBRE_UNIDAD}=="AERODROMO PICHOY"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CAÑAL BAJO" || $F{NOMBRE_UNIDAD}=="AEROPUERTO EL TEPUAL"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO CARLOS IBAÑEZ DEL CAMPO" || $F{NOMBRE_UNIDAD}=="AERODROMO BALMACEDA"
+? $V{prueba}:0)]]></variableExpression>
+	</variable>
+	<variable name="horasProme" class="java.lang.Long">
+		<variableExpression><![CDATA[400000000]]></variableExpression>
+	</variable>
+	<variable name="horTurno+horProm" class="java.lang.Long">
+		<variableExpression><![CDATA[$V{sumaHorasTurno}+$V{horasProme}]]></variableExpression>
+	</variable>
+	<variable name="sumEne" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_UNIDAD}=="AEROPUERTO CHACALLUTA" || $F{NOMBRE_UNIDAD}=="AERODROMO MATAVERI"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO GENERAL DIEGO ARACENA" ||$F{NOMBRE_UNIDAD}=="AERODROMO EL LOA"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO ANDRES SABELLA" || $F{NOMBRE_UNIDAD}== "AERODROMO DESIERTO DE ATACAMA"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA FLORIDA" || $F{NOMBRE_UNIDAD}=="AERODROMO RODELILLO"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO VIÑA DEL MAR" || $F{NOMBRE_UNIDAD}=="AERODROMO EULOGIO SANCHEZ"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CARRIEL SUR" || $F{NOMBRE_UNIDAD}=="AERODROMO ROBINSON CRUSOE"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA ARAUCANIA" || $F{NOMBRE_UNIDAD}=="AERODROMO PICHOY"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CAÑAL BAJO" || $F{NOMBRE_UNIDAD}=="AEROPUERTO EL TEPUAL"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO CARLOS IBAÑEZ DEL CAMPO" || $F{NOMBRE_UNIDAD}=="AERODROMO BALMACEDA"
+? $F{ENERO}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumFeb" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_UNIDAD}=="AEROPUERTO CHACALLUTA" || $F{NOMBRE_UNIDAD}=="AERODROMO MATAVERI"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO GENERAL DIEGO ARACENA" ||$F{NOMBRE_UNIDAD}=="AERODROMO EL LOA"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO ANDRES SABELLA" || $F{NOMBRE_UNIDAD}== "AERODROMO DESIERTO DE ATACAMA"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA FLORIDA" || $F{NOMBRE_UNIDAD}=="AERODROMO RODELILLO"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO VIÑA DEL MAR" || $F{NOMBRE_UNIDAD}=="AERODROMO EULOGIO SANCHEZ"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CARRIEL SUR" || $F{NOMBRE_UNIDAD}=="AERODROMO ROBINSON CRUSOE"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA ARAUCANIA" || $F{NOMBRE_UNIDAD}=="AERODROMO PICHOY"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CAÑAL BAJO" || $F{NOMBRE_UNIDAD}=="AEROPUERTO EL TEPUAL"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO CARLOS IBAÑEZ DEL CAMPO" || $F{NOMBRE_UNIDAD}=="AERODROMO BALMACEDA"
+? $F{FEBRERO}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumMar" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_UNIDAD}=="AEROPUERTO CHACALLUTA" || $F{NOMBRE_UNIDAD}=="AERODROMO MATAVERI"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO GENERAL DIEGO ARACENA" ||$F{NOMBRE_UNIDAD}=="AERODROMO EL LOA"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO ANDRES SABELLA" || $F{NOMBRE_UNIDAD}== "AERODROMO DESIERTO DE ATACAMA"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA FLORIDA" || $F{NOMBRE_UNIDAD}=="AERODROMO RODELILLO"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO VIÑA DEL MAR" || $F{NOMBRE_UNIDAD}=="AERODROMO EULOGIO SANCHEZ"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CARRIEL SUR" || $F{NOMBRE_UNIDAD}=="AERODROMO ROBINSON CRUSOE"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA ARAUCANIA" || $F{NOMBRE_UNIDAD}=="AERODROMO PICHOY"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CAÑAL BAJO" || $F{NOMBRE_UNIDAD}=="AEROPUERTO EL TEPUAL"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO CARLOS IBAÑEZ DEL CAMPO" || $F{NOMBRE_UNIDAD}=="AERODROMO BALMACEDA"
+? $F{MARZO}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumAbr" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_UNIDAD}=="AEROPUERTO CHACALLUTA" || $F{NOMBRE_UNIDAD}=="AERODROMO MATAVERI"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO GENERAL DIEGO ARACENA" ||$F{NOMBRE_UNIDAD}=="AERODROMO EL LOA"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO ANDRES SABELLA" || $F{NOMBRE_UNIDAD}== "AERODROMO DESIERTO DE ATACAMA"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA FLORIDA" || $F{NOMBRE_UNIDAD}=="AERODROMO RODELILLO"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO VIÑA DEL MAR" || $F{NOMBRE_UNIDAD}=="AERODROMO EULOGIO SANCHEZ"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CARRIEL SUR" || $F{NOMBRE_UNIDAD}=="AERODROMO ROBINSON CRUSOE"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA ARAUCANIA" || $F{NOMBRE_UNIDAD}=="AERODROMO PICHOY"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CAÑAL BAJO" || $F{NOMBRE_UNIDAD}=="AEROPUERTO EL TEPUAL"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO CARLOS IBAÑEZ DEL CAMPO" || $F{NOMBRE_UNIDAD}=="AERODROMO BALMACEDA"
+? $F{ABRIL}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumMay" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_UNIDAD}=="AEROPUERTO CHACALLUTA" || $F{NOMBRE_UNIDAD}=="AERODROMO MATAVERI"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO GENERAL DIEGO ARACENA" ||$F{NOMBRE_UNIDAD}=="AERODROMO EL LOA"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO ANDRES SABELLA" || $F{NOMBRE_UNIDAD}== "AERODROMO DESIERTO DE ATACAMA"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA FLORIDA" || $F{NOMBRE_UNIDAD}=="AERODROMO RODELILLO"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO VIÑA DEL MAR" || $F{NOMBRE_UNIDAD}=="AERODROMO EULOGIO SANCHEZ"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CARRIEL SUR" || $F{NOMBRE_UNIDAD}=="AERODROMO ROBINSON CRUSOE"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA ARAUCANIA" || $F{NOMBRE_UNIDAD}=="AERODROMO PICHOY"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CAÑAL BAJO" || $F{NOMBRE_UNIDAD}=="AEROPUERTO EL TEPUAL"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO CARLOS IBAÑEZ DEL CAMPO" || $F{NOMBRE_UNIDAD}=="AERODROMO BALMACEDA"
+? $F{MAYO}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumJun" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_UNIDAD}=="AEROPUERTO CHACALLUTA" || $F{NOMBRE_UNIDAD}=="AERODROMO MATAVERI"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO GENERAL DIEGO ARACENA" ||$F{NOMBRE_UNIDAD}=="AERODROMO EL LOA"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO ANDRES SABELLA" || $F{NOMBRE_UNIDAD}== "AERODROMO DESIERTO DE ATACAMA"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA FLORIDA" || $F{NOMBRE_UNIDAD}=="AERODROMO RODELILLO"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO VIÑA DEL MAR" || $F{NOMBRE_UNIDAD}=="AERODROMO EULOGIO SANCHEZ"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CARRIEL SUR" || $F{NOMBRE_UNIDAD}=="AERODROMO ROBINSON CRUSOE"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA ARAUCANIA" || $F{NOMBRE_UNIDAD}=="AERODROMO PICHOY"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CAÑAL BAJO" || $F{NOMBRE_UNIDAD}=="AEROPUERTO EL TEPUAL"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO CARLOS IBAÑEZ DEL CAMPO" || $F{NOMBRE_UNIDAD}=="AERODROMO BALMACEDA"
+? $F{JUNIO}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumJul" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_UNIDAD}=="AEROPUERTO CHACALLUTA" || $F{NOMBRE_UNIDAD}=="AERODROMO MATAVERI"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO GENERAL DIEGO ARACENA" ||$F{NOMBRE_UNIDAD}=="AERODROMO EL LOA"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO ANDRES SABELLA" || $F{NOMBRE_UNIDAD}== "AERODROMO DESIERTO DE ATACAMA"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA FLORIDA" || $F{NOMBRE_UNIDAD}=="AERODROMO RODELILLO"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO VIÑA DEL MAR" || $F{NOMBRE_UNIDAD}=="AERODROMO EULOGIO SANCHEZ"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CARRIEL SUR" || $F{NOMBRE_UNIDAD}=="AERODROMO ROBINSON CRUSOE"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA ARAUCANIA" || $F{NOMBRE_UNIDAD}=="AERODROMO PICHOY"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CAÑAL BAJO" || $F{NOMBRE_UNIDAD}=="AEROPUERTO EL TEPUAL"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO CARLOS IBAÑEZ DEL CAMPO" || $F{NOMBRE_UNIDAD}=="AERODROMO BALMACEDA"
+? $F{JULIO}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumAgo" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_UNIDAD}=="AEROPUERTO CHACALLUTA" || $F{NOMBRE_UNIDAD}=="AERODROMO MATAVERI"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO GENERAL DIEGO ARACENA" ||$F{NOMBRE_UNIDAD}=="AERODROMO EL LOA"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO ANDRES SABELLA" || $F{NOMBRE_UNIDAD}== "AERODROMO DESIERTO DE ATACAMA"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA FLORIDA" || $F{NOMBRE_UNIDAD}=="AERODROMO RODELILLO"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO VIÑA DEL MAR" || $F{NOMBRE_UNIDAD}=="AERODROMO EULOGIO SANCHEZ"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CARRIEL SUR" || $F{NOMBRE_UNIDAD}=="AERODROMO ROBINSON CRUSOE"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA ARAUCANIA" || $F{NOMBRE_UNIDAD}=="AERODROMO PICHOY"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CAÑAL BAJO" || $F{NOMBRE_UNIDAD}=="AEROPUERTO EL TEPUAL"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO CARLOS IBAÑEZ DEL CAMPO" || $F{NOMBRE_UNIDAD}=="AERODROMO BALMACEDA"
+? $F{AGOSTO}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumSep" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_UNIDAD}=="AEROPUERTO CHACALLUTA" || $F{NOMBRE_UNIDAD}=="AERODROMO MATAVERI"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO GENERAL DIEGO ARACENA" ||$F{NOMBRE_UNIDAD}=="AERODROMO EL LOA"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO ANDRES SABELLA" || $F{NOMBRE_UNIDAD}== "AERODROMO DESIERTO DE ATACAMA"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA FLORIDA" || $F{NOMBRE_UNIDAD}=="AERODROMO RODELILLO"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO VIÑA DEL MAR" || $F{NOMBRE_UNIDAD}=="AERODROMO EULOGIO SANCHEZ"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CARRIEL SUR" || $F{NOMBRE_UNIDAD}=="AERODROMO ROBINSON CRUSOE"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA ARAUCANIA" || $F{NOMBRE_UNIDAD}=="AERODROMO PICHOY"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CAÑAL BAJO" || $F{NOMBRE_UNIDAD}=="AEROPUERTO EL TEPUAL"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO CARLOS IBAÑEZ DEL CAMPO" || $F{NOMBRE_UNIDAD}=="AERODROMO BALMACEDA"
+? $F{SEPTIEMBRE}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumOct" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_UNIDAD}=="AEROPUERTO CHACALLUTA" || $F{NOMBRE_UNIDAD}=="AERODROMO MATAVERI"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO GENERAL DIEGO ARACENA" ||$F{NOMBRE_UNIDAD}=="AERODROMO EL LOA"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO ANDRES SABELLA" || $F{NOMBRE_UNIDAD}== "AERODROMO DESIERTO DE ATACAMA"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA FLORIDA" || $F{NOMBRE_UNIDAD}=="AERODROMO RODELILLO"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO VIÑA DEL MAR" || $F{NOMBRE_UNIDAD}=="AERODROMO EULOGIO SANCHEZ"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CARRIEL SUR" || $F{NOMBRE_UNIDAD}=="AERODROMO ROBINSON CRUSOE"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA ARAUCANIA" || $F{NOMBRE_UNIDAD}=="AERODROMO PICHOY"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CAÑAL BAJO" || $F{NOMBRE_UNIDAD}=="AEROPUERTO EL TEPUAL"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO CARLOS IBAÑEZ DEL CAMPO" || $F{NOMBRE_UNIDAD}=="AERODROMO BALMACEDA"
+? $F{OCTUBRE}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumNov" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_UNIDAD}=="AEROPUERTO CHACALLUTA" || $F{NOMBRE_UNIDAD}=="AERODROMO MATAVERI"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO GENERAL DIEGO ARACENA" ||$F{NOMBRE_UNIDAD}=="AERODROMO EL LOA"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO ANDRES SABELLA" || $F{NOMBRE_UNIDAD}== "AERODROMO DESIERTO DE ATACAMA"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA FLORIDA" || $F{NOMBRE_UNIDAD}=="AERODROMO RODELILLO"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO VIÑA DEL MAR" || $F{NOMBRE_UNIDAD}=="AERODROMO EULOGIO SANCHEZ"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CARRIEL SUR" || $F{NOMBRE_UNIDAD}=="AERODROMO ROBINSON CRUSOE"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA ARAUCANIA" || $F{NOMBRE_UNIDAD}=="AERODROMO PICHOY"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CAÑAL BAJO" || $F{NOMBRE_UNIDAD}=="AEROPUERTO EL TEPUAL"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO CARLOS IBAÑEZ DEL CAMPO" || $F{NOMBRE_UNIDAD}=="AERODROMO BALMACEDA"
+? $F{NOVIEMBRE}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumDic" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_UNIDAD}=="AEROPUERTO CHACALLUTA" || $F{NOMBRE_UNIDAD}=="AERODROMO MATAVERI"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO GENERAL DIEGO ARACENA" ||$F{NOMBRE_UNIDAD}=="AERODROMO EL LOA"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO ANDRES SABELLA" || $F{NOMBRE_UNIDAD}== "AERODROMO DESIERTO DE ATACAMA"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA FLORIDA" || $F{NOMBRE_UNIDAD}=="AERODROMO RODELILLO"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO VIÑA DEL MAR" || $F{NOMBRE_UNIDAD}=="AERODROMO EULOGIO SANCHEZ"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CARRIEL SUR" || $F{NOMBRE_UNIDAD}=="AERODROMO ROBINSON CRUSOE"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO LA ARAUCANIA" || $F{NOMBRE_UNIDAD}=="AERODROMO PICHOY"
+|| $F{NOMBRE_UNIDAD}=="AERODROMO CAÑAL BAJO" || $F{NOMBRE_UNIDAD}=="AEROPUERTO EL TEPUAL"
+|| $F{NOMBRE_UNIDAD}=="AEROPUERTO CARLOS IBAÑEZ DEL CAMPO" || $F{NOMBRE_UNIDAD}=="AERODROMO BALMACEDA"
+? $F{DICIEMBRE}:0)]]></variableExpression>
+	</variable>
+	<variable name="ejecHorTurno" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumEne}+$V{sumFeb}+$V{sumMar}+$V{sumAbr}+$V{sumMay}+$V{sumJun}+
+$V{sumJul}+$V{sumAgo}+$V{sumSep}+$V{sumOct}+$V{sumNov}+$V{sumDic}]]></variableExpression>
+	</variable>
+	<variable name="ejecHorTurnoPorc" class="java.lang.Double" calculation="Average">
+		<variableExpression><![CDATA[($V{ejecHorTurno}*100)/$V{sumaHorasTurno}]]></variableExpression>
+	</variable>
+	<variable name="saldoHorTurno" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumaHorasTurno}-$V{ejecHorTurno}]]></variableExpression>
+	</variable>
+	<variable name="suplementos" class="java.lang.Long">
+		<variableExpression><![CDATA[$F{NOMBRE_UNIDAD}.equals("AEROPUERTO CHACALLUTA")? 24035162 :
+   ($F{NOMBRE_UNIDAD}.equals("AERODROMO MATAVERI")? 18000000 :
+     $F{NOMBRE_UNIDAD}.equals("AEROPUERTO GENERAL DIEGO ARACENA")? 30941218 :
+      $F{NOMBRE_UNIDAD}.equals("AERODROMO EL LOA")? 8000000 :
+       $F{NOMBRE_UNIDAD}.equals("AEROPUERTO ANDRES SABELLA")? 199074034 :
+        $F{NOMBRE_UNIDAD}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")? 4000000 :
+         $F{NOMBRE_UNIDAD}.equals("AERODROMO DESIERTO DE ATACAMA")? 28868557 :
+          $F{NOMBRE_UNIDAD}.equals("AERODROMO LA FLORIDA")? 0 :
+                        $F{NOMBRE_UNIDAD}.equals("AERODROMO VIÑA DEL MAR")? 0 :
+              $F{NOMBRE_UNIDAD}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")? 11000000 :
+               $F{NOMBRE_UNIDAD}.equals("AERODROMO EULOGIO SANCHEZ")? 6000000 :
+                $F{NOMBRE_UNIDAD}.equals("AERODROMO CARRIEL SUR")? 0 :
+               $F{NOMBRE_UNIDAD}.equals("AERODROMO ROBINSON CRUSOE")? 0 :
+              $F{NOMBRE_UNIDAD}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")? 34000000 :
+              $F{NOMBRE_UNIDAD}.equals("AEROPUERTO ARTURO MERINO BENITEZ")? 202800000 :
+            $F{NOMBRE_UNIDAD}.equals("SECCION SERVICIOS GENERALES LOGISTICA")? 0 :
+           $F{NOMBRE_UNIDAD}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")? 0 :
+          $F{NOMBRE_UNIDAD}.equals("SECCION ZONA AEROPORTUARIA SUR")? 5265519 :
+         $F{NOMBRE_UNIDAD}.equals("AERODROMO LA ARAUCANIA")? 35031565 :
+        $F{NOMBRE_UNIDAD}.equals("AERODROMO PICHOY")? -4266980 :
+       $F{NOMBRE_UNIDAD}.equals("AERODROMO CAÑAL BAJO")? 0 :
+      $F{NOMBRE_UNIDAD}.equals("AEROPUERTO EL TEPUAL")? 24899249 :
+     $F{NOMBRE_UNIDAD}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL")? 17700000  :
+    $F{NOMBRE_UNIDAD}.equals("AEROPUERTO CARLOS IBAÑEZ DEL CAMPO")? 2300000 :
+  ($F{NOMBRE_UNIDAD}.equals("AERODROMO BALMACEDA")? -297788 :0)
+)]]></variableExpression>
+	</variable>
+	<variable name="sumSuple" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$V{suplementos}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="94" splitType="Stretch">
+			<staticText>
+				<reportElement style="SubTitle" x="-384" y="30" width="272" height="22" uuid="d57c4680-f265-4ba7-928e-533fb5098d8a"/>
+				<textElement>
+					<font fontName="Times New Roman" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Informe general de horas extras]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="-19" y="0" width="842" height="94" backcolor="#4C4C93" uuid="4bd65cdd-2b8e-4f9e-ac48-cb37adab31a7"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="-14" y="8" width="173" height="14" forecolor="#FFFFFF" backcolor="#000080" uuid="0bb899a3-d6c9-4da9-b359-f2b38f3c145a"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SubtÍtulo:21]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="580" y="8" width="175" height="14" forecolor="#FFFFFF" backcolor="#000080" uuid="d78c1b54-c5ab-4925-8842-6ea417b604aa"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Asignación :Horas Extras]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="580" y="22" width="53" height="14" forecolor="#FFFFFF" backcolor="#000080" uuid="51f93428-5f44-4523-a61c-c47b356b4d86"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-14" y="22" width="173" height="14" forecolor="#FFFFFF" backcolor="#000080" uuid="1a8e4a45-9807-4bd3-961e-05b22e35bd4a"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ítem :Remuneración Variable]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="178" y="30" width="397" height="22" forecolor="#FFFFFF" backcolor="#000080" uuid="cea8ad61-1983-4487-995c-532098cc9ee9"/>
+				<textElement>
+					<font fontName="SansSerif" size="16" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Informe de Horas extraordinarias]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="633" y="22" width="122" height="14" forecolor="#FFFFFF" backcolor="#000080" uuid="4faf9a42-e5dc-4102-b55f-17d2d81c322c"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ano}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="580" y="36" width="57" height="20" forecolor="#FFFFFF" uuid="0bf38d07-2cda-47c7-9989-4e90c6a5936b"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[subparam]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="637" y="36" width="100" height="20" forecolor="#FFFFFF" uuid="87b6299b-0e6a-47d0-b914-b8764740142d"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{subtitulo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="580" y="56" width="57" height="20" forecolor="#FFFFFF" uuid="b52b6fa6-613a-4c59-bf5c-a6a9f5e5943e"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[userparam:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="2" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="40" y="0" width="100" height="16" uuid="5a3e4fde-1416-44ac-906a-10a976d9f910"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ANO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="151" y="0" width="100" height="16" uuid="dad58eca-7266-4253-a3f8-544c93b1c8d0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MES}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="272" y="0" width="100" height="16" uuid="a2439421-1588-4ddb-90e0-df8e4e031bd8"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CODIGO_UNIDAD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="396" y="0" width="100" height="16" uuid="fbd6a927-591d-4249-9457-26bcaf5d85ce"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRE_UNIDAD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="521" y="0" width="100" height="16" uuid="4f89cecd-ff2b-4887-a0c4-65a4453f01f4"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ESPECIALIDAD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="681" y="0" width="100" height="16" uuid="6b7b6bab-cf60-45a0-b40c-1a8f6f24d126"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PAGO_DEL_MES}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="2" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-18" y="0" width="843" height="24" forecolor="#D0B48E" backcolor="#0000FF" uuid="9a486b70-05a0-45ce-8171-e55e40252ba4"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="783" y="1" width="40" height="20" forecolor="#FFFFFF" uuid="b79f99d4-46c9-4e5c-a703-06338ce6eb4a"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="703" y="1" width="80" height="20" forecolor="#FFFFFF" uuid="9897aa80-7e89-4540-9e8d-c705dd6b2c7d"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="22" y="3" width="174" height="20" forecolor="#FFFFFF" uuid="98f233c2-f2b7-4c6a-83f0-b2ab87f38928"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="445" y="3" width="45" height="20" forecolor="#FFFFFF" backcolor="#FFFF1A" uuid="6c7fbcc2-7e0c-4559-8553-d100958b650d"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Riesgo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="535" y="3" width="45" height="20" forecolor="#FFFFFF" backcolor="#B00000" uuid="8ee5763c-8ab9-43aa-9b64-7cd70f47cd41"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Alerta]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="196" y="4" width="140" height="20" forecolor="#FFFFFF" uuid="010f0c62-1df1-43a9-8e4a-4050e4cb8f43"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Ejec. presupuestaria % según alarmas : ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="353" y="4" width="45" height="20" forecolor="#FFFFFF" backcolor="#00FF00" uuid="577b7854-b3e0-4732-aba5-4846698b1d30"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Aceptable]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="100" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-18" y="28" width="841" height="60" forecolor="#D0B48E" backcolor="#4C4C93" uuid="76b844c8-f4a8-4728-9b27-0b7cb964b86f"/>
+				<elementGroup/>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>

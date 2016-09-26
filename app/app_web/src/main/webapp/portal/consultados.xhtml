@@ -1,0 +1,183 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition>
+		<rich:panel header="LISTA DE DOCUMENTOS">
+		<rich:dataTable value="#{busquedaBean.listDocumentoDescarga}" var="doc"
+			iterationStatusVar="it" id="table2" rows="15"
+			styleClass="tablaDocumentos">
+			<rich:column style="text-align: center;">
+				<f:facet name="header">#</f:facet>
+		                #{doc.doc_id}
+		            </rich:column>
+			<rich:column style="text-align: center;">
+				<f:facet name="header">Año</f:facet>
+				<h:outputText value="#{doc.doc_ano}" />
+			</rich:column>
+			<rich:column style="text-align: center;">
+				<f:facet name="header">Destinatario</f:facet>
+				<h:outputText value="#{doc.nombreDestinatario}" />
+
+			</rich:column>
+			<rich:column style="text-align: center;">
+				<f:facet name="header">N° Documento</f:facet>
+				<h:outputText value="#{doc.doc_numero}" />
+			</rich:column>
+			<rich:column style="text-align: center;">
+				<f:facet name="header">Fecha Ingreso</f:facet>
+				<h:outputText value="#{doc.doc_fecha_ingreso}">
+					<f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</rich:column>
+
+			<rich:column style="text-align: center;">
+				<f:facet name="header">Materia</f:facet>
+				<h:outputText value="#{doc.doc_materia}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">Resumen</f:facet>
+				<h:outputText value="#{doc.doc_resumen}" />
+			</rich:column>
+			<rich:column style="text-align: center;">
+				<f:facet name="header">Abogado</f:facet>
+				<h:outputText value="#{doc.doc_abogado}" />
+			</rich:column>
+			<rich:column style="text-align: center;">
+				<f:facet name="header">Descriptor</f:facet>
+				<h:outputText value="#{doc.nombreDescriptor}" />
+			</rich:column>
+
+			<rich:column style="text-align: center;">
+				<f:facet name="header">Estado</f:facet>
+				<h:outputText rendered="#{doc.doc_estado == 1}" value="Publicado" />
+				<h:outputText rendered="#{doc.doc_estado == 0}" value="Cerrado" />
+			</rich:column>
+			
+			<rich:column style="text-align: center;">
+				<f:facet name="header">Cant. Descargas</f:facet>
+				<h:outputText value="#{doc.docDescarga}" />
+			</rich:column>
+
+			<rich:column>
+				<f:facet name="header">Acciones</f:facet>
+
+				<a4j:commandLink styleClass="no-decor"
+					action="#{busquedaBean.onPreRender()}" execute="@this"
+					render="@none" oncomplete="#{rich:component('previewPane')}.show()">
+					<h:graphicImage value="resources/image/view.png" alt="download"
+						styleClass="centerIcon" style="  left: 10px;" />
+					<f:setPropertyActionListener target="#{busquedaBean.objDocumentoEdit}"
+						value="#{doc}" />
+				</a4j:commandLink>
+
+			</rich:column>
+
+			<f:facet name="footer">
+				<rich:dataScroller page="#{busquedaBean.page}" fastStep="3" />
+			</f:facet>
+		</rich:dataTable>
+
+	</rich:panel>
+	
+	<rich:popupPanel id="previewPane" autosized="true"
+		domElementAttachment="form" header="Visualizar Documento">
+
+		<table>
+
+			<tr>
+
+				<td style="width: 820px"><pe:documentViewer height="500"
+						value="#{busquedaBean.content}" /></td>
+				<td style="width: 100px">
+
+					<table id="tblMetadata">
+
+						<tr>
+
+							<td><p:outputLabel for="yearM" value="Año:" /></td>
+							<td><p:outputLabel id="yearM"
+									value="#{busquedaBean.objDocumentoEdit.doc_ano}"></p:outputLabel></td>
+
+
+						</tr>
+						<tr>
+
+							<td><p:outputLabel for="destinatarioM" value="Destinatario:" /></td>
+							<td><p:outputLabel id="destinatarioM"
+									value="#{busquedaBean.objDocumentoEdit.nombreDestinatario}"></p:outputLabel></td>
+						</tr>
+
+						<tr>
+
+							<td><p:outputLabel for="descriptorM" value="Descriptor:" /></td>
+							<td><p:outputLabel id="descriptorM"
+									value="#{busquedaBean.objDocumentoEdit.nombreDescriptor}"></p:outputLabel></td>
+
+
+
+						</tr>
+
+
+						<tr>
+
+							<td><p:outputLabel value="Materia:" for="materiaM" /></td>
+							<td><p:outputLabel id="materiaM"
+									value="#{busquedaBean.objDocumentoEdit.doc_materia}" /></td>
+						</tr>
+
+						<tr>
+
+							<td><p:outputLabel value="N° Documento:" for="numeroM" /></td>
+							<td><p:outputLabel id="numeroM"
+									value="#{busquedaBean.objDocumentoEdit.doc_numero}" /></td>
+
+
+
+						</tr>
+
+
+						<tr>
+
+							<td><p:outputLabel for="tpoDocumentoM"
+									value="Tipo Documento:" /></td>
+							<td><p:outputLabel id="tpoDocumentoM"
+									value="#{busquedaBean.objDocumentoEdit.nombreTipoDoc}" /></td>
+
+						</tr>
+
+						<tr>
+
+							<td><p:outputLabel value="Abogado:" for="abogadoM" /></td>
+							<td><p:outputLabel id="abogadoM"
+									value="#{busquedaBean.objDocumentoEdit.doc_abogado}" /></td>
+
+
+
+						</tr>
+
+						<tr>
+
+							<td><p:outputLabel value="Resumen:" for="resumenM" /></td>
+							<td><p:inputTextarea rows="6" cols="33" id="resumenM"
+									value="#{busquedaBean.objDocumentoEdit.doc_resumen}"
+									disabled="true" /></td>
+						</tr>
+					</table>
+
+				</td>
+
+			</tr>
+
+		</table>
+
+		<a4j:commandButton value="Salir"
+			onclick="#{rich:component('previewPane')}.hide(); return false;" />
+
+	</rich:popupPanel>
+</ui:composition>
+</html>

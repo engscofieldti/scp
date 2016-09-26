@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="repviaticos3" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6b5d2709-3c56-4f8d-bf9e-e94aadf75c3b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<style name="zebra2" backcolor="#99FF99">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==0]]></conditionExpression>
+			<style/>
+		</conditionalStyle>
+	</style>
+	<style name="zebra">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==1]]></conditionExpression>
+			<style backcolor="#9999FF">
+				<box>
+					<pen lineWidth="1.0" lineColor="#99FF00"/>
+					<topPen lineWidth="1.0" lineColor="#99FF00"/>
+					<leftPen lineWidth="1.0" lineColor="#99FF00"/>
+					<bottomPen lineWidth="1.0" lineColor="#99FF00"/>
+					<rightPen lineWidth="1.0" lineColor="#99FF00"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==0]]></conditionExpression>
+			<style backcolor="#CCCCFF">
+				<box>
+					<pen lineWidth="1.0" lineColor="#99FF00"/>
+					<topPen lineWidth="1.0" lineColor="#99FF00"/>
+					<leftPen lineWidth="1.0" lineColor="#99FF00"/>
+					<bottomPen lineWidth="1.0" lineColor="#99FF00"/>
+					<rightPen lineWidth="1.0" lineColor="#99FF00"/>
+				</box>
+			</style>
+		</conditionalStyle>
+	</style>
+	<style name="zebra_tot">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==1]]></conditionExpression>
+			<style backcolor="#66FF66"/>
+		</conditionalStyle>
+	</style>
+	<style name="estiloCabecera">
+		<box>
+			<pen lineWidth="1.0" lineColor="#33FFFF"/>
+			<topPen lineWidth="1.0" lineColor="#33FFFF"/>
+			<leftPen lineWidth="1.0" lineColor="#33FFFF"/>
+			<bottomPen lineWidth="1.0" lineColor="#33FFFF"/>
+			<rightPen lineWidth="1.0" lineColor="#33FFFF"/>
+		</box>
+	</style>
+	<parameter name="parameter1" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     viaticos_test."uni_ejec" AS viaticos_test_uni_ejec,
+     viaticos_test."tarea" AS viaticos_test_tarea,
+     viaticos_test."descripc" AS viaticos_test_descripc,
+     viaticos_test."catalogo" AS viaticos_test_catalogo,
+     viaticos_test."obligado1" AS viaticos_test_obligado1,
+     viaticos_test."devengado1" AS viaticos_test_devengado1,
+     viaticos_test."obligado2" AS viaticos_test_obligado2,
+     viaticos_test."devengado2" AS viaticos_test_devengado2,
+     viaticos_test."obligado3" AS viaticos_test_obligado3,
+     viaticos_test."devengado3" AS viaticos_test_devengado3,
+     viaticos_test."total_oblig" AS viaticos_test_total_oblig,
+     viaticos_test."total_dev" AS viaticos_test_total_dev,
+     viaticos_test."presup_vigente" AS viaticos_test_presup_vigente,
+     viaticos_test."saldo_disp" AS viaticos_test_saldo_disp,
+     viaticos_test."ejecucion_porc" AS viaticos_test_ejecucion_porc
+FROM
+     "public"."viaticos_test" viaticos_test
+where
+ viaticos_test."tarea" =$P{parameter1}
+]]>
+	</queryString>
+	<field name="viaticos_test_uni_ejec" class="java.lang.String"/>
+	<field name="viaticos_test_tarea" class="java.lang.Integer"/>
+	<field name="viaticos_test_descripc" class="java.lang.String"/>
+	<field name="viaticos_test_catalogo" class="java.lang.Integer"/>
+	<field name="viaticos_test_obligado1" class="java.lang.Long"/>
+	<field name="viaticos_test_devengado1" class="java.lang.Long"/>
+	<field name="viaticos_test_obligado2" class="java.lang.Long"/>
+	<field name="viaticos_test_devengado2" class="java.lang.Long"/>
+	<field name="viaticos_test_obligado3" class="java.lang.Long"/>
+	<field name="viaticos_test_devengado3" class="java.lang.Long"/>
+	<field name="viaticos_test_total_oblig" class="java.lang.Long"/>
+	<field name="viaticos_test_total_dev" class="java.lang.Long"/>
+	<field name="viaticos_test_presup_vigente" class="java.lang.Long"/>
+	<field name="viaticos_test_saldo_disp" class="java.lang.Long"/>
+	<field name="viaticos_test_ejecucion_porc" class="java.lang.Float"/>
+	<variable name="sumaObli1" class="java.lang.Long" resetType="Group" resetGroup="viaticos_test_uni_ejec" calculation="Sum">
+		<variableExpression><![CDATA[$F{viaticos_test_obligado1}]]></variableExpression>
+	</variable>
+	<variable name="sumaDev1" class="java.lang.Long" resetType="Group" resetGroup="viaticos_test_uni_ejec" calculation="Sum">
+		<variableExpression><![CDATA[$F{viaticos_test_devengado1}]]></variableExpression>
+	</variable>
+	<variable name="sumObl2" class="java.lang.Long" resetType="Group" resetGroup="viaticos_test_uni_ejec" calculation="Sum">
+		<variableExpression><![CDATA[$F{viaticos_test_obligado2}]]></variableExpression>
+	</variable>
+	<variable name="sumaDev2" class="java.lang.Long" resetType="Group" resetGroup="viaticos_test_uni_ejec" calculation="Sum">
+		<variableExpression><![CDATA[$F{viaticos_test_devengado2}]]></variableExpression>
+	</variable>
+	<variable name="sumaObl3" class="java.lang.Long" resetType="Group" resetGroup="viaticos_test_uni_ejec" calculation="Sum">
+		<variableExpression><![CDATA[$F{viaticos_test_obligado3}]]></variableExpression>
+	</variable>
+	<variable name="sumaDev3" class="java.lang.Long" resetType="Group" resetGroup="viaticos_test_uni_ejec" calculation="Sum">
+		<variableExpression><![CDATA[$F{viaticos_test_devengado3}]]></variableExpression>
+	</variable>
+	<variable name="totOblig" class="java.lang.Long" resetType="Group" resetGroup="viaticos_test_uni_ejec" calculation="Sum">
+		<variableExpression><![CDATA[$F{viaticos_test_total_oblig}]]></variableExpression>
+	</variable>
+	<variable name="totDev" class="java.lang.Long" resetType="Group" resetGroup="viaticos_test_uni_ejec" calculation="Sum">
+		<variableExpression><![CDATA[$F{viaticos_test_total_dev}]]></variableExpression>
+	</variable>
+	<variable name="presupVig" class="java.lang.Long" resetType="Group" resetGroup="viaticos_test_uni_ejec" calculation="Sum">
+		<variableExpression><![CDATA[$F{viaticos_test_presup_vigente}]]></variableExpression>
+	</variable>
+	<variable name="saldoDisp" class="java.lang.Long" resetType="Group" resetGroup="viaticos_test_uni_ejec" calculation="Sum">
+		<variableExpression><![CDATA[$F{viaticos_test_saldo_disp}]]></variableExpression>
+	</variable>
+	<variable name="ejecPresPorc" class="java.lang.Double" resetType="Group" resetGroup="viaticos_test_uni_ejec">
+		<variableExpression><![CDATA[($V{totOblig}/$V{presupVig})*100]]></variableExpression>
+	</variable>
+	<variable name="sumaObli1_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{viaticos_test_obligado1}]]></variableExpression>
+	</variable>
+	<variable name="sumaDev1_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{viaticos_test_devengado1}]]></variableExpression>
+	</variable>
+	<variable name="sumObl2_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{viaticos_test_obligado2}]]></variableExpression>
+	</variable>
+	<variable name="sumaDev2_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{viaticos_test_devengado2}]]></variableExpression>
+	</variable>
+	<variable name="sumaObl3_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{viaticos_test_obligado3}]]></variableExpression>
+	</variable>
+	<variable name="sumaDev3_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{viaticos_test_devengado3}]]></variableExpression>
+	</variable>
+	<variable name="totOblig_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{viaticos_test_total_oblig}]]></variableExpression>
+	</variable>
+	<variable name="totDev_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{viaticos_test_total_dev}]]></variableExpression>
+	</variable>
+	<variable name="presupVig_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{viaticos_test_presup_vigente}]]></variableExpression>
+	</variable>
+	<variable name="saldoDisp_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{viaticos_test_saldo_disp}]]></variableExpression>
+	</variable>
+	<variable name="ejecPresPorc_1" class="java.lang.Double">
+		<variableExpression><![CDATA[($V{totOblig_1}/$V{presupVig_1})*100]]></variableExpression>
+	</variable>
+	<group name="viaticos_test_uni_ejec">
+		<groupExpression><![CDATA[$F{viaticos_test_uni_ejec}]]></groupExpression>
+		<groupHeader>
+			<band height="58">
+				<textField>
+					<reportElement style="Detail" x="115" y="0" width="194" height="20" forecolor="#736343" uuid="6f469293-fb92-4f64-8820-151cd6cdffad"/>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{viaticos_test_uni_ejec}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="-21" y="0" width="144" height="20" forecolor="#736343" uuid="3f2b74fb-fedb-41ab-925a-9f152b77d3a0"/>
+					<textElement>
+						<font fontName="Arial" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Unidad Ejecutora:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="25" y="43" width="113" height="15" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="68647b56-0a6d-4d99-a3f8-d07c0a0f33a6"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Descripción]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="138" y="43" width="57" height="15" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="c2370f57-7242-4091-a1a4-a82eca3f4b39"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Catálogo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="195" y="43" width="57" height="15" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="94400bb3-8eb5-40dd-b51f-d608db2a56df"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Obligado]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="252" y="43" width="57" height="15" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="b13d11ae-a27a-4e93-89dc-d7e49631dc92"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Devengado]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="309" y="43" width="57" height="15" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="acfd308f-58ce-4343-91f2-567e8078f4df"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Obligado]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="366" y="43" width="57" height="15" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="c95b9c19-ddcb-4fad-8e8e-9eee5e99018e"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Devengado]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="423" y="43" width="57" height="15" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="3367089e-82dc-4516-9b1c-689dcb8a2a20"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Obligado]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="480" y="43" width="57" height="15" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="86823c64-7bf1-4b62-8cbb-ea9ed2d24fc2"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Devengado]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="537" y="43" width="57" height="15" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="aa053b5a-ac9f-4672-abf5-91538aca46d4"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Total obligado]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="594" y="43" width="57" height="15" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="d68de815-5421-4cfe-aaa4-a77d2f83565d"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Total Devengado]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="651" y="43" width="57" height="15" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="b0648468-eb9a-4083-8283-705cb06e2ee9"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Presup. vigente]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="708" y="43" width="64" height="15" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="c61741e9-a5c9-4cb0-b7c0-27f35e8f84cc"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Saldo Disponible]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="772" y="43" width="56" height="15" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="3fd6ce05-d043-4004-8519-c5fd975f995c"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Ejecución %]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="230" y="30" width="49" height="13" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="2ba910cc-c667-466f-9158-c115ee9cfedb"/>
+					<textElement>
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[      Enero]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="341" y="30" width="54" height="13" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="37f7b567-aad2-4705-8b1d-e3fb16f74398"/>
+					<textElement>
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[    Febrero]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="452" y="30" width="49" height="13" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="1350b78c-494b-44c3-b6b3-c671f8db29d7"/>
+					<textElement>
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[      Marzo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="-21" y="43" width="46" height="15" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="0322ad8f-4eec-4aa9-8129-ffb2635e04b5"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Tarea]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="26">
+				<staticText>
+					<reportElement style="zebra_tot" mode="Opaque" x="-21" y="0" width="82" height="20" forecolor="#FFFFFF" backcolor="#CCCCFF" uuid="d34152bc-2f86-4cda-a30e-80725d3ac487"/>
+					<textElement>
+						<font fontName="Arial" size="11" isBold="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Total Unidad :]]></text>
+				</staticText>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra_tot" mode="Opaque" x="252" y="0" width="57" height="20" forecolor="#FFFFFF" backcolor="#CCCCFF" uuid="b56e8f25-e6ab-4611-87e5-0b516d0f1071"/>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumaDev1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement mode="Opaque" x="195" y="0" width="57" height="20" forecolor="#FFFFFF" backcolor="#CCCCFF" uuid="0c556ba0-73cd-4ac6-b851-37b463c26758"/>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumaObli1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra_tot" mode="Opaque" x="309" y="0" width="57" height="20" forecolor="#FFFFFF" backcolor="#CCCCFF" uuid="a129f2e9-eea4-4f50-a247-1a2a24e9c1d7"/>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumObl2}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra_tot" mode="Opaque" x="366" y="0" width="57" height="20" forecolor="#FFFFFF" backcolor="#CCCCFF" uuid="b0c49dcd-e0b5-4ec1-be4a-533c657225ba"/>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumaDev2}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra_tot" mode="Opaque" x="423" y="0" width="57" height="20" forecolor="#FFFFFF" backcolor="#CCCCFF" uuid="64e28226-7a82-4874-a04e-1741cff655af"/>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumaObl3}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra_tot" mode="Opaque" x="480" y="0" width="57" height="20" forecolor="#FFFFFF" backcolor="#CCCCFF" uuid="4a901ca4-0717-4cb5-8e44-643680f37cb5"/>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumaDev3}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra_tot" mode="Opaque" x="537" y="0" width="57" height="20" forecolor="#FFFFFF" backcolor="#CCCCFF" uuid="c5e60fbc-7ace-470d-970f-a914850f6a6d"/>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totOblig}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra_tot" mode="Opaque" x="594" y="0" width="57" height="20" forecolor="#FFFFFF" backcolor="#CCCCFF" uuid="9d8b2ed5-31e7-49af-9084-a016f6662de6"/>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totDev}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra_tot" mode="Opaque" x="708" y="0" width="64" height="20" forecolor="#FFFFFF" backcolor="#CCCCFF" uuid="4d13db77-3b12-4a78-a922-21530d027519"/>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{saldoDisp}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00 &apos;%&apos;">
+					<reportElement style="zebra_tot" mode="Opaque" x="772" y="0" width="63" height="20" forecolor="#FFFFFF" backcolor="#CCCCFF" uuid="7853538b-cae0-4886-948e-ca366338d3ea"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ejecPresPorc}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="61" y="0" width="134" height="20" forecolor="#FFFFFF" backcolor="#CCCCFF" uuid="cd73b3a3-0c70-4f5c-8502-2dfc2133621b"/>
+					<textElement>
+						<font fontName="Arial" size="11" isBold="true" isUnderline="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{viaticos_test_uni_ejec}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra_tot" mode="Opaque" x="651" y="0" width="57" height="20" forecolor="#FFFFFF" backcolor="#CCCCFF" uuid="6970a79f-2eab-4e2e-844f-2b636e06f252"/>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{presupVig}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="72" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="291" y="0" width="263" height="62" uuid="5dbd5c50-970a-417d-9849-0f42d593fbbd"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="24" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Informe de viáticos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="0" width="235" height="56" uuid="4baaaaee-df3e-47d1-977c-25eaf2aedada"/>
+				<text><![CDATA[Oficina de Presupuesto
+Sección Planificación y Control
+Departamento de Recursos Humanos
+Dirección General de Aeronáutica Civil
+			]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="601" y="52" width="161" height="14" uuid="9850b6fe-2199-437d-885b-27622d40fb1c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período :Enero-Marzo 2016]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="601" y="24" width="161" height="14" uuid="5d357818-f90f-4731-bd41-eb4b4a16dbf9"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ítem :Remuneración Variable]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="601" y="38" width="161" height="14" uuid="333024e1-41b2-4ab9-a8e0-66b8a2293910"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Asignación :Viáticos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="601" y="10" width="161" height="14" uuid="e69c45fc-b765-49ec-8e35-b917f7855b4b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SubtÍtulo:21]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="18" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="802" height="1" uuid="67a26264-97cc-49d1-8070-e66ed69b4af1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="802" height="15" uuid="d4dfcffa-e264-4b98-b635-c7b9fb409f32"/>
+			</frame>
+			<textField isStretchWithOverflow="true" pattern="#0.00 &apos;%&apos;">
+				<reportElement style="zebra" mode="Opaque" x="772" y="0" width="57" height="35" uuid="a6d582b8-37f3-4e02-9b8c-88d1d0381ecf"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{viaticos_test_ejecucion_porc}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="zebra" mode="Opaque" x="-21" y="0" width="46" height="35" uuid="aff7ae30-456a-4519-803e-e249c3a20e9c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{viaticos_test_tarea}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="zebra" mode="Opaque" x="25" y="0" width="113" height="35" uuid="b30ebc12-3fde-43c8-b460-c5dac32c1cd5"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{viaticos_test_descripc}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="zebra" mode="Opaque" x="138" y="0" width="57" height="35" uuid="88a1b91b-44b6-4280-bd9a-16315ef633e3"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{viaticos_test_catalogo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="195" y="0" width="57" height="35" uuid="a84856fc-9e1f-4927-a414-ca7c233a6cb5"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{viaticos_test_obligado1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="252" y="0" width="57" height="35" uuid="7c3e20ec-e61c-456d-8cb4-675c14a9ebf0"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{viaticos_test_devengado1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="309" y="0" width="57" height="35" uuid="9e3099ce-8d03-408d-ba9f-8dd84431a470"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{viaticos_test_obligado2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="366" y="0" width="57" height="35" uuid="b80a2de1-387f-44a8-a38a-63724a8d4e73"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{viaticos_test_devengado2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="423" y="0" width="57" height="35" uuid="4fe1400b-7df4-47ab-a592-09d8b0de345d"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{viaticos_test_obligado3}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="480" y="0" width="57" height="35" uuid="7e53c670-2cf1-489a-8504-4d3041983158"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{viaticos_test_devengado3}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="537" y="0" width="57" height="35" uuid="b2eea02c-eb85-42ce-8da8-3f2de7fd9534"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{viaticos_test_total_oblig}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="594" y="0" width="57" height="35" uuid="d651e83e-2669-4577-89b4-e9924090ba5a"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{viaticos_test_total_dev}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="708" y="0" width="64" height="35" uuid="3541f810-b327-4c5d-abdf-74ec3588dd70"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{viaticos_test_saldo_disp}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="653" y="0" width="55" height="35" uuid="39ce7686-6153-4774-879e-a81d59f6cd56"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{viaticos_test_presup_vigente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="6" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="802" height="1" uuid="479d3869-c702-4e16-b827-9761a152fc4a"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-21" y="1" width="856" height="24" forecolor="#D0B48E" backcolor="#F2EBDF" uuid="1e4cca05-d15d-4937-8523-bb995078c0bd"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="13" y="0" width="197" height="20" forecolor="#736343" uuid="86320368-466a-4fde-8fde-6280b55e34a4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="749" y="0" width="40" height="20" forecolor="#736343" uuid="8f451146-a25c-4598-84b8-ab01a584c2d8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Column header" x="669" y="0" width="80" height="20" forecolor="#736343" uuid="aed7e1b4-3600-4a1f-b29f-34cc7bdc76b4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="40" splitType="Stretch">
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Opaque" x="195" y="20" width="57" height="20" forecolor="#FFFFFF" backcolor="#9999FF" uuid="063e930a-ad86-478c-8392-b983513769a0"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumaObli1_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Opaque" x="653" y="20" width="62" height="20" forecolor="#FFFFFF" backcolor="#9999FF" uuid="a57d07b1-f603-4866-b11d-2a98cc743ada"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{presupVig_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Opaque" x="252" y="20" width="57" height="20" forecolor="#FFFFFF" backcolor="#9999FF" uuid="f9568b50-b36b-4d0c-9420-a72a5987f1e6"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumaDev1_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Opaque" x="480" y="20" width="57" height="20" forecolor="#FFFFFF" backcolor="#9999FF" uuid="59cabf29-66c1-4df9-aad7-b6a15d44ab17"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumaDev3_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Opaque" x="537" y="20" width="57" height="20" forecolor="#FFFFFF" backcolor="#9999FF" uuid="40846cdb-eec0-44cf-8576-90384f6b24da"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totOblig_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Opaque" x="594" y="20" width="59" height="20" forecolor="#FFFFFF" backcolor="#9999FF" uuid="ecc95142-8114-4346-a147-8820935be03a"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totDev}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Opaque" x="309" y="20" width="57" height="20" forecolor="#FFFFFF" backcolor="#9999FF" uuid="5b14bc00-3345-4359-a5f0-58c35cf9da08"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumObl2_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Opaque" x="715" y="20" width="59" height="20" forecolor="#FFFFFF" backcolor="#9999FF" uuid="21633294-6c57-45e7-b537-d3487189b8b7"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{saldoDisp_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Opaque" x="366" y="20" width="57" height="20" forecolor="#FFFFFF" backcolor="#9999FF" uuid="db0ba008-8cfa-427f-bbb8-e20f197695d5"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumaDev2_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00 &apos;%&apos;">
+				<reportElement mode="Opaque" x="772" y="20" width="63" height="20" forecolor="#FFFFFF" backcolor="#9999FF" uuid="7ad1ad95-0cd8-49eb-bdad-9081ba05d564"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{ejecPresPorc_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Opaque" x="423" y="20" width="57" height="20" forecolor="#FFFFFF" backcolor="#9999FF" uuid="f7051d31-6e41-41f3-aadc-cf90d64e4e50"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumaObl3_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="-21" y="20" width="216" height="20" forecolor="#FFFFFF" backcolor="#9999FF" uuid="4dae3bab-03f5-48b9-ae79-8f688a8d9c6d"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Total General :]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

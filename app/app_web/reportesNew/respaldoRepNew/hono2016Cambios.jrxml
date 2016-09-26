@@ -1,0 +1,848 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="hono2016Cambios" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="05c670a5-b772-44fb-87c9-0777d260ecaa">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="336"/>
+	<property name="ireport.y" value="0"/>
+	<style name="zebra2">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==1]]></conditionExpression>
+			<style backcolor="#9999FF">
+				<box>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+					<topPen lineWidth="0.25" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineColor="#000000"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==0]]></conditionExpression>
+			<style backcolor="#9999FF">
+				<box>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+					<topPen lineWidth="0.25" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineColor="#000000"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<style mode="Opaque" forecolor="#000000" backcolor="#000000" fill="Solid" fontName="DejaVu Sans"/>
+		</conditionalStyle>
+	</style>
+	<style name="zebra">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==1]]></conditionExpression>
+			<style backcolor="#F0F8FF">
+				<box>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+					<topPen lineWidth="0.25" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineColor="#000000"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==0]]></conditionExpression>
+			<style backcolor="#FFFFFF">
+				<box>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+					<topPen lineWidth="0.25" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineColor="#000000"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<style mode="Opaque" forecolor="#000000" backcolor="#000000" fill="Solid" fontName="DejaVu Sans"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="ano" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="mes" class="java.util.Collection"/>
+	<parameter name="user" class="java.lang.String"/>
+	<parameter name="asignaciones" class="java.lang.Collection"/>
+	<parameter name="subtitulo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT UNI.RUT,
+       UNI.NOMBRE,
+       UNI.ID_CONTRATO,
+       UNI.UNIDAD_EJECUTOR,
+       UNI.FECHA_INICIO,
+       UNI.FECHA_TERMINO,
+       UNI.UNIDAD,
+       UNI.DESCRIP AS DEPTO_AREA,
+       UNI.FUNCION AS ESPECIALIDAD,
+       SUM(UNI.MES_01) AS ENE,
+       SUM(UNI.MES_02) AS FEB,
+       SUM(UNI.MES_03) AS MAR,
+       SUM(UNI.MES_04) AS ABR,
+       SUM(UNI.MES_05) AS MAY,
+       SUM(UNI.MES_06) AS JUN,
+       SUM(UNI.MES_07) AS JUL,
+       SUM(UNI.MES_08) AS AGO,
+       SUM(UNI.MES_09) AS SEP,
+       SUM(UNI.MES_10) AS OCT,
+       SUM(UNI.MES_11) AS NOV,
+       SUM(UNI.MES_12) AS DIC
+FROM (SELECT TRAB.RUT,
+             TRAB.NOMBRE,
+             TRAB.ID_CONTRATO,
+             TRAB.UNIDAD,
+             TRAB.UNIDAD_EJECUTOR,
+             CT.FECHA_INICIO,
+             CT.FECHA_TERMINO,
+             TAB.DESCRIP,
+             ESPE.DESCRIP AS FUNCION,
+             DECODE(TRAB.MES, 01, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_01,
+             DECODE(TRAB.MES, 02, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_02,
+             DECODE(TRAB.MES, 03, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_03,
+             DECODE(TRAB.MES, 04, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_04,
+             DECODE(TRAB.MES, 05, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_05,
+             DECODE(TRAB.MES, 06, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_06,
+             DECODE(TRAB.MES, 07, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_07,
+             DECODE(TRAB.MES, 08, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_08,
+             DECODE(TRAB.MES, 09, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_09,
+             DECODE(TRAB.MES, 10, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_10,
+             DECODE(TRAB.MES, 11, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_11,
+             DECODE(TRAB.MES, 12, NVL(RESU.hhohono, 0) + NVL(RESU.hhohono_r, 0), 0) AS MES_12
+      FROM NOMINA_DGAC.PROCESOS_TRABAJADORES TRAB,
+           NOMINA_DGAC.PROCESOS_RESULTADOS RESU,
+          (SELECT CODIGO, DESCRIP FROM NOMINA_DGAC.TABLAS WHERE ID_TABLA = 69) TAB,
+          (SELECT CODIGO,DESCRIP FROM NOMINA_DGAC.TABLAS WHERE ID_TABLA = 189) ESPE,
+           NOMINA_DGAC.AIRH_CONTRATOS_TRAB CT
+      WHERE TRAB.RUT         = RESU.RUT
+      AND   TRAB.ID_EMPRESA  = RESU.ID_EMPRESA
+      AND   TRAB.ID_CONTRATO = RESU.ID_CONTRATO
+      AND   TRAB.ID_PROCESO  = RESU.ID_PROCESO
+      AND   TRAB.ANO         = RESU.ANO
+      AND   TRAB.MES         = RESU.MES
+      AND   TRAB.ANO         = $P{ano}
+      AND   TRAB.MES IN ($P!{mes})
+      AND   TRAB.RUT         = CT.RUT
+      AND   TRAB.ID_EMPRESA  = CT.ID_EMPRESA
+      AND   TRAB.ID_CONTRATO = CT.ID_CONTRATO
+      AND   RESU.RUT         = CT.RUT
+      AND   RESU.ID_EMPRESA  = CT.ID_EMPRESA
+      AND   RESU.ID_CONTRATO = CT.ID_CONTRATO
+      AND   TRAB.ID_PROCESO  = 0
+      AND   TRAB.ID_EMPRESA  = 1
+      AND   TRAB.ACTIVO      = 1
+      AND   TRAB.UNIDAD      = TAB.CODIGO(+)
+      AND   TRAB.FUNCION     = ESPE.CODIGO(+)
+      AND  (NVL(RESU.hhohono, 0) +
+            NVL(RESU.hhohono_r, 0)) != 0
+      AND   TRAB.TIPO_CONTRATO IN (3)
+      AND TRAB.MES IN ($P!{mes})
+      AND   TRAB.ANO    = $P{ano}
+      ORDER BY TRAB.NOMBRE, TRAB.ID_CONTRATO,TRAB.UNIDAD_EJECUTOR) UNI--,TAB.DESCRIP) UNI
+GROUP BY UNI.RUT,
+         UNI.NOMBRE,
+         UNI.ID_CONTRATO,
+         UNI.UNIDAD,
+         UNI.UNIDAD_EJECUTOR,
+         UNI.DESCRIP,
+         UNI.FUNCION,
+         UNI.FECHA_INICIO,
+         UNI.FECHA_TERMINO
+ORDER BY UNI.NOMBRE, UNI.ID_CONTRATO]]>
+	</queryString>
+	<field name="RUT" class="java.lang.String"/>
+	<field name="NOMBRE" class="java.lang.String"/>
+	<field name="ID_CONTRATO" class="java.math.BigDecimal"/>
+	<field name="UNIDAD_EJECUTOR" class="java.math.BigDecimal"/>
+	<field name="FECHA_INICIO" class="java.sql.Timestamp"/>
+	<field name="FECHA_TERMINO" class="java.sql.Timestamp"/>
+	<field name="UNIDAD" class="java.math.BigDecimal"/>
+	<field name="DEPTO_AREA" class="java.lang.String"/>
+	<field name="ESPECIALIDAD" class="java.lang.String"/>
+	<field name="ENE" class="java.math.BigDecimal"/>
+	<field name="FEB" class="java.math.BigDecimal"/>
+	<field name="MAR" class="java.math.BigDecimal"/>
+	<field name="ABR" class="java.math.BigDecimal"/>
+	<field name="MAY" class="java.math.BigDecimal"/>
+	<field name="JUN" class="java.math.BigDecimal"/>
+	<field name="JUL" class="java.math.BigDecimal"/>
+	<field name="AGO" class="java.math.BigDecimal"/>
+	<field name="SEP" class="java.math.BigDecimal"/>
+	<field name="OCT" class="java.math.BigDecimal"/>
+	<field name="NOV" class="java.math.BigDecimal"/>
+	<field name="DIC" class="java.math.BigDecimal"/>
+	<variable name="ejec_hono" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{ENE}+$F{FEB}+$F{MAR}+$F{ABR}+$F{MAY}+$F{JUN}
++$F{JUL}+$F{AGO}+$F{SEP}+$F{OCT}+$F{NOV}+$F{DIC}]]></variableExpression>
+	</variable>
+	<variable name="ejec_hono_summary" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumEne}+$V{sumFeb}+$V{sumMar}+$V{sumAbr}
++$V{sumMay}+$V{sumJun}+$V{sumJul}+$V{sumAgo}
++$V{sumSep}+$V{sumOct}+$V{sumNov}+$V{sumDic}]]></variableExpression>
+	</variable>
+	<variable name="ejecSummaryTitle" class="java.lang.Long" incrementType="Report">
+		<variableExpression><![CDATA[$V{ejec_hono_summary}]]></variableExpression>
+	</variable>
+	<variable name="saldoTitulo" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{presupEstatico}-$V{ejecSummaryTitle}]]></variableExpression>
+	</variable>
+	<variable name="presupEstatico" class="java.lang.Long">
+		<variableExpression><![CDATA[218040000]]></variableExpression>
+	</variable>
+	<variable name="estimado" class="java.lang.Long">
+		<variableExpression><![CDATA[153946562]]></variableExpression>
+	</variable>
+	<variable name="porcEjeTitle" class="java.lang.Double" incrementType="Report" calculation="Average">
+		<variableExpression><![CDATA[$V{ejecSummaryTitle}/$V{presupEstatico}]]></variableExpression>
+	</variable>
+	<variable name="sumEne" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{ENE}]]></variableExpression>
+	</variable>
+	<variable name="sumFeb" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{FEB}]]></variableExpression>
+	</variable>
+	<variable name="sumMar" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{MAR}]]></variableExpression>
+	</variable>
+	<variable name="sumAbr" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{ABR}]]></variableExpression>
+	</variable>
+	<variable name="sumMay" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{MAY}]]></variableExpression>
+	</variable>
+	<variable name="sumJun" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{JUN}]]></variableExpression>
+	</variable>
+	<variable name="sumJul" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{JUL}]]></variableExpression>
+	</variable>
+	<variable name="sumAgo" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{AGO}]]></variableExpression>
+	</variable>
+	<variable name="sumSep" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{SEP}]]></variableExpression>
+	</variable>
+	<variable name="sumOct" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{OCT}]]></variableExpression>
+	</variable>
+	<variable name="sumNov" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{NOV}]]></variableExpression>
+	</variable>
+	<variable name="sumDic" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{DIC}]]></variableExpression>
+	</variable>
+	<variable name="saldoFinalTitle" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{presupEstatico}-$V{estimado}]]></variableExpression>
+	</variable>
+	<variable name="cantContrata" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{NOMBRE}]]></variableExpression>
+	</variable>
+	<variable name="varEspecialidad" class="java.lang.String">
+		<variableExpression><![CDATA[(!($F{ESPECIALIDAD}.equals(null))
+? $F{ESPECIALIDAD}:"NO DEFINIDO")]]></variableExpression>
+	</variable>
+	<variable name="ejecSummary" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumEne}+$V{sumFeb}+$V{sumMar}+$V{sumAbr}+$V{sumMay}+
+$V{sumJun}+$V{sumJul}+$V{sumAgo}+$V{sumSep}+
+$V{sumOct}+$V{sumNov}+$V{sumDic}]]></variableExpression>
+	</variable>
+	<variable name="estimadoDicEstatico" class="java.lang.Long">
+		<variableExpression><![CDATA[77813726]]></variableExpression>
+	</variable>
+	<variable name="variable1" class="java.lang.Long">
+		<variableExpression><![CDATA[$V{presupEstatico}-$V{estimadoDicEstatico}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="205" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-74" y="-10" width="892" height="193" backcolor="#0000CD" uuid="17731698-dbb5-495f-ad98-5db4dc575931"/>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="456" y="0" width="362" height="183" backcolor="#3333FF" uuid="599bbf56-df19-4650-84ed-460bf70d1ba3"/>
+			</rectangle>
+			<textField evaluationTime="Report" pattern="&apos; $ &apos;#,##0">
+				<reportElement x="640" y="128" width="100" height="20" forecolor="#FFFFFF" backcolor="#000080" uuid="d9c272cb-01a5-439e-8847-e6853e0ed935"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{saldoTitulo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="474" y="45" width="150" height="20" forecolor="#FFFFFF" backcolor="#000080" uuid="ba78e318-2656-4cfa-b213-748135f3de3f"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<text><![CDATA[(b)-(*) Gasto estimado a Diciembre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="476" y="128" width="107" height="20" forecolor="#FFFFFF" backcolor="#000080" uuid="da78303a-1d5b-4b43-b149-b04eb395c403"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[(a-d)Saldo II :]]></text>
+			</staticText>
+			<textField evaluationTime="Report" pattern="&apos; $ &apos;#,##0">
+				<reportElement x="638" y="25" width="100" height="20" forecolor="#FFFFFF" backcolor="#000080" uuid="b4c476c0-c05b-4c52-9f16-bdce55996958"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{presupEstatico}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="476" y="149" width="107" height="20" forecolor="#FFFFFF" backcolor="#000080" uuid="7b3fc967-4045-442c-8b4e-148d74e315c4"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[(a-b)Saldo III :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="475" y="87" width="111" height="20" forecolor="#FFFFFF" backcolor="#000080" uuid="d5508acd-c6c6-4734-b3e1-2a813ea490f8"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[(d)-Ejecución  A La Fecha :]]></text>
+			</staticText>
+			<textField evaluationTime="Report" pattern="&apos; $ &apos;#,##0">
+				<reportElement x="638" y="45" width="100" height="20" forecolor="#FFFFFF" backcolor="#000080" uuid="1ef6804e-215f-4216-9092-09737882ec99"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{estimado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="474" y="25" width="107" height="20" forecolor="#FFFFFF" backcolor="#000080" uuid="be43dd3a-8b5a-44ba-bc50-28598c9f06d2"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[(a)-Presupuesto :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="473" y="1" width="117" height="20" forecolor="#FFFFFF" backcolor="#000080" uuid="442c54cc-6758-4730-8db5-8535c5dbdfdd"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Honorarios a la fecha :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="235" y="183" width="295" height="20" uuid="cfb4f035-519e-4ddc-aae4-90501e59c5fd"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Informe  De Ejecución a La Fecha del Total De Contrataciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-13" y="30" width="155" height="20" forecolor="#FFFFFF" uuid="aeb333e4-347a-4889-af02-3807462be394"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Asignación : Honorarios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-13" y="10" width="136" height="20" forecolor="#FFFFFF" uuid="695883e9-bfb3-4b9a-b6ba-6dc3126261f7"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item: Otras Remuneraciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-13" y="-10" width="91" height="20" forecolor="#FFFFFF" uuid="47aef80a-a399-4370-be33-6297f41853ec"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Subtítulo :21]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-13" y="70" width="71" height="20" forecolor="#FFFFFF" uuid="a66c62f0-5483-4993-b528-b46718080c62"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-13" y="50" width="91" height="20" forecolor="#FFFFFF" uuid="5d191cd5-a395-4ce0-8435-71836a243c12"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuario conectado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-13" y="110" width="383" height="42" forecolor="#FFFFFF" uuid="d8a3bae2-4e68-4690-ac45-2d6caee65415"/>
+				<textElement>
+					<font fontName="Calibri" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Honorarios]]></text>
+			</staticText>
+			<textField evaluationTime="Report" pattern="&apos; $ &apos;#,##0">
+				<reportElement x="641" y="149" width="100" height="20" forecolor="#FFFFFF" uuid="7f301232-fee3-4762-9332-e6b133e53fc0"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{saldoFinalTitle}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="792" y="65" width="23" height="20" forecolor="#FFFFFF" uuid="55da1db2-95d2-4a34-a647-226470f1d95b"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cantContrata}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-13" y="89" width="91" height="20" forecolor="#FFFFFF" uuid="aa8e64ef-c9ad-41f5-a27a-bf0213b8d2ac"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidad Ejecutora:]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="80" y="90" width="36" height="20" forecolor="#FFFFFF" backcolor="#4C4C93" uuid="433a9abc-ad8a-4b08-92c0-8afdf747eb5f"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{UNIDAD_EJECUTOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="58" y="70" width="100" height="20" forecolor="#FFFFFF" backcolor="#4C4C93" uuid="158b0ba9-5723-441c-b76a-cc7494359b34"/>
+				<textElement verticalAlignment="Top">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ano}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="50" width="100" height="20" forecolor="#FFFFFF" uuid="4249c55f-5052-4e6d-984f-c89ca48f25f6"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{user}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement mode="Transparent" x="636" y="1" width="92" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="1942f69d-4b5a-4956-9459-5a978511766d"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(new SimpleDateFormat("MMMM-yyyy")).format(new java.util.Date()).toString().toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" pattern="&apos; $ &apos;#,##0">
+				<reportElement x="641" y="86" width="100" height="20" forecolor="#FFFFFF" uuid="a758e600-4687-4dca-abeb-aa6b698b412b"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{ejecSummary}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Transparent" x="640" y="65" width="79" height="20" forecolor="#FFFFFF" uuid="00e53a95-d97b-41d9-b9f5-2e3e356ab951"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{estimadoDicEstatico}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="474" y="66" width="127" height="20" forecolor="#FFFFFF" uuid="3471f7ce-c236-4343-b616-ecbf75db0c52"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<text><![CDATA[(c)-Proyeccion a Diciembre :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="719" y="65" width="71" height="20" forecolor="#FFFFFF" backcolor="#000080" uuid="cca49533-85ac-4a67-a1f3-dc12320b50fe"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Contrataciones :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="476" y="106" width="107" height="20" forecolor="#FFFFFF" backcolor="#000080" uuid="73d4e4d3-fa67-41e2-af77-59a87530e891"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[(a-c)Saldo I :]]></text>
+			</staticText>
+			<textField evaluationTime="Report" pattern="&apos; $ &apos;#,##0">
+				<reportElement x="641" y="108" width="100" height="20" forecolor="#FFFFFF" uuid="d6c31c43-8b6f-406c-a950-b30d331438ad"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="-19" y="0" width="132" height="25" forecolor="#FFFFFF" backcolor="#0000CD" uuid="434ee7f8-45f7-4bfd-815c-6a0066d95097"/>
+				<textElement>
+					<font fontName="Calibri" size="6" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="113" y="0" width="30" height="25" forecolor="#FFFFFF" backcolor="#0000CD" uuid="c6323782-a227-4fe9-b936-c15b0225041b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[INICIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="142" y="0" width="30" height="25" forecolor="#FFFFFF" backcolor="#0000CD" uuid="56b1dfa8-e7c9-464d-9685-3daab9d89d35"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[TERMINO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="171" y="0" width="65" height="25" forecolor="#FFFFFF" backcolor="#0000CD" uuid="450d8d7b-54c4-47eb-b69c-f4cef7b69e60"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[DEPTO_AREA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="235" y="0" width="60" height="25" forecolor="#FFFFFF" backcolor="#0000CD" uuid="f0449a31-65ea-406b-a70e-863ae1a1772a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[ESPECIALIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="294" y="0" width="38" height="25" forecolor="#FFFFFF" backcolor="#0000CD" uuid="c062eb26-84b1-49c8-ab3e-06621da4b16a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[ENERO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="332" y="0" width="40" height="25" forecolor="#FFFFFF" backcolor="#0000CD" uuid="04d1b064-c524-44e8-bb64-6a943227369f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[FEBRERO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="371" y="0" width="40" height="25" forecolor="#FFFFFF" backcolor="#0000CD" uuid="e87f506e-d685-4603-a1e1-d1ffde590299"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[MARZO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="411" y="0" width="40" height="25" forecolor="#FFFFFF" backcolor="#0000CD" uuid="f7f8bed4-9264-4c65-b4af-eadf298bab2f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[ABRIL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="450" y="0" width="40" height="25" forecolor="#FFFFFF" backcolor="#0000CD" uuid="ea89167b-d28e-4427-a767-a5fc89c833bd"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[MAYO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="490" y="0" width="40" height="25" forecolor="#FFFFFF" backcolor="#0000CD" uuid="cc81bd76-ef49-48c2-853b-7ebd48046310"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[JUNIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="529" y="0" width="40" height="25" forecolor="#FFFFFF" backcolor="#0000CD" uuid="69172e8d-b7c4-4473-8595-cdacc1f64ef6"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[JULIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="568" y="0" width="40" height="25" forecolor="#FFFFFF" backcolor="#0000CD" uuid="a77515e9-dc36-42f8-bfa8-5840c7e4d2fa"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[AGOSTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="608" y="0" width="40" height="25" forecolor="#FFFFFF" backcolor="#0000CD" uuid="11b9a746-7720-417b-8306-56114cd3682b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[SEPTIEMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="647" y="0" width="40" height="25" forecolor="#FFFFFF" backcolor="#0000CD" uuid="5acf01f8-cec1-458d-9a84-d6be9dd914ab"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[OCTUBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="685" y="0" width="40" height="25" forecolor="#FFFFFF" backcolor="#0000CD" uuid="8768f2f0-af75-4a6c-999a-c2717427bf75"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[NOVIEMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="725" y="0" width="40" height="25" forecolor="#FFFFFF" backcolor="#0000CD" uuid="e44b5b2d-66f4-4108-9619-e84fb42abd1f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[DICIEMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="764" y="0" width="56" height="25" forecolor="#FFFFFF" backcolor="#0000CD" uuid="d09f2397-ba0c-42c3-8715-8ae7ba897e4e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[EJECUCION]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement style="zebra" mode="Opaque" x="-18" y="0" width="134" height="25" uuid="576fa40e-7c58-4e6e-9d96-69ee266de5a1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yy">
+				<reportElement style="zebra" mode="Opaque" x="116" y="0" width="30" height="25" uuid="71186c57-76bf-4ce0-aa1c-e3d61e87baaf"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FECHA_INICIO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yy">
+				<reportElement style="zebra" mode="Opaque" x="145" y="0" width="30" height="25" uuid="6eade002-f3a6-43eb-b4a2-146eb9c4195d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FECHA_TERMINO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="zebra" mode="Opaque" x="175" y="0" width="65" height="25" uuid="9dfbafc0-77b7-4cf6-a99b-8da909339d3c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEPTO_AREA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="295" y="0" width="38" height="25" uuid="06870574-7a5b-43b1-9271-26298181e1b5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ENE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="333" y="0" width="37" height="25" uuid="90dd132d-cf0c-45df-b2f6-51dbbf1f9880"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FEB}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="370" y="0" width="40" height="25" uuid="d79d7e61-9104-4406-a101-feb88f831742"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MAR}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="410" y="0" width="40" height="25" uuid="f026f677-8915-47d1-9da7-5fee582b6b27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ABR}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="450" y="0" width="40" height="25" uuid="ae156393-b566-473a-82e2-235b08019eae"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MAY}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="490" y="0" width="40" height="25" uuid="ce5d4aa2-cfc4-4c52-b7be-94ad5b1c0a11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{JUN}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="530" y="0" width="39" height="25" uuid="f20c017b-33e3-4b96-a9bd-5492be83bfc1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{JUL}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="569" y="0" width="39" height="25" uuid="a17b06a4-ec67-4726-8f8e-fe5d442995ba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AGO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="608" y="0" width="40" height="25" uuid="9505cd64-b5fa-48cf-a563-3f6224e8783a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SEP}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="648" y="0" width="39" height="25" uuid="bdeecfe2-f7b6-4ff0-8d10-05076ea42b26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{OCT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="687" y="0" width="38" height="25" uuid="97dbace2-95c1-4fef-9500-fd4dee02e12b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOV}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="725" y="0" width="40" height="25" uuid="d6f9d089-f9be-483c-ac85-9c9d4c4d6ea6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DIC}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="765" y="0" width="55" height="25" uuid="37c95fe9-9035-4a2c-a38d-939fee971e01"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{ejec_hono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="zebra" mode="Opaque" x="236" y="0" width="59" height="25" uuid="28c4e6b9-8b42-4e99-9702-df700ccf450f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{varEspecialidad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="43" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-19" y="-1" width="839" height="21" backcolor="#0000CD" uuid="573f8c77-1f36-44e2-8b34-83ad8c3fc249"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="-19" y="0" width="108" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="b0587d98-da43-46c8-b86c-75289a601688"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Totales :]]></text>
+			</staticText>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Opaque" x="295" y="0" width="36" height="20" forecolor="#FFFFFF" backcolor="#0000CD" uuid="49986904-afbd-450b-a785-1dce4e604a02"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumEne}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Opaque" x="331" y="0" width="40" height="20" forecolor="#FFFFFF" backcolor="#0000CD" uuid="223635b6-8bb9-43fe-8ce2-9e628ceff94c"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumFeb}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Opaque" x="372" y="0" width="37" height="20" forecolor="#FFFFFF" backcolor="#0000CD" uuid="aa048e99-94a9-4aea-9aa0-3119cf64ced2"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumMar}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement mode="Opaque" x="410" y="0" width="39" height="20" forecolor="#FFFFFF" backcolor="#0000CD" uuid="cf755174-1e13-471e-b793-e7416f2771b1"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumAbr}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Opaque" x="450" y="0" width="40" height="20" forecolor="#FFFFFF" backcolor="#0000CD" uuid="2ab587c7-d35e-45db-b4d8-f07fc4ecf122"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumMay}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Opaque" x="530" y="0" width="37" height="20" forecolor="#FFFFFF" backcolor="#0000CD" uuid="6542386d-4a5d-41bb-a409-a6a9a1a46f14"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumJul}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Opaque" x="568" y="0" width="40" height="20" forecolor="#FFFFFF" backcolor="#0000CD" uuid="0433403a-e475-4588-9ebb-c542300b1d36"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumAgo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Opaque" x="490" y="0" width="40" height="20" forecolor="#FFFFFF" backcolor="#0000CD" uuid="4a053220-62f7-4a63-bfc8-38546c5e13dc"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumJun}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement mode="Opaque" x="608" y="0" width="40" height="20" forecolor="#FFFFFF" backcolor="#0000CD" uuid="34dd09c5-9be7-4a55-9d77-45f1fc24463b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumSep}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Opaque" x="648" y="0" width="40" height="20" forecolor="#FFFFFF" backcolor="#0000CD" uuid="1ada49ce-6b48-4aa9-a2ea-0c663f8f239a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumOct}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Opaque" x="688" y="0" width="38" height="20" forecolor="#FFFFFF" backcolor="#0000CD" uuid="19358887-3fbb-4a87-aa0f-4f8a900c3e9e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumNov}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement mode="Opaque" x="726" y="0" width="40" height="20" forecolor="#FFFFFF" backcolor="#0000CD" uuid="5d4ec269-3f06-41d1-ace3-5e8a00a4aa67"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumDic}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement x="766" y="-1" width="54" height="20" forecolor="#FFFFFF" uuid="98a60bf9-3d41-4acb-ba16-853d1d2aa697"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{ejecSummary}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="133" y="21" width="471" height="20" uuid="65d73eb6-0b84-4c72-888f-426c20590a42"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[(*) Nota : El gasto estimado a Diciembre esta sujeto a variaciones según nuevas contrataciones]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

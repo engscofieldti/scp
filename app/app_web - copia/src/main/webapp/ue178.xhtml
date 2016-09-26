@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui">
+  
+   
+   <h:head style="background-color:rgb(72,181,163)">
+       <title>Modulo de Consulta y Reportes ...</title>
+   </h:head>
+   <h:body>
+      <h2>Unidad Ejecutora 178 : Recursos Humanos  </h2>
+      <hr />
+      <h:form style="background-color:rgb(148,168,208)">
+    <p:messages autoUpdate="true" />  
+    
+     <h:panelGrid columns="4"   style="margin-bottom:10px;font-size: 10px;background-color: rgb(117,137,191)" cellpadding="5" border="3">
+  
+       
+       <h:panelGrid columns="1"  border="1"> 
+       <h3 style="margin-top:0px">Subtítulo 21 - Item</h3> <p:outputLabel></p:outputLabel>
+    <p:selectManyCheckbox id="item" value="#{dropdownView.selectedConsoles}" layout="grid" columns="1">
+             
+     	<f:selectItem itemLabel="Viaticos"  itemValue="viat" /> 
+        <f:selectItem  itemLabel="Planta" itemValue="plan" /> 
+        <f:selectItem  itemLabel="Contrata" itemValue="cont" />
+   </p:selectManyCheckbox>
+    </h:panelGrid>
+    
+    
+   <h:panelGrid columns="1" border="1"> 
+   <h3 style="margin-top:0px">Subtítulo 22 - Asignación</h3>
+    <p:selectManyCheckbox id="asignacion" value="#{dropdownView.selectedConsoles}" layout="grid" columns="1">
+        <f:selectItem itemLabel="Electricidad" itemValue="elec" />
+        <f:selectItem itemLabel="Agua" itemValue="agua" />
+        <f:selectItem itemLabel="Telefonía" itemValue="tele" />
+        <f:selectItem itemLabel="Correo" itemValue="correo" />
+        <f:selectItem itemLabel="Pasajes,Fletes,Bodegaje" itemValue="pasflebod" />
+        <f:selectItem itemLabel="Sala Cuna y/o Jardines Infantiles " itemValue="salacujard" />
+        <f:selectItem itemLabel="Gastos Menores " itemValue="gastomen" />
+                  
+                
+    </p:selectManyCheckbox>
+    </h:panelGrid>
+   
+  
+    </h:panelGrid>
+  
+    <h:panelGrid columns="3"   style="margin-bottom:10px;font-size: 10px;background-color: rgb(191,213,232)" cellpadding="5" border="3">
+    <h3 style="margin-top:0px">Seleccione Periodo </h3>
+      <h:panelGrid columns="1" style="margin-bottom:10px">
+      
+        <p:selectOneMenu id="console2" value="#{dropdownView.cities}" style="width:125px">
+             <f:selectItem itemLabel="Selecciona un periodo" itemValue="" />
+            <f:selectItem itemLabel="Mensual" itemValue="Mensual" />
+            <f:selectItem itemLabel="Anual" itemValue="Anual" />
+                    
+        </p:selectOneMenu>
+  </h:panelGrid >
+  
+  
+  <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5" border="1" >
+  <h3 style="margin-top:0px">Periodo anual</h3>
+    <p:selectManyCheckbox id="periodoanual2" value="#{dropdownView.selectedConsoles}" layout="grid" columns="1">
+        <f:selectItem itemLabel="2014" itemValue="2014" />
+        <f:selectItem itemLabel="2015" itemValue="2015" />
+        <f:selectItem itemLabel="2016" itemValue="2016" />
+              
+    </p:selectManyCheckbox>
+    </h:panelGrid>
+    <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5" border="1" >
+      <h3 style="margin-top:0px">Periodo mensual</h3>
+    <p:selectManyCheckbox id="periodoanual3" value="#{dropdownView.selectedConsoles}" layout="grid" columns="3">
+        <f:selectItem itemLabel="Enero" itemValue="Enero" />
+        <f:selectItem itemLabel="Febrero" itemValue="Febrero" />
+        <f:selectItem itemLabel="Marzo" itemValue="Marzo" />
+        <f:selectItem itemLabel="Abril" itemValue="Abril" />
+        <f:selectItem itemLabel="Mayo" itemValue="Mayo" />
+        <f:selectItem itemLabel="Junio" itemValue="Junio" />
+        <f:selectItem itemLabel="Julio" itemValue="Julio" />
+        <f:selectItem itemLabel="Agosto" itemValue="Agosto" />
+        <f:selectItem itemLabel="Septiembre" itemValue="Septiembre" />
+        <f:selectItem itemLabel="Octubre" itemValue="Octubre" />
+        <f:selectItem itemLabel="Noviembre" itemValue="Noviembre" />
+        <f:selectItem itemLabel="Diciembre" itemValue="Diciembre" />
+              
+    </p:selectManyCheckbox>
+    </h:panelGrid>
+    
+     <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" border="1">
+       <h3 style="margin-top:0px">Seleccione Tipo </h3>
+     
+      
+        <p:selectOneMenu id="console3" value="#{dropdownView.cities}" style="width:155px">
+             <f:selectItem itemLabel="Seleccione una opcion" itemValue="" />
+            <f:selectItem itemLabel="Presupuesto aprobado por la ley" itemValue="Presupuesto aprobado por la ley" />
+            <f:selectItem itemLabel="Ejecucion presupuestaria" itemValue="Ejecucion presupuestaria" />
+             
+       </p:selectOneMenu>
+   
+    </h:panelGrid>
+    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" border="1">
+        <h:outputText value="" />
+       
+        <p:commandButton value="Volver" update="display" icon="ui-icon-check" />
+        <p:spacer />
+        <p:commandButton value="Siguiente" update="display" icon="ui-icon-check" />
+        <p:spacer />
+         <p:commandButton value="Salir" update="display" icon="ui-icon-check" />
+        <p:spacer /> 
+        <h:outputText value="" />
+        <h:outputText id="display" value="#{dropdownView.option}" style="font-weight: bold" />
+    </h:panelGrid>
+    </h:panelGrid >
+   </h:form>
+  
+ 
+   </h:body>
+</html>

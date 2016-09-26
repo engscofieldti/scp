@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="parameters" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9c8021c4-3c04-4f7e-a91b-43403b8d0222">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="mes_param" class="java.lang.Integer"/>
+	<parameter name="ano_param" class="java.lang.Integer"/>
+	<parameter name="codigouni_param" class="java.lang.String"/>
+	<parameter name="mes_param2" class="java.lang.Integer"/>
+	<parameter name="mes_param3" class="java.lang.Integer"/>
+	<parameter name="mes_param4" class="java.lang.Integer"/>
+	<parameter name="mes_param5" class="java.lang.Integer"/>
+	<parameter name="mes_param6" class="java.lang.Integer"/>
+	<parameter name="mes_param7" class="java.lang.Integer"/>
+	<parameter name="mes_param8" class="java.lang.Integer"/>
+	<parameter name="mes_param9" class="java.lang.Integer"/>
+	<parameter name="mes_param10" class="java.lang.Integer"/>
+	<parameter name="mes_param11" class="java.lang.Integer"/>
+	<parameter name="mes_param12" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT UNI.ANO, UNI.MES, UNI.UNIDAD AS CODIGO_UNIDAD,
+       UNI.UNIDAD_DESC AS NOMBRE_UNIDAD,
+       SUM(UNI.MONTO_DIFER) AS PAGO_DEL_MES
+
+FROM (SELECT TRAB.ANO, TRAB.MES, TRAB.RUT, TRAB.NOMBRE,
+             DECODE(TRAB.TIPO_CONTRATO, 1, 'PLANTA',
+                                        2, 'C.SIMPLE',
+                                        10, 'C.GLOBAL', TRAB.TIPO_CONTRATO) AS C_JURIDICA,
+             TRAB.ID_CONTRATO,
+             TRAB.UNIDAD,
+             UNI.UNIDAD_DESC,
+             FN.DESCRIP AS CARGO,
+             Row_Number() Over(Partition By TRAB.RUT, TRAB.ID_CONTRATO
+                               Order By TRAB.RUT, TRAB.ID_CONTRATO, TRAB.ID_CONTRATO,
+                                        RET.ANO_CALCULO, RET.MES_CALCULO) AS SEC,
+
+
+             NVL(RESU.HCGHLYF_R, 0) +
+             NVL(RESU.HCSHLYF_R, 0) +
+             NVL(RESU.HPTHLYF_R, 0) AS HORAS_PROMEDIO,
+             RET.ANO_CALCULO AS ANO_C,
+             RET.MES_CALCULO AS MES_C,
+             RET.MONTO_ANTER, RET.MONTO_NUEVO, RET.MONTO_DIFER
+      FROM NOMINA_DGAC.PROCESOS_TRABAJADORES TRAB,
+           NOMINA_DGAC.PROCESOS_RESULTADOS RESU,
+          (SELECT CODIGO, DESCRIP FROM NOMINA_DGAC.TABLAS WHERE ID_TABLA = 189) FN,
+          (SELECT RP.RUT,
+                  RP.ID_EMPRESA,
+                  RP.ID_CONTRATO,
+                  DIF.ANO_CALCULO,
+                  DIF.MES_CALCULO,
+                  DIF.FIELD_NAME,
+                  DIF.MONTO_ANTER,
+                  DIF.MONTO_NUEVO,
+                  DIF.MONTO_DIFER,
+                  RP.ANO_PROCESO,
+                  RP.MES_PROCESO
+          FROM NOMINA_DGAC.REM_RELIQ_PROCESOS RP, NOMINA_DGAC.REM_RELIQ_PROCESOS_DIFER DIF
+          WHERE RP.ID_PROCESO = DIF.ID_PROCESO
+
+          AND   RP.ANO_PROCESO = $P{ano_param}
+          AND   RP.MES_PROCESO IN ($P{mes_param},$P{mes_param2},$P{mes_param3},$P{mes_param4},$P{mes_param5},
+          $P{mes_param6},$P{mes_param7},$P{mes_param8},$P{mes_param9},$P{mes_param10},$P{mes_param11},$P{mes_param12})
+          AND   DIF.FIELD_NAME IN ('hpthtcom', 'hcshtcom', 'hcghtcom','hcghlyf', 'hcshlyf', 'hpthlyf')) RET,
+         (SELECT CODIGO, TRIM(DESCRIP) AS UNIDAD_DESC FROM NOMINA_DGAC.TABLAS WHERE ID_TABLA = 69) UNI
+          WHERE TRAB.RUT         = RESU.RUT
+
+          AND   TRAB.ID_EMPRESA  = RESU.ID_EMPRESA
+          AND   TRAB.ID_CONTRATO = RESU.ID_CONTRATO
+          AND   TRAB.ID_PROCESO  = RESU.ID_PROCESO
+          AND   TRAB.ANO         = RESU.ANO
+          AND   TRAB.MES         = RESU.MES
+          AND   TRAB.ANO         = $P{ano_param}
+          AND   TRAB.MES        IN ($P{mes_param},$P{mes_param2},$P{mes_param3},$P{mes_param4},$P{mes_param5},
+          $P{mes_param6},$P{mes_param7},$P{mes_param8},$P{mes_param9},$P{mes_param10},$P{mes_param11},$P{mes_param12})
+          AND   TRAB.ID_PROCESO  = 0
+          AND   TRAB.RUT         = RET.RUT
+          AND   TRAB.ID_EMPRESA  = RET.ID_EMPRESA
+          AND   TRAB.ID_CONTRATO = RET.ID_CONTRATO
+          AND   TRAB.ANO         = RET.ANO_PROCESO
+          AND   TRAB.MES         = RET.MES_PROCESO
+          AND   TRAB.UNIDAD      = UNI.CODIGO(+)
+          AND   TRAB.ID_CARGO    = FN.CODIGO(+)
+          AND   TRAB.ID_EMPRESA  = 1
+          AND   TRAB.ACTIVO      = 1
+	AND TRAB.UNIDAD =      $P{codigouni_param}
+
+          AND   (NVL(RESU.HCGHLYF_R, 0) +
+                 NVL(RESU.HCSHLYF_R, 0) +
+                 NVL(RESU.HPTHLYF_R, 0)) != 0
+          ORDER BY TRAB.ANO, TRAB.MES, TRAB.NOMBRE, TRAB.TIPO_CONTRATO, TRAB.ID_CONTRATO) UNI
+GROUP BY UNI.ANO, UNI.MES, UNI.UNIDAD, UNI.UNIDAD_DESC
+ORDER BY 1, 2, 3]]>
+	</queryString>
+	<field name="ANO" class="java.math.BigDecimal"/>
+	<field name="MES" class="java.math.BigDecimal"/>
+	<field name="CODIGO_UNIDAD" class="java.math.BigDecimal"/>
+	<field name="NOMBRE_UNIDAD" class="java.lang.String"/>
+	<field name="PAGO_DEL_MES" class="java.math.BigDecimal"/>
+	<variable name="varMes" class="java.lang.String">
+		<variableExpression><![CDATA[ $F{MES}==  1 ? "Enero" :
+ $F{MES}==  2 ? "Febrero" :
+ $F{MES}== 3 ? "Marzo" :
+ $F{MES}== 4 ? "Abril" :
+ $F{MES}== 5 ? "Mayo" :
+ $F{MES}== 6 ? "Junio" :
+ $F{MES}== 7 ? "Julio" :
+ $F{MES}== 8 ? "Agosto" :
+ $F{MES}== 9 ? "Septiembre" :
+ $F{MES}== 10 ? "Octubre" :
+ $F{MES}== 11 ? "Noviembre" :
+ $F{MES}== 12 ? "Diciembre" : 0]]></variableExpression>
+	</variable>
+	<variable name="variable1" class="java.lang.String">
+		<variableExpression><![CDATA[($F{MES}.equals("1")? "Enero" :
+ $F{MES}.equals("2")? "Febrero" :
+ $F{MES}.equals("3")? "Marzo" :
+ $F{MES}.equals("4")? "Abril" :
+ $F{MES}.equals("5")? "Mayo" :
+ $F{MES}.equals("6")? "Junio" :
+ $F{MES}.equals("7")? "Julio" :
+ $F{MES}.equals("8")? "Agosto" :
+ $F{MES}.equals("9")? "Septiembre" :
+ $F{MES}.equals("10")? "Octubre" :
+ $F{MES}.equals("11")? "Noviembre" :
+ $F{MES}.equals("12")? "Diciembre" :
+ $F{MES}.equals(null)? null : null)]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="41" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="16" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="160" height="20" uuid="dea22256-2631-4f44-909c-583247fd156a"/>
+				<text><![CDATA[ANO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="0" width="160" height="20" uuid="7d7c436f-5faf-482e-8348-8cc4885d40bb"/>
+				<text><![CDATA[MES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="0" width="99" height="20" uuid="62b799d8-95a7-4831-9a1f-231f0e5721b7"/>
+				<text><![CDATA[CODIGO_UNIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="435" y="0" width="160" height="20" uuid="c37fec89-c382-4fda-9e25-3872d42d8b43"/>
+				<text><![CDATA[NOMBRE_UNIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="574" y="0" width="160" height="20" uuid="ee7919d7-11ff-4797-8393-669f10dbde5b"/>
+				<text><![CDATA[PAGO_DEL_MES]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="53" height="20" uuid="50e77002-1084-4414-9228-0c0efe588757"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ANO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="0" width="99" height="20" uuid="0bedffb8-267f-4ea8-a2eb-3517b67e8fac"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CODIGO_UNIDAD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="0" width="155" height="20" uuid="9705c746-61f7-439f-8a7f-7daed24e9913"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRE_UNIDAD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="574" y="0" width="92" height="20" uuid="f666f9f9-d022-4ae1-b3c3-24a10dea0fd4"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PAGO_DEL_MES}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="143" y="1" width="100" height="20" uuid="3d3a1368-8ec2-499e-9ca0-6dc145c6897c"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{varMes}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

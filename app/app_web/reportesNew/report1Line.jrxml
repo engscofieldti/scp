@@ -1,0 +1,1285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1Line" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Key" uuid="fccc2f2b-62f6-4003-8e18-498ce8f37d7a">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="411"/>
+	<property name="ireport.y" value="89"/>
+	<style name="estiloCabecera" backcolor="#CCCCCC">
+		<box>
+			<pen lineWidth="1.0" lineColor="#33FFFF"/>
+			<topPen lineWidth="1.0" lineColor="#33FFFF"/>
+			<leftPen lineWidth="1.0" lineColor="#33FFFF"/>
+			<bottomPen lineWidth="1.0" lineColor="#33FFFF"/>
+			<rightPen lineWidth="1.0" lineColor="#33FFFF"/>
+		</box>
+	</style>
+	<style name="style2">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{calcPorcEjec} > 16.6)]]></conditionExpression>
+			<style forecolor="#B00000" isBold="true">
+				<pen lineColor="#000000"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid" lineColor="#99FF00"/>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#99FF00"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#99FF00"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#99FF00"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#99FF00"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{calcPorcEjec} >= 14.0)&new Boolean($V{calcPorcEjec} <= 16.5)]]></conditionExpression>
+			<style forecolor="#FFFF1A" isBold="true">
+				<pen lineColor="#000000"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#99FF00"/>
+					<topPen lineWidth="0.5" lineColor="#99FF00"/>
+					<leftPen lineWidth="0.5" lineColor="#99FF00"/>
+					<bottomPen lineWidth="0.5" lineColor="#99FF00"/>
+					<rightPen lineWidth="0.5" lineColor="#99FF00"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{calcPorcEjec} <= 14.0)]]></conditionExpression>
+			<style forecolor="#00FF00" isBold="true">
+				<pen lineColor="#000000"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#99FF00"/>
+					<topPen lineWidth="0.5" lineColor="#99FF00"/>
+					<leftPen lineWidth="0.5" lineColor="#99FF00"/>
+					<bottomPen lineWidth="0.5" lineColor="#99FF00"/>
+					<rightPen lineWidth="0.5" lineColor="#99FF00"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==1]]></conditionExpression>
+			<style backcolor="#FDFDAF">
+				<box>
+					<pen lineWidth="0.5" lineColor="#99FF00"/>
+					<topPen lineWidth="0.5" lineColor="#99FF00"/>
+					<leftPen lineWidth="0.5" lineColor="#99FF00"/>
+					<bottomPen lineWidth="0.5" lineColor="#99FF00"/>
+					<rightPen lineWidth="0.5" lineColor="#99FF00"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==0]]></conditionExpression>
+			<style backcolor="#FEFEE1">
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.5" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+			</style>
+		</conditionalStyle>
+	</style>
+	<style name="condicion">
+		<conditionalStyle>
+			<style/>
+		</conditionalStyle>
+	</style>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="zebra">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==1]]></conditionExpression>
+			<style backcolor="#F0F8FF">
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.5" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==0]]></conditionExpression>
+			<style backcolor="#FFFFFF">
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.5" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+			</style>
+		</conditionalStyle>
+	</style>
+	<style name="zebra2">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==1]]></conditionExpression>
+			<style backcolor="#9999FF">
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.5" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==0]]></conditionExpression>
+			<style backcolor="#9999FF">
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.5" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($F{ENERO}<1)|| new Boolean($F{FEBRERO}<1)
+||new Boolean($F{MARZO}<1)|| new Boolean($F{ABRIL}<1)
+||new Boolean($F{MAYO}<1)|| new Boolean($F{JUNIO}<1)
+||new Boolean($F{JULIO}<1)|| new Boolean($F{AGOSTO}<1)
+||new Boolean($F{SEPTIEMBRE}<1)|| new Boolean($F{OCTUBRE}<1)
+||new Boolean($F{NOVIEMBRE}<1)|| new Boolean($F{DICIEMBRE}<1)]]></conditionExpression>
+			<style mode="Transparent" backcolor="#FF0000"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<style mode="Opaque" forecolor="#000000" backcolor="#000000" fill="Solid" fontName="DejaVu Sans"/>
+		</conditionalStyle>
+	</style>
+	<style name="style3" mode="Opaque">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==1]]></conditionExpression>
+			<style backcolor="#000000">
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.5" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==0]]></conditionExpression>
+			<style backcolor="#000000">
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.5" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{ejecPresPorc}>=$V{varMesesBajo}&& $V{ejecPresPorc}<=$V{varMesesAlto} )
+]]></conditionExpression>
+			<style forecolor="#00FF00"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{ejecPresPorc}>$V{varMesesAlto})]]></conditionExpression>
+			<style forecolor="#FF0000"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{ejecPresPorc}<=$V{varMesesBajo})]]></conditionExpression>
+			<style forecolor="#F0E68C"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="unidadesZonas" class="java.util.Collection" nestedType="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[java.util.Arrays.asList(new String("12000000"), new String("11001000"))]]></defaultValueExpression>
+	</parameter>
+	<parameter name="mes" class="java.lang.String" nestedType="java.lang.Integer" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ano" class="java.lang.Integer"/>
+	<parameter name="user" class="java.lang.String"/>
+	<parameter name="cuentaMes" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT UNI.COD_PADRE,
+       UNI.NOMBRE_PADRE,
+       NVL(DU.PRESUPUESTO, 0) AS PRESUPUESTO,
+       UNI.ENERO,
+       UNI.FEBRERO,
+       UNI.MARZO,
+       UNI.ABRIL,
+       UNI.MAYO,
+       UNI.JUNIO,
+       UNI.JULIO,
+       UNI.AGOSTO,
+       UNI.SEPTIEMBRE,
+       UNI.OCTUBRE,
+       UNI.NOVIEMBRE,
+       UNI.DICIEMBRE,
+       NVL(DU.GASTO, 0) AS EJEC_PRESUP,
+       ROUND(NVL(DU.GASTO, 0) / NVL(DU.PRESUPUESTO, 0) * 100, 2) AS EJEC_PRESUP_PORC,
+       NVL(DU.PRESUPUESTO, 0) - NVL(DU.GASTO, 0) AS SALDO
+FROM (SELECT COD_PADRE,
+             NOMBRE_PADRE,
+             SUM(ENERO)      AS ENERO,
+             SUM(FEBRERO)    AS FEBRERO,
+             SUM(MARZO)      AS MARZO,
+             SUM(ABRIL)      AS ABRIL,
+             SUM(MAYO)       AS MAYO,
+             SUM(JUNIO)      AS JUNIO,
+             SUM(JULIO)      AS JULIO,
+             SUM(AGOSTO)     AS AGOSTO,
+             SUM(SEPTIEMBRE) AS SEPTIEMBRE,
+             SUM(OCTUBRE)    AS OCTUBRE,
+             SUM(NOVIEMBRE)  AS NOVIEMBRE,
+             SUM(DICIEMBRE)  AS DICIEMBRE
+      FROM (SELECT NVL(ORG.COD_PADRE, '0') AS COD_PADRE,
+                   NVL(ORG.NOMBRE_PADRE, '--') AS NOMBRE_PADRE,
+                   DECODE(HT.MES, 1,  HT.PAGO_DEL_MES, 0) AS ENERO,
+                   DECODE(HT.MES, 2,  HT.PAGO_DEL_MES, 0) AS FEBRERO,
+                   DECODE(HT.MES, 3,  HT.PAGO_DEL_MES, 0) AS MARZO,
+                   DECODE(HT.MES, 4,  HT.PAGO_DEL_MES, 0) AS ABRIL,
+                   DECODE(HT.MES, 5,  HT.PAGO_DEL_MES, 0) AS MAYO,
+                   DECODE(HT.MES, 6,  HT.PAGO_DEL_MES, 0) AS JUNIO,
+                   DECODE(HT.MES, 7,  HT.PAGO_DEL_MES, 0) AS JULIO,
+                   DECODE(HT.MES, 8,  HT.PAGO_DEL_MES, 0) AS AGOSTO,
+                   DECODE(HT.MES, 9,  HT.PAGO_DEL_MES, 0) AS SEPTIEMBRE,
+                   DECODE(HT.MES, 10, HT.PAGO_DEL_MES, 0) AS OCTUBRE,
+                   DECODE(HT.MES, 11, HT.PAGO_DEL_MES, 0) AS NOVIEMBRE,
+                   DECODE(HT.MES, 12, HT.PAGO_DEL_MES, 0) AS DICIEMBRE
+            FROM NOMINA_DGAC.V_PAGOS_HT_2016 HT,
+                 NOMINA_DGAC.V_UNIDADES_ORG ORG
+            WHERE HT.CODIGO_UNIDAD = ORG.CODIGO_UNIDAD(+)
+            AND   HT.MES IN ($P!{mes}))
+      GROUP BY COD_PADRE, NOMBRE_PADRE) UNI,
+     (SELECT UP.COD_PADRE,
+             UP.NOMBRE_PADRE,
+             UP.PRESUPUESTO,
+             GAS.GASTO
+      FROM NOMINA_DGAC.V_UNIDADES_PRESUP UP,
+          (SELECT ORG.COD_PADRE, SUM(HT.PAGO_DEL_MES) AS GASTO
+           FROM NOMINA_DGAC.V_PAGOS_HT_2016 HT,
+                NOMINA_DGAC.V_UNIDADES_ORG ORG
+           WHERE HT.CODIGO_UNIDAD = ORG.CODIGO_UNIDAD
+           AND   ORG.COD_PADRE IN ($P!{unidadesZonas})
+           AND   HT.MES IN ($P!{mes})
+           GROUP BY ORG.COD_PADRE) GAS
+      WHERE UP.COD_PADRE = GAS.COD_PADRE(+)) DU
+WHERE UNI.COD_PADRE = DU.COD_PADRE(+)
+AND   NVL(DU.COD_PADRE, 0) IN ($P!{unidadesZonas})
+ORDER BY 1]]>
+	</queryString>
+	<field name="COD_PADRE" class="java.math.BigDecimal"/>
+	<field name="NOMBRE_PADRE" class="java.lang.String"/>
+	<field name="PRESUPUESTO" class="java.math.BigDecimal"/>
+	<field name="ENERO" class="java.math.BigDecimal"/>
+	<field name="FEBRERO" class="java.math.BigDecimal"/>
+	<field name="MARZO" class="java.math.BigDecimal"/>
+	<field name="ABRIL" class="java.math.BigDecimal"/>
+	<field name="MAYO" class="java.math.BigDecimal"/>
+	<field name="JUNIO" class="java.math.BigDecimal"/>
+	<field name="JULIO" class="java.math.BigDecimal"/>
+	<field name="AGOSTO" class="java.math.BigDecimal"/>
+	<field name="SEPTIEMBRE" class="java.math.BigDecimal"/>
+	<field name="OCTUBRE" class="java.math.BigDecimal"/>
+	<field name="NOVIEMBRE" class="java.math.BigDecimal"/>
+	<field name="DICIEMBRE" class="java.math.BigDecimal"/>
+	<field name="EJEC_PRESUP" class="java.math.BigDecimal"/>
+	<field name="EJEC_PRESUP_PORC" class="java.math.BigDecimal"/>
+	<field name="SALDO" class="java.math.BigDecimal"/>
+	<variable name="ejecSubUnidad" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{ENERO}+$F{FEBRERO}+$F{MARZO}+$F{ABRIL}
++$F{MAYO}+$F{JUNIO}+$F{JULIO}+$F{AGOSTO}
++$F{SEPTIEMBRE}+$F{OCTUBRE}+$F{NOVIEMBRE}+$F{DICIEMBRE}]]></variableExpression>
+	</variable>
+	<variable name="saldoFinal" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{varPresuCondicion}-$F{EJEC_PRESUP}]]></variableExpression>
+	</variable>
+	<variable name="sumEne" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{ENERO}]]></variableExpression>
+	</variable>
+	<variable name="sumFeb" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_PADRE}.equals("AEROPUERTO ARTURO MERINO BENITEZ") ||
+   $F{NOMBRE_PADRE}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")||
+     $F{NOMBRE_PADRE}.equals("SECCION SERVICIOS GENERALES LOGISTICA")||
+      $F{NOMBRE_PADRE}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")||
+       $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")||
+          $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")||
+            $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA SUR")||
+              $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL")? $F{FEBRERO}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumMar" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_PADRE}.equals("AEROPUERTO ARTURO MERINO BENITEZ") ||
+   $F{NOMBRE_PADRE}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")||
+     $F{NOMBRE_PADRE}.equals("SECCION SERVICIOS GENERALES LOGISTICA")||
+      $F{NOMBRE_PADRE}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")||
+       $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")||
+          $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")||
+            $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA SUR")||
+              $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL")? $F{MARZO}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumAbr" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_PADRE}.equals("AEROPUERTO ARTURO MERINO BENITEZ") ||
+   $F{NOMBRE_PADRE}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")||
+     $F{NOMBRE_PADRE}.equals("SECCION SERVICIOS GENERALES LOGISTICA")||
+      $F{NOMBRE_PADRE}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")||
+       $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")||
+          $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")||
+            $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA SUR")||
+              $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL")? $F{ABRIL}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumMay" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_PADRE}.equals("AEROPUERTO ARTURO MERINO BENITEZ") ||
+   $F{NOMBRE_PADRE}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")||
+     $F{NOMBRE_PADRE}.equals("SECCION SERVICIOS GENERALES LOGISTICA")||
+      $F{NOMBRE_PADRE}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")||
+       $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")||
+          $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")||
+            $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA SUR")||
+              $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL")? $F{MAYO}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumJun" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_PADRE}.equals("AEROPUERTO ARTURO MERINO BENITEZ") ||
+   $F{NOMBRE_PADRE}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")||
+     $F{NOMBRE_PADRE}.equals("SECCION SERVICIOS GENERALES LOGISTICA")||
+      $F{NOMBRE_PADRE}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")||
+       $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")||
+          $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")||
+            $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA SUR")||
+              $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL")? $F{JUNIO}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumJul" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_PADRE}.equals("AEROPUERTO ARTURO MERINO BENITEZ") ||
+   $F{NOMBRE_PADRE}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")||
+     $F{NOMBRE_PADRE}.equals("SECCION SERVICIOS GENERALES LOGISTICA")||
+      $F{NOMBRE_PADRE}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")||
+       $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")||
+          $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")||
+            $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA SUR")||
+              $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL")? $F{JULIO}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumAgo" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_PADRE}.equals("AEROPUERTO ARTURO MERINO BENITEZ") ||
+   $F{NOMBRE_PADRE}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")||
+     $F{NOMBRE_PADRE}.equals("SECCION SERVICIOS GENERALES LOGISTICA")||
+      $F{NOMBRE_PADRE}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")||
+       $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")||
+          $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")||
+            $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA SUR")||
+              $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL")? $F{AGOSTO}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumSep" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_PADRE}.equals("AEROPUERTO ARTURO MERINO BENITEZ") ||
+   $F{NOMBRE_PADRE}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")||
+     $F{NOMBRE_PADRE}.equals("SECCION SERVICIOS GENERALES LOGISTICA")||
+      $F{NOMBRE_PADRE}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")||
+       $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")||
+          $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")||
+            $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA SUR")||
+              $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL")? $F{SEPTIEMBRE}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumOct" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_PADRE}.equals("AEROPUERTO ARTURO MERINO BENITEZ") ||
+   $F{NOMBRE_PADRE}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")||
+     $F{NOMBRE_PADRE}.equals("SECCION SERVICIOS GENERALES LOGISTICA")||
+      $F{NOMBRE_PADRE}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")||
+       $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")||
+          $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")||
+            $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA SUR")||
+              $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL")? $F{OCTUBRE}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumNov" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_PADRE}.equals("AEROPUERTO ARTURO MERINO BENITEZ") ||
+   $F{NOMBRE_PADRE}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")||
+     $F{NOMBRE_PADRE}.equals("SECCION SERVICIOS GENERALES LOGISTICA")||
+      $F{NOMBRE_PADRE}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")||
+       $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")||
+          $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")||
+            $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA SUR")||
+              $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL")? $F{NOVIEMBRE}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumDic" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_PADRE}.equals("AEROPUERTO ARTURO MERINO BENITEZ") ||
+   $F{NOMBRE_PADRE}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")||
+     $F{NOMBRE_PADRE}.equals("SECCION SERVICIOS GENERALES LOGISTICA")||
+      $F{NOMBRE_PADRE}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")||
+       $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")||
+          $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")||
+            $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA SUR")||
+              $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL")? $F{DICIEMBRE}:0)]]></variableExpression>
+	</variable>
+	<variable name="sumEjSubUni" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumEne}+$V{sumFeb}+$V{sumMar}+$V{sumAbr}+
+$V{sumMay}+$V{sumJun}+$V{sumJul}+
+$V{sumAgo}+$V{sumSep}+$V{sumOct}+
+$V{sumNov}+$V{sumDic}]]></variableExpression>
+	</variable>
+	<variable name="varPresuCondicion" class="java.lang.Long">
+		<variableExpression><![CDATA[($F{NOMBRE_PADRE}.equals("AEROPUERTO ARTURO MERINO BENITEZ")? 1001440533 :
+   $F{NOMBRE_PADRE}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")? 75329817 :
+     $F{NOMBRE_PADRE}.equals("SECCION SERVICIOS GENERALES LOGISTICA")? 12354857 :
+      $F{NOMBRE_PADRE}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")? 284302305 :
+       $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")? 25531122 :
+          $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")? 50936826 :
+            $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA SUR")? 27513712 :
+              ($F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL")? 28323811:
+                  $F{NOMBRE_PADRE}.equals("AERODROMO MATAVERI")? 1 :
+    $F{NOMBRE_PADRE}.equals("AEROPUERTO CHACALLUTA")? 1 :
+     $F{NOMBRE_PADRE}.equals("AEROPUERTO GENERAL DIEGO ARACENA")? 1 :
+      $F{NOMBRE_PADRE}.equals("AERODROMO EL LOA")? 1 :
+       $F{NOMBRE_PADRE}.equals("AEROPUERTO ANDRES SABELLA")? 1 :
+         $F{NOMBRE_PADRE}.equals("AERODROMO DESIERTO DE ATACAMA")? 1 :
+          $F{NOMBRE_PADRE}.equals("AERODROMO LA FLORIDA")? 1 :
+           $F{NOMBRE_PADRE}.equals("AERODROMO RODELILLO")? 1 :
+             $F{NOMBRE_PADRE}.equals("AERODROMO VIÑA DEL MAR")? 1 :
+               $F{NOMBRE_PADRE}.equals("AERODROMO EULOGIO SANCHEZ")? 1 :
+                $F{NOMBRE_PADRE}.equals("AERODROMO CARRIEL SUR")? 1 :
+               $F{NOMBRE_PADRE}.equals("AERODROMO ROBINSON CRUSOE")? 1 :
+              $F{NOMBRE_PADRE}.equals("AERODROMO LA ARAUCANIA")? 1 :
+        $F{NOMBRE_PADRE}.equals("AERODROMO PICHOY")? 1 :
+       $F{NOMBRE_PADRE}.equals("AERODROMO CAÑAL BAJO")? 1 :
+      $F{NOMBRE_PADRE}.equals("AEROPUERTO EL TEPUAL")? 1 :
+    $F{NOMBRE_PADRE}.equals("AEROPUERTO CARLOS IBAÑEZ DEL CAMPO")? 1 :
+  $F{NOMBRE_PADRE}.equals("AERODROMO BALMACEDA")? 1 :0)
+)]]></variableExpression>
+	</variable>
+	<variable name="saldoFinal2" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{varPresuCondicion}-$V{ejecucionNueva}]]></variableExpression>
+	</variable>
+	<variable name="sumPresu" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_PADRE}.equals("AEROPUERTO ARTURO MERINO BENITEZ") ||
+   $F{NOMBRE_PADRE}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")||
+     $F{NOMBRE_PADRE}.equals("SECCION SERVICIOS GENERALES LOGISTICA")||
+      $F{NOMBRE_PADRE}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")||
+       $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")||
+          $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")||
+            $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA SUR")||
+              $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL")? $V{varPresuCondicion}:0)]]></variableExpression>
+	</variable>
+	<variable name="ejecSummary" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_PADRE}.equals("AEROPUERTO ARTURO MERINO BENITEZ") ||
+   $F{NOMBRE_PADRE}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")||
+     $F{NOMBRE_PADRE}.equals("SECCION SERVICIOS GENERALES LOGISTICA")||
+      $F{NOMBRE_PADRE}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")||
+       $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")||
+          $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")||
+            $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA SUR")||
+              $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL")? $V{sumEneDicImpu}+$V{sumFeb}+$V{sumMar}+$V{sumAbr}+
+$V{sumMay}+$V{sumJun}+$V{sumJul}+$V{sumAgo}+
+$V{sumSep}+$V{sumOct}+$V{sumNov}+$V{sumDic}:0)]]></variableExpression>
+	</variable>
+	<variable name="ejecPresPorcTotal" class="java.lang.Double" calculation="Average">
+		<variableExpression><![CDATA[($V{ejecSummary}*100)/$V{sumPresu}]]></variableExpression>
+	</variable>
+	<variable name="saldoFinalSummary" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_PADRE}.equals("AEROPUERTO ARTURO MERINO BENITEZ") ||
+   $F{NOMBRE_PADRE}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")||
+     $F{NOMBRE_PADRE}.equals("SECCION SERVICIOS GENERALES LOGISTICA")||
+      $F{NOMBRE_PADRE}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")||
+       $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")||
+          $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")||
+            $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA SUR")||
+              $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL")? $V{sumPresu}-$V{ejecSummary}:0)]]></variableExpression>
+	</variable>
+	<variable name="eneDicImpu" class="java.lang.Long">
+		<variableExpression><![CDATA[($F{NOMBRE_PADRE}.equals("AEROPUERTO ARTURO MERINO BENITEZ")? 48970 :
+    $F{NOMBRE_PADRE}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")? 0 :
+     $F{NOMBRE_PADRE}.equals("SECCION SERVICIOS GENERALES LOGISTICA")? 0 :
+      $F{NOMBRE_PADRE}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")? 0 :
+       $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")? 0 :
+         $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")? 0 :
+          $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA SUR")? 0 :
+     $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL")? 0 :0)]]></variableExpression>
+	</variable>
+	<variable name="sumEneDicImpu" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[($F{NOMBRE_PADRE}=="AEROPUERTO ARTURO MERINO BENITEZ" || $F{NOMBRE_PADRE}=="DEPARTAMENTO METEOROLOGICA DE CHILE"
+|| $F{NOMBRE_PADRE}=="SECCION SERVICIOS GENERALES LOGISTICA" ||$F{NOMBRE_PADRE}=="DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS"
+|| $F{NOMBRE_PADRE}=="SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL" || $F{NOMBRE_PADRE}== "SECCION ZONA AEROPORTUARIA SUR"
+|| $F{NOMBRE_PADRE}=="SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL" ||
+$F{NOMBRE_PADRE}=="SECCION ZONA AEROPORTUARIA AUSTRAL"
+? $V{eneDicImpu}:0)]]></variableExpression>
+	</variable>
+	<variable name="ejeEspeFeb" class="java.lang.Double">
+		<variableExpression><![CDATA[8.3]]></variableExpression>
+	</variable>
+	<variable name="ejeEspeMar" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{ejeEspeFeb}+8.3]]></variableExpression>
+	</variable>
+	<variable name="ejeEspeAbr" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{ejeEspeMar}+8.3]]></variableExpression>
+	</variable>
+	<variable name="ejeEspeMay" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{ejeEspeAbr}+8.3]]></variableExpression>
+	</variable>
+	<variable name="ejeEspeJun" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{ejeEspeMay}+8.3]]></variableExpression>
+	</variable>
+	<variable name="ejeEspeJul" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{ejeEspeJun}+8.3]]></variableExpression>
+	</variable>
+	<variable name="ejeEspeAgo" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{ejeEspeJul}+8.3]]></variableExpression>
+	</variable>
+	<variable name="ejeEspeSep" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{ejeEspeAgo}+8.3]]></variableExpression>
+	</variable>
+	<variable name="ejeEspeOct" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{ejeEspeSep}+8.3]]></variableExpression>
+	</variable>
+	<variable name="ejeEspeNov" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{ejeEspeOct}+8.3]]></variableExpression>
+	</variable>
+	<variable name="ejeEspeDic" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{ejeEspeNov}+8.3]]></variableExpression>
+	</variable>
+	<variable name="varMeses" class="java.lang.Double">
+		<variableExpression><![CDATA[($P{cuentaMes}*8.3)]]></variableExpression>
+	</variable>
+	<variable name="varMesesBajo" class="java.lang.Double">
+		<variableExpression><![CDATA[($P{cuentaMes}*8.3)-2.0]]></variableExpression>
+	</variable>
+	<variable name="varMesesAlto" class="java.lang.Double">
+		<variableExpression><![CDATA[($P{cuentaMes}*8.3)+2.0]]></variableExpression>
+	</variable>
+	<variable name="ejecucionNueva" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{FEBRERO}+$F{MARZO}+$F{ABRIL}+$F{MAYO}+$F{JUNIO}+
+$F{JULIO}+$F{AGOSTO}+$F{SEPTIEMBRE}+$F{OCTUBRE}+$F{NOVIEMBRE}+$F{DICIEMBRE}+$V{eneDicImpu}]]></variableExpression>
+	</variable>
+	<variable name="saldoFinal3" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{varPresuCondicion}-$V{ejecucionNueva}]]></variableExpression>
+	</variable>
+	<variable name="ejecPresPorc" class="java.lang.Double" incrementType="Report" calculation="Average">
+		<variableExpression><![CDATA[($V{ejecucionNueva}*100)/$V{varPresuCondicion}]]></variableExpression>
+	</variable>
+	<variable name="ejecSummary2" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[ $V{sumEneDicImpu}+$V{sumFeb}+$V{sumMar}+$V{sumAbr}+
+$V{sumMay}+$V{sumJun}+$V{sumJul}+$V{sumAgo}+
+$V{sumSep}+$V{sumOct}+$V{sumNov}+$V{sumDic}]]></variableExpression>
+	</variable>
+	<variable name="saldoFinalSummary2" class="java.lang.Long" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumPresu}-$V{ejecSummary2}]]></variableExpression>
+	</variable>
+	<variable name="ejecPresPorcTot2" class="java.lang.Double" incrementType="Report" calculation="Average">
+		<variableExpression><![CDATA[($F{NOMBRE_PADRE}.equals("AEROPUERTO ARTURO MERINO BENITEZ") ||
+   $F{NOMBRE_PADRE}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")||
+     $F{NOMBRE_PADRE}.equals("SECCION SERVICIOS GENERALES LOGISTICA")||
+      $F{NOMBRE_PADRE}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")||
+       $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")||
+          $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")||
+            $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA SUR")||
+              $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL")&& $V{varPresuCondicion}>1
+              || $V{sumPresu} >1?($V{ejecSummary2}*100)/$V{sumPresu}:($V{ejecSummary2}*100)/$V{sumPresu})
+
+
+  ]]></variableExpression>
+	</variable>
+	<variable name="variable1" class="java.lang.Long" incrementType="Report" calculation="Average">
+		<variableExpression><![CDATA[($V{ejecSummary2}*100)/$V{sumPresu}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="52" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="-20" y="-20" width="842" height="72" backcolor="#0000CD" uuid="9d16d726-a41d-4eaf-9af0-a18e9860b552"/>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Transparent" x="2" y="38" width="75" height="14" forecolor="#000000" backcolor="#000000" uuid="88a19dcc-6d23-429f-a370-36677c43ad64"/>
+				<textElement>
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" mode="Transparent" x="238" y="-16" width="272" height="40" forecolor="#000000" backcolor="#000000" uuid="91e063b1-6ce7-46d8-9192-21929070643c"/>
+				<textElement>
+					<font fontName="Calibri" size="16" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Informe de Horas Extraordinarias ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="2" y="10" width="161" height="14" forecolor="#000000" backcolor="#000000" uuid="4d30302d-828e-4069-903e-3d545053bf2c"/>
+				<textElement>
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Asignación :Horas Extraordinarias]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="1" y="-4" width="111" height="14" forecolor="#000000" backcolor="#000000" uuid="be7e79be-1f47-453a-821e-cf5f54742b07"/>
+				<textElement>
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ítem :Remuneración Variable]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="2" y="-18" width="111" height="14" forecolor="#000000" backcolor="#000000" uuid="301256e2-c739-4890-a846-71f6fe745360"/>
+				<textElement>
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SubtÍtulo:21]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="77" y="38" width="98" height="14" forecolor="#000000" backcolor="#000000" uuid="03525c55-6656-4f76-8276-d0eba0c41a4a"/>
+				<textElement>
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ano}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="628" y="-16" width="310" height="46" uuid="467c4a1b-5dfb-40c7-a8fb-e056cc71434d"/>
+				<imageExpression><![CDATA["C:\\Users\\michael.solis\\Desktop\\docs escritorio\\docsEscritorio030816\\imagenesReporte\\4.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement mode="Transparent" x="2" y="24" width="74" height="14" forecolor="#000000" backcolor="#000000" uuid="879c013d-72a9-4b9c-bec9-9a43f6f0ddff"/>
+				<textElement>
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuario conectado :]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="77" y="24" width="98" height="14" forecolor="#000000" backcolor="#000000" uuid="5c54e397-87e5-46ef-8ff7-df084012a80b"/>
+				<textElement>
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{user}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" mode="Transparent" x="282" y="24" width="174" height="20" forecolor="#000000" backcolor="#000000" uuid="886e7697-5595-4806-b86f-b7100b8ad1cb"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="558" y="28" width="59" height="16" forecolor="#000000" uuid="17a9bfc9-ed2d-4ad1-8489-a4dbc3ec7a4a">
+					<printWhenExpression><![CDATA[($F{NOMBRE_PADRE}.equals("SgfdfgfdgfdddL"))]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{ejecPresPorcTot2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="62" y="1" width="54" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="228b2201-4c49-4e7a-ac55-83c20226c1f1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRESUPUESTO ($)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="116" y="1" width="45" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="a2ec7e4f-7db4-4a49-a360-7e3a7ca52c9e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GASTO ENERO($)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="160" y="1" width="45" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="deb2013c-bf67-4980-871d-7309112e0892"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GASTO FEBRERO ($)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="204" y="1" width="43" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="2677df7a-7334-4763-a754-5b380ca2fab6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GASTO MARZO ($)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="247" y="1" width="45" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="cc71aac7-54dd-4457-a07c-761cf51a16a5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GASTO ABRIL($)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="292" y="1" width="47" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="e92d3c3d-1fb1-4822-aeab-7aacc2045264"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GASTO MAYO($)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="337" y="1" width="48" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="fba2d6a3-fbcd-45ef-8d54-e16a6c3cf11f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GASTO JUNIO($)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="383" y="1" width="46" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="42c4b653-5131-4b6e-a424-2005487d5d5e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GASTO JULIO($)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="429" y="1" width="48" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="f20c91d2-8018-47ff-9278-e574b699ca8d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GASTO AGOSTO($)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="477" y="1" width="47" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="f084040b-7370-4bfc-a910-9e03248b7c23"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GASTO SEPTIEMBRE ($)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="524" y="1" width="47" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="6b3b0614-7b07-4a89-8d01-47a98eeca638"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GASTO OCTUBRE ($)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="571" y="1" width="45" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="12594b3a-ba7e-47b8-bc2e-b83071cb8f4d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GASTO NOVIEMBRE ($)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="616" y="1" width="47" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="2be66539-ff42-42ee-b021-cc767b516de0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GASTO DICIEMBRE ($)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="663" y="1" width="59" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="df11d22c-a14d-42d1-b75a-9e9eb63cbe97"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EJECUCION PRESUPUESTARIA ($)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="722" y="1" width="43" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="95f10c8e-1bb2-4e8a-ae27-2136fce628b4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EJECUCION PRESUPUESTARIA (%)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="765" y="1" width="55" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="937e768e-0532-41d5-83f1-ec1f69bc07ad"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SALDO FINAL ($)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="estiloCabecera" mode="Opaque" x="-19" y="1" width="81" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="1639ffe5-a544-4baa-b7b2-3e3bcb575312"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE UNIDAD]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="159" y="0" width="46" height="20" isRemoveLineWhenBlank="true" uuid="62264973-a49b-4973-ae79-9df64506a5f4">
+					<printWhenExpression><![CDATA[$V{varPresuCondicion}>1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FEBRERO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="203" y="0" width="44" height="20" isRemoveLineWhenBlank="true" uuid="6dbcd485-da65-4f2d-93bc-137165b6d154">
+					<printWhenExpression><![CDATA[$V{varPresuCondicion}>1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MARZO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="246" y="0" width="48" height="20" isRemoveLineWhenBlank="true" uuid="6b782e42-bc76-4739-beee-3311834ca0ac">
+					<printWhenExpression><![CDATA[$V{varPresuCondicion}>1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ABRIL}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="292" y="0" width="45" height="20" isRemoveLineWhenBlank="true" uuid="9a3f6922-8bf8-4e08-8287-b4269d32d169">
+					<printWhenExpression><![CDATA[$V{varPresuCondicion}>1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MAYO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="337" y="0" width="46" height="20" isRemoveLineWhenBlank="true" uuid="af855a8c-44bc-40de-b124-feb2dc929959">
+					<printWhenExpression><![CDATA[$V{varPresuCondicion}>1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{JUNIO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="383" y="0" width="46" height="20" isRemoveLineWhenBlank="true" uuid="cba67cfa-baf9-4c37-ad16-163ea03e7b91">
+					<printWhenExpression><![CDATA[$V{varPresuCondicion}>1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{JULIO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="429" y="0" width="48" height="20" isRemoveLineWhenBlank="true" uuid="d51b01f8-1c2e-4a19-9061-2d7142830c42">
+					<printWhenExpression><![CDATA[$V{varPresuCondicion}>1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AGOSTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="477" y="0" width="47" height="20" isRemoveLineWhenBlank="true" uuid="b0cef933-7113-428f-b181-7573717f3c06">
+					<printWhenExpression><![CDATA[$V{varPresuCondicion}>1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SEPTIEMBRE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="524" y="0" width="47" height="20" isRemoveLineWhenBlank="true" uuid="1c35f2e3-7df5-4b25-a805-93461a63f70b">
+					<printWhenExpression><![CDATA[$V{varPresuCondicion}>1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{OCTUBRE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="571" y="0" width="46" height="20" isRemoveLineWhenBlank="true" uuid="f1e8317b-ae64-411a-a79f-4342107ecf06">
+					<printWhenExpression><![CDATA[$V{varPresuCondicion}>1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOVIEMBRE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="616" y="0" width="46" height="20" isRemoveLineWhenBlank="true" uuid="75d29aca-4a86-4bae-b25b-8554d28cb8ce">
+					<printWhenExpression><![CDATA[$V{varPresuCondicion}>1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DICIEMBRE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" isPrintRepeatedValues="false" mode="Opaque" x="61" y="0" width="55" height="20" isRemoveLineWhenBlank="true" uuid="a9ddfcc1-b9ad-4273-8b9f-38cf4627ce19">
+					<printWhenExpression><![CDATA[$V{varPresuCondicion}>1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{varPresuCondicion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="zebra" isPrintRepeatedValues="false" mode="Opaque" x="-19" y="0" width="80" height="20" isRemoveLineWhenBlank="true" uuid="5b4da951-0cb5-4290-acb0-aa5ebc6faece">
+					<printWhenExpression><![CDATA[($F{NOMBRE_PADRE}.equals("AEROPUERTO ARTURO MERINO BENITEZ") ||
+   $F{NOMBRE_PADRE}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")||
+     $F{NOMBRE_PADRE}.equals("SECCION SERVICIOS GENERALES LOGISTICA")||
+      $F{NOMBRE_PADRE}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")||
+       $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")||
+          $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")||
+            $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA SUR")||
+              $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL"))]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRE_PADRE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="116" y="0" width="43" height="20" isRemoveLineWhenBlank="true" uuid="c54bc9cd-9dd9-4bd4-96cd-c83896d99296">
+					<printWhenExpression><![CDATA[($F{NOMBRE_PADRE}.equals("AEROPUERTO ARTURO MERINO BENITEZ") ||
+   $F{NOMBRE_PADRE}.equals("DEPARTAMENTO METEOROLOGICA DE CHILE")||
+     $F{NOMBRE_PADRE}.equals("SECCION SERVICIOS GENERALES LOGISTICA")||
+      $F{NOMBRE_PADRE}.equals("DEPARTAMENTO AERODROMOS Y SERVICIOS AERONAUTICOS")||
+       $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTUARIA NORTE COMERCIAL")||
+          $F{NOMBRE_PADRE}.equals("SUBDEPARTAMENTO ZONA AEROPORTTUARIA CENTRAL")||
+            $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA SUR")||
+              $F{NOMBRE_PADRE}.equals("SECCION ZONA AEROPORTUARIA AUSTRAL"))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{eneDicImpu}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="663" y="0" width="59" height="20" isRemoveLineWhenBlank="true" uuid="33923f44-2d84-4ec5-b1b3-c2b399fdd8e0">
+					<printWhenExpression><![CDATA[$V{varPresuCondicion}>1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{ejecucionNueva}]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos; $ &apos;#,##0">
+				<reportElement style="zebra" mode="Opaque" x="766" y="0" width="54" height="20" isRemoveLineWhenBlank="true" uuid="de3ac606-ae64-44fb-9d83-ccc4f0987b9b">
+					<printWhenExpression><![CDATA[$V{varPresuCondicion}>1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{saldoFinal3}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00 &apos;%&apos;">
+				<reportElement style="style3" mode="Opaque" x="722" y="0" width="44" height="20" isRemoveLineWhenBlank="true" uuid="6471c698-ceef-4550-b246-faa132cd4b5e">
+					<printWhenExpression><![CDATA[$V{varPresuCondicion}>1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{ejecPresPorc}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="56" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-19" y="1" width="843" height="55" forecolor="#D0B48E" backcolor="#000000" uuid="fe2c2763-6297-465b-8f5a-1ef69eacc5dc"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="801" y="4" width="40" height="20" forecolor="#FFFFFF" uuid="d7f5c56d-0a5f-4e57-994d-0450feafb6be"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Calibri" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="743" y="4" width="58" height="20" forecolor="#FFFFFF" uuid="bf504a20-8c98-40e0-a4d2-34267bdd4043"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Calibri" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="514" y="3" width="44" height="13" forecolor="#FFFFFF" backcolor="#000000" uuid="fe19a693-4cc3-42d5-8305-7d9afc47ab86"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Calibri" size="5" isBold="true"/>
+					</textElement>
+					<text><![CDATA[AGOSTO %]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="157" y="16" width="93" height="13" forecolor="#FFFFFF" uuid="eb8cd665-9cec-440f-88a8-d538c9e6de21"/>
+					<textElement>
+						<font fontName="Calibri" size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Porcentaje esperado ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="349" y="3" width="42" height="13" forecolor="#FFFFFF" backcolor="#000000" uuid="92aab9b9-da0c-45f9-a1f8-050887d399cd"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Calibri" size="5" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ABRIL %]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="391" y="3" width="41" height="13" forecolor="#FFFFFF" backcolor="#000000" uuid="98daf573-9de4-43a3-94d6-5bdc8148ef3e"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Calibri" size="5" isBold="true"/>
+					</textElement>
+					<text><![CDATA[MAYO %]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="3" y="4" width="142" height="25" forecolor="#FFFFFF" uuid="633e665a-aae4-426b-834b-93ddaeb2ccc8"/>
+					<textElement>
+						<font fontName="Calibri" size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Ejecución presupuestaria porcentual mensual esperada para cada mes por unidad : ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="303" y="3" width="46" height="13" forecolor="#FFFFFF" backcolor="#000000" uuid="9861dfaf-60ae-4526-b1cb-861c443268fb"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Calibri" size="5" isBold="true"/>
+					</textElement>
+					<text><![CDATA[MARZO %]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="640" y="3" width="37" height="13" forecolor="#FFFFFF" backcolor="#000000" uuid="be3d35c1-85b8-4f2e-9634-9dcf5bc8d209"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Calibri" size="5" isBold="true"/>
+					</textElement>
+					<text><![CDATA[NOVIEMBRE %]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="602" y="3" width="38" height="13" forecolor="#FFFFFF" backcolor="#000000" uuid="e068e5bb-61d5-4a43-95b1-457837d768ba"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Calibri" size="5" isBold="true"/>
+					</textElement>
+					<text><![CDATA[OCTUBRE%]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="251" y="3" width="52" height="13" forecolor="#FFFFFF" backcolor="#000000" uuid="90362fdb-b802-47cb-9dec-e0baa9840a20"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Calibri" size="5" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ FEBRERO %]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="473" y="3" width="41" height="13" forecolor="#FFFFFF" backcolor="#000000" uuid="1de33568-c3b4-4029-bc9b-0972de3b3f19"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Calibri" size="5" isBold="true"/>
+					</textElement>
+					<text><![CDATA[JULIO %]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="677" y="3" width="39" height="13" forecolor="#FFFFFF" backcolor="#000000" uuid="9e9de098-8851-4f58-aeef-ff92e2f052dc"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Calibri" size="5" isBold="true"/>
+					</textElement>
+					<text><![CDATA[DICIEMBRE%]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="558" y="3" width="44" height="13" forecolor="#FFFFFF" backcolor="#000000" uuid="75245d66-2ed1-4d58-881f-0a9ea5e29b11"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Calibri" size="5" isBold="true"/>
+					</textElement>
+					<text><![CDATA[SEPTIEMBRE %]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="433" y="3" width="41" height="13" forecolor="#FFFFFF" backcolor="#000000" uuid="984d8462-f02c-44a7-81fd-702bb9d88498"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Calibri" size="5" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ JUNIO %]]></text>
+				</staticText>
+				<textField pattern="#0.00 &apos;%&apos;">
+					<reportElement x="251" y="16" width="52" height="13" forecolor="#FFFFFF" uuid="43ad4288-8968-4712-a1dd-a4d85955d358"/>
+					<textElement textAlignment="Center">
+						<font fontName="Calibri" size="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ejeEspeFeb}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00 &apos;%&apos;">
+					<reportElement x="303" y="16" width="46" height="13" forecolor="#FFFFFF" uuid="7c70a1d2-9c60-43c3-9832-30d468c6b9ad"/>
+					<textElement textAlignment="Center">
+						<font fontName="Calibri" size="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ejeEspeMar}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00 &apos;%&apos;">
+					<reportElement x="349" y="16" width="42" height="13" forecolor="#FFFFFF" uuid="c2826506-43e4-455f-8f39-ab2939f0e415"/>
+					<textElement textAlignment="Center">
+						<font fontName="Calibri" size="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ejeEspeAbr}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00 &apos;%&apos;">
+					<reportElement x="391" y="16" width="42" height="13" forecolor="#FFFFFF" uuid="75840c76-eb67-4a86-900a-58bf0c447bbb"/>
+					<textElement textAlignment="Center">
+						<font fontName="Calibri" size="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ejeEspeMay}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00 &apos;%&apos;">
+					<reportElement x="433" y="16" width="42" height="13" forecolor="#FFFFFF" uuid="e3eaf197-4d6d-41ff-b64c-8fef30a69036"/>
+					<textElement textAlignment="Center">
+						<font fontName="Calibri" size="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ejeEspeJun}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00 &apos;%&apos;">
+					<reportElement x="474" y="16" width="41" height="13" forecolor="#FFFFFF" uuid="1a1cd01b-0723-4edd-8cf9-66204f3737ad"/>
+					<textElement textAlignment="Center">
+						<font fontName="Calibri" size="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ejeEspeJul}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00 &apos;%&apos;">
+					<reportElement x="514" y="16" width="44" height="13" forecolor="#FFFFFF" uuid="c36ca960-fa1a-411a-a072-c21e5094be2e"/>
+					<textElement textAlignment="Center">
+						<font fontName="Calibri" size="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ejeEspeAgo}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00 &apos;%&apos;">
+					<reportElement x="558" y="16" width="45" height="13" forecolor="#FFFFFF" uuid="d1798c31-69f9-4e8e-b29a-42f7dd012ddc"/>
+					<textElement textAlignment="Center">
+						<font fontName="Calibri" size="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ejeEspeSep}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00 &apos;%&apos;">
+					<reportElement x="602" y="16" width="38" height="13" forecolor="#FFFFFF" uuid="065fccf3-dbe3-41e6-ae67-f25e590826e9"/>
+					<textElement textAlignment="Center">
+						<font fontName="Calibri" size="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ejeEspeOct}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00 &apos;%&apos;">
+					<reportElement x="640" y="16" width="38" height="13" forecolor="#FFFFFF" uuid="9b8800e2-0f91-4a02-aee2-5b65a1d32400"/>
+					<textElement textAlignment="Center">
+						<font fontName="Calibri" size="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ejeEspeNov}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00 &apos;%&apos;">
+					<reportElement x="678" y="16" width="39" height="13" forecolor="#FFFFFF" uuid="ad8c7ea0-ea5f-426d-8959-76ddc3c46f5a"/>
+					<textElement textAlignment="Center">
+						<font fontName="Calibri" size="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ejeEspeDic}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="60" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-19" y="16" width="843" height="44" forecolor="#D0B48E" backcolor="#000000" uuid="4285ddce-a9cc-4c8e-a7cc-5454363cbee1"/>
+				<staticText>
+					<reportElement style="estiloCabecera" mode="Opaque" x="0" y="0" width="71" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="8c5505fb-a295-4eb2-a045-0517a5b6061c"/>
+					<textElement>
+						<font fontName="Calibri" size="5" isBold="true"/>
+					</textElement>
+					<text><![CDATA[PRESUPUESTO HORAS TURNO :]]></text>
+				</staticText>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra" mode="Opaque" x="178" y="0" width="45" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="4ce24e1a-cf51-4101-8921-9300f28c8141"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Calibri" size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumFeb}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra" mode="Opaque" x="223" y="0" width="41" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="deee34d2-5ef4-439d-8101-d8c12ebdf78d"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Calibri" size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumMar}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra" mode="Opaque" x="264" y="0" width="45" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="320ff502-561d-43fc-80c1-33ca629c49d8"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Calibri" size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumAbr}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra" mode="Opaque" x="309" y="0" width="46" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="60245b68-59de-47c0-a671-a35f2bafe9b8"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Calibri" size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumMay}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra" mode="Opaque" x="355" y="0" width="46" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="0d69a868-1faf-4020-b317-6917741618ee"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Calibri" size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumJun}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra" mode="Opaque" x="401" y="0" width="47" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="59f09129-536a-4918-9bf4-603db034d0e1"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Calibri" size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumJul}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra" mode="Opaque" x="448" y="0" width="47" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="65a805fb-f617-41bb-825e-42aea862c713"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Calibri" size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumAgo}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra" mode="Opaque" x="495" y="0" width="47" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="99665f24-157c-4669-9d5c-5fc2b2d4c1f9"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Calibri" size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumSep}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra" mode="Opaque" x="542" y="0" width="45" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="f5985e29-04b1-4074-9815-beca9154fbcb"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Calibri" size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumOct}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra" mode="Opaque" x="587" y="0" width="49" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="fbb89c08-7e29-470e-8808-4bf8f9221c63"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Calibri" size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumNov}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra" mode="Opaque" x="636" y="0" width="47" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="226ab09a-d692-4878-be80-93f013209b37"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Calibri" size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumDic}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra" mode="Opaque" x="81" y="0" width="56" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="1237aa73-cd83-42b4-b3df-3a351b1514c5"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Calibri" size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumPresu}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra" mode="Opaque" x="137" y="0" width="44" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="8300d4ba-ead3-4670-9ca2-3df555b07102"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Calibri" size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumEneDicImpu}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra" mode="Opaque" x="683" y="0" width="58" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="285bcdf3-9026-4450-90e2-3f1b8d7f9aa4"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Calibri" size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ejecSummary2}]]></textFieldExpression>
+				</textField>
+				<textField pattern="&apos; $ &apos;#,##0">
+					<reportElement style="zebra" mode="Opaque" x="786" y="0" width="53" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="8f054e44-899d-4a04-a565-45db1fe3b956"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Calibri" size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{saldoFinalSummary2}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00 &apos;%&apos;">
+					<reportElement style="zebra" mode="Opaque" x="741" y="0" width="45" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="7e3e9782-092b-4b6f-b403-55b1c2432124"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Calibri" size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ejecPresPorcTot2}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<staticText>
+				<reportElement x="-19" y="0" width="98" height="16" uuid="836eed33-339c-43ac-b6a5-b4c5a925ae34"/>
+				<textElement>
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Totales:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

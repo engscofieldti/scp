@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui">
+  
+   
+   <h:head style="background-color:rgb(72,181,163)">
+      <title>Modulo de Consulta y Reportes ...</title>
+   </h:head>
+   <h:body>
+      <h2>Modulo de seleccion de variables </h2>
+      <hr />
+      <h:form style="background-color:rgb(148,168,208)">
+    <p:messages autoUpdate="true" />  
+    
+     <h:panelGrid columns="4"   style="margin-bottom:10px;font-size: 10px;background-color: rgb(117,137,191)" cellpadding="5" border="3">
+    <h:panelGrid columns="1" cellpadding="5" border="1" style="margin-bottom:10px"  >
+    <h3 style="margin-top:0px">Seleccione Subtitulo </h3>
+       
+        <p:selectOneMenu id="console4" value="#{dropdownView.cities}" style="width:155px" >
+            <f:selectItem itemLabel="Selecciona un subtitulo" itemValue="" />
+            <f:selectItem itemLabel="Subtitulo 21" itemValue="Subtitulo 21" />
+            <f:selectItem itemLabel="Subtitulo 22" itemValue="Subtitulo 22" />
+            <f:selectItem itemLabel="Subtitulo 23" itemValue="Subtitulo 23" /> 
+        </p:selectOneMenu>
+  </h:panelGrid>
+       
+       <h:panelGrid columns="1"  border="1"> 
+       <h3 style="margin-top:0px">Subtitulo 23 - Item</h3> <p:outputLabel></p:outputLabel>
+    <p:selectManyCheckbox id="item" value="#{dropdownView.selectedConsoles}" layout="grid" columns="1">
+             
+     	<f:selectItem itemLabel="Prestaciones Previsionales"  itemValue="prestprev" /> 
+       
+   </p:selectManyCheckbox>
+    </h:panelGrid>
+    
+    
+   <h:panelGrid columns="1" border="1"> 
+   <h3 style="margin-top:0px">Subtitulo 23 - Asignación</h3>
+    <p:selectManyCheckbox id="asignacion" value="#{dropdownView.selectedConsoles}" layout="grid" columns="1">
+        <f:selectItem itemLabel="Subsidios por accidentes de trabajo (23.01.012)" itemValue="subacctra" />
+        <f:selectItem itemLabel="Otras Remuneraciones (23.01.002) " itemValue="otrrem" />
+        <f:selectItem itemLabel="Otros gastos en personal (23.01.004)" itemValue="otrgaspe" />
+        <f:selectItem itemLabel="Otros" itemValue="otr" />
+      
+    </p:selectManyCheckbox>
+    </h:panelGrid>
+   
+
+    </h:panelGrid>
+    <h:panelGrid columns="1" border="1" style="margin-bottom:10px;font-size: 10px;background-color: rgb(148,168,208)">
+     <h3 style="margin-top:0px">Unidades Ejecutoras</h3>
+    <p:selectManyCheckbox id="unidadesejecutoras" value="#{dropdownView.selectedConsoles}" layout="grid" columns="1">
+        <f:selectItem itemLabel="178 - Recursos Humanos" itemValue="178 - Recursos Humanos" />
+        <f:selectItem itemLabel="179 - Capacitacion" itemValue="179 - Capacitacion" />
+        <f:selectItem itemLabel="180 - Beneficios Medicos" itemValue="180 - Beneficios Medicos" />
+        <f:selectItem itemLabel="183 - ETA" itemValue="183 - ETA" />
+        <f:selectItem itemLabel="184 - Subdepto.Personal" itemValue="184 - Subdepto.Personal" />
+        <f:selectItem itemLabel="185 - Remuneraciones" itemValue="185 - Remuneraciones" />
+        <f:selectItem itemLabel="187 - Prevencion de Riesgos" itemValue="187 - Prevencion de Riesgos" />
+       
+    </p:selectManyCheckbox>
+   </h:panelGrid>
+    <h:panelGrid columns="3"   style="margin-bottom:10px;font-size: 10px;background-color: rgb(191,213,232)" cellpadding="5" border="3">
+    <h3 style="margin-top:0px">Seleccione Periodo </h3>
+      <h:panelGrid columns="1" style="margin-bottom:10px">
+      
+            <p:selectManyCheckbox id="peri" value="#{dropdownView.selectedConsoles}" layout="grid" columns="1">
+        	<f:selectItem itemLabel="Mensual" itemValue="mens" />
+        	<f:selectItem itemLabel="Anual" itemValue="anu" />
+               
+    </p:selectManyCheckbox>
+      
+     
+         
+  </h:panelGrid >
+  
+  
+  <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5" border="1" >
+  <h3 style="margin-top:0px">Periodo anual</h3>
+     <p:selectOneMenu id="console22" value="#{dropdownView.cities}" style="width:125px">
+             <f:selectItem itemLabel="Seleccione año" itemValue="" />
+            <f:selectItem itemLabel="2012" itemValue="2012" />
+            <f:selectItem itemLabel="2013" itemValue="2013" />
+            <f:selectItem itemLabel="2014" itemValue="2014" />
+            <f:selectItem itemLabel="2015" itemValue="2015" />
+            <f:selectItem itemLabel="2016" itemValue="2016" />
+               
+        </p:selectOneMenu>
+        
+        
+        
+    </h:panelGrid>
+    <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5" border="1" >
+      <h3 style="margin-top:0px">Periodo mensual</h3>
+    <p:selectManyCheckbox id="periodoanual3" value="#{dropdownView.selectedConsoles}" layout="grid" columns="3">
+        <f:selectItem itemLabel="Enero" itemValue="Enero" />
+        <f:selectItem itemLabel="Febrero" itemValue="Febrero" />
+        <f:selectItem itemLabel="Marzo" itemValue="Marzo" />
+        <f:selectItem itemLabel="Abril" itemValue="Abril" />
+        <f:selectItem itemLabel="Mayo" itemValue="Mayo" />
+        <f:selectItem itemLabel="Junio" itemValue="Junio" />
+        <f:selectItem itemLabel="Julio" itemValue="Julio" />
+        <f:selectItem itemLabel="Agosto" itemValue="Agosto" />
+        <f:selectItem itemLabel="Septiembre" itemValue="Septiembre" />
+        <f:selectItem itemLabel="Octubre" itemValue="Octubre" />
+        <f:selectItem itemLabel="Noviembre" itemValue="Noviembre" />
+        <f:selectItem itemLabel="Diciembre" itemValue="Diciembre" />
+              
+    </p:selectManyCheckbox>
+    </h:panelGrid>
+    
+     <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" border="1">
+       <h3 style="margin-top:0px">Seleccione Tipo </h3>
+     
+      
+        <p:selectOneMenu id="console3" value="#{dropdownView.cities}" style="width:155px">
+             <f:selectItem itemLabel="Seleccione una opcion" itemValue="" />
+            <f:selectItem itemLabel="Presupuesto aprobado por la ley" itemValue="Presupuesto aprobado por la ley" />
+            <f:selectItem itemLabel="Ejecucion presupuestaria" itemValue="Ejecucion presupuestaria" />
+             
+       </p:selectOneMenu>
+   
+    </h:panelGrid>
+    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" border="1">
+        <h:outputText value="" />
+       
+        <p:commandButton value="Volver" update="display" icon="ui-icon-check" />
+        <p:spacer />
+        <p:commandButton value="Siguiente" update="display" icon="ui-icon-check" />
+        <p:spacer />
+         <p:commandButton value="Salir" update="display" icon="ui-icon-check" />
+        <p:spacer />        
+        <h:outputText value="" />
+        <h:outputText id="display" value="#{dropdownView.option}" style="font-weight: bold" />
+    </h:panelGrid>
+    </h:panelGrid >
+   </h:form>
+  
+ 
+   </h:body>
+</html>

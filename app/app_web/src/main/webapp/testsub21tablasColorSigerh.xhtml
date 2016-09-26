@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:rich="http://richfaces.org/rich">
+ <h:head>
+<ui:remove><script type="text/javascript" src="C:\Users\michael.solis\workspace3\app\app_web\src\main\webapp\resources\js\jquery.js"></script></ui:remove>
+
+     <script type="text/javascript">
+    $(document).ready(function(){
+    if (jQuery) {  
+            // jQuery is loaded  
+    alert("probando si esta cargado jquery,si sale este mensaje estamos ok");
+    } else {
+    // jQuery is not loaded
+    alert("no esta cargado jquery");
+        }
+    });
+    </script>
+     
+<script type="text/javascript">
+$(document).ready(function() {
+    if("#xxx").change(function() {
+        if ($(this).prop('checked')) {
+            alert("mensaje on"); 
+        }
+        else {
+            alert("mensaje off"); 
+        }
+    });
+});
+</script>
+<script type="text/javascript">
+   $("#xxx2").change(function(event){
+        if (this.checked){
+            alert("You have elected to show your checkout history.");
+        } else {
+            alert("You have elected to turn off checkout history.");
+        }
+    });
+</script>
+
+  <style>
+h4 {
+    border: 2px solid black;
+    padding: 9px;
+    width: 180px;
+    height: 30px;
+    text-align: center;
+    }
+   </style>
+   <style>
+ body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	/*	font-size:12px;*/
+	/*	line-height:140%;*/
+	color: #7f7f7f;
+	/*text-align:center;*/
+	margin: 0 0 0 0;
+	background-color: #000099;
+	background-image: /app_web/src/main/webapp/resources/image/rsz_presu3.jpg;
+	background-repeat: repeat-x;
+	margin-top: 50px;
+}
+   </style> 
+   <style>
+   legend {
+ display: block;
+ font-weight:bold;
+text-align:center;
+  border-bottom: 2px solid red;
+  color:black;
+  border:3px #00f;
+  width:100%;
+  height:50%;
+  margin-bottom: 20px;
+ 
+background-color:#ddd;
+   }
+    </style>
+    <style>
+    fieldset{
+border: solid 1px #080808;
+background-color:white;
+    }
+    </style>
+         <title>Modulo de Consulta y Reportes ...</title>
+                   <img src="resources/css/images/login/logo_gobierno_login.png" width="100" height="150" />
+                   <img src="resources/image/rsz_presu4.jpg" width="800" height="150" />
+              
+    </h:head>
+     
+          <h:body  style="background-color:rgb(70,130,180);border-left:10px solid #000; 
+          border-right: 10px solid #000;border-top: 10px solid #000;border-right: 10px bottom #000;">
+   
+                <h:form style="background-color:rgb(139,0,139)">
+        <p:growl id="mensajeSelecDeselec" />
+        <p:growl id="growl" showDetail="true" sticky="false"/> 
+        
+        <c:set var="horasExtraSelected" value="#{panelUsuarioMB.horasExtraSelected}"/>
+      	<c:set var="asig2" value="#{panelUsuarioMB.asignacionAmbas}"/>
+        <c:set var="currentYear" value="#{panelUsuarioMB.currentYear}"/>
+        <c:set var="currentMonth" value="#{panelUsuarioMB.currentMonth}"/>
+        <p:panelGrid id="panelVarialbles1" style="margin:0 auto;font-size: 14px;background-color: rgb(0,0,0)" cellpadding="5" border="3" >
+           <legend><span style="color:black;font-weight:bold;font-size:16px">Modulo de selección de variables para generar informes</span></legend>
+           <table>
+           <tr>
+           <td> 
+           <fieldset>
+           <legend>Ingrese Subtitulo:</legend>
+           <p:selectOneMenu style="font-size: 10px;" value="#{panelUsuarioMB.selectedValues.subtitulo}" required="true" requiredMessage="Subtitulo Requerido"
+                                         effect="fade" >
+                            <f:selectItem itemLabel="Selecciona un subtitulo" itemValue="" />
+                            <f:selectItems value="#{panelUsuarioMB.availableSubtitulo}" 
+                                           var="subt" itemLabel="#{subt.nomSub}" itemValue="#{subt.cod}"/>
+           </p:selectOneMenu>
+           </fieldset>
+           </td>
+           <td>
+           <fieldset>
+           <legend>Marque un Item</legend>
+           <p:selectManyCheckbox id="itemCheck" required="true" requiredMessage="Marque un Item"
+                                              value="#{panelUsuarioMB.selectedValues.item}" layout="grid"
+                                              columns="1" style="font-size: 12px;color:blue">
+                            <f:selectItems value="#{panelUsuarioMB.item}" var="item" 
+                                           itemLabel="#{item.descItem}" itemValue="#{item.codItem}" />
+                                       <p:ajax  process="itemCheck" listener="#{panelUsuarioMB.inicializaResum}" 
+                                       update="asignacionCheck"/>
+                                    </p:selectManyCheckbox>
+                        </fieldset>
+           </td>
+           <td>
+            <fieldset>
+            <legend>Marque una Asignación</legend>
+                        <p:selectManyCheckbox  id="asignacionCheck" style="font-size: 12px;color:blue" required="true" requiredMessage="Marque una Asignación"
+                                              value="#{panelUsuarioMB.selectedValues.asignacion}" 
+                                              layout="grid"
+                                              columns="1" >
+                                             
+                            <f:selectItems value="#{panelUsuarioMB.asignacion}"
+                                           var="asignacion" 
+                                           itemLabel="#{asignacion.descAsig}"
+                                           itemValue="#{asignacion.codAsig}" 
+                                           itemDisabled="#{panelUsuarioMB.asignacionDisabled(asignacion.descAsig)}"
+                                           />
+                                           <p:ajax  process="asignacionCheck" listener="#{panelUsuarioMB.inicializaResum}" update="itemCheck,zonaResum,ueCheck"/>
+                                          
+                        </p:selectManyCheckbox>
+                        </fieldset>
+           </td>
+           <td>
+           <fieldset>
+           <legend>Zonas :</legend>
+                        <p:selectManyCheckbox id="zonaResum" required="true" requiredMessage="Marque una Zona" style="font-size: 12px;color:blue"
+                                              value="#{panelUsuarioMB.selectedValues.uniResum}" 
+                                              layout="grid"
+                                              columns="1">
+
+                         
+                            <f:selectItems value="#{panelUsuarioMB.uniResum}"
+                                           var="uniResum" 
+                                           itemLabel="#{uniResum.descUniResum}"
+                                           itemValue="#{uniResum.codUniResum}"
+                                           itemDisabled="#{!horasExtraSelected}"/>
+                              <p:ajax  process="@this" event="change" listener="#{panelUsuarioMB.cargaUnidadesPorZona}" update="zonaCheck"/> 
+                               
+                                                               
+                        </p:selectManyCheckbox>
+                        </fieldset>
+           </td>
+           <td>
+           <fieldset>
+            <legend> Unidades:</legend>
+                    	<p:scrollPanel id="zonaCheckPanel"  mode="native" style="width:250px;height:200px" required="true" 
+                    	requiredMessage="Elija una o mas unidades">
+                        <p:selectManyCheckbox id="zonaCheck"
+                                              value="#{panelUsuarioMB.selectedValues.unidadZona}" layout="grid"
+                                              columns="1" style="font-size: 12px;color:blue">
+                            <f:selectItems  id="zonaCheckValues" value="#{panelUsuarioMB.unidadZona}" 
+                            			   var="unidad"
+                                           itemLabel="#{unidad.uniDes}" 
+                                           itemValue="#{unidad.codigoUni}" />
+                                
+                        </p:selectManyCheckbox>
+                        </p:scrollPanel>
+                       </fieldset>
+           </td>
+           </tr>
+            <tr>
+            <td>
+            <fieldset>
+            <legend> Unidades Ejecutoras:</legend>
+                        <p:selectManyCheckbox id="ueCheck"
+                                              value="#{panelUsuarioMB.selectedValues.unidadEjec}" layout="grid" required="true" requiredMessage="Marque una Unidad Ejecutora"
+                                              columns="1" style="font-size: 12px;color:blue">
+                            <f:selectItems value="#{panelUsuarioMB.unidadEjec}" var="unidadEj"
+                                           itemLabel="#{unidadEj.descUniEje}"
+                                           itemValue="#{unidadEj.codUniEje}" 
+                                           itemDisabled="#{panelUsuarioMB.unidadEjDisabled(unidadEj.codUniEje)}"/>
+                        </p:selectManyCheckbox>
+                        </fieldset>
+            </td>
+            </tr>
+            <tr>
+            <td>
+            <fieldset>
+             <legend> Seleccione un año:</legend>
+                        <p:selectOneMenu value="#{panelUsuarioMB.selectedValues.ano}" effect="fade" style="font-size: 12px;color:blue" required="true" requiredMessage="Seleccione un año" >
+                            <f:selectItem itemLabel="Selecciona un año" itemValue="" />
+                            <f:selectItems value="#{panelUsuarioMB.ano}"
+                                           var="year" itemLabel="#{year}" itemValue="#{year}" />
+                             <p:ajax update = "mesesCheck" process ="@this" partialSubmit="true"/> 
+                        </p:selectOneMenu> 
+                        </fieldset>
+            </td>
+            <td>
+            <fieldset>
+            <legend> Seleccione uno o más Meses </legend>
+               <p:selectManyCheckbox id="mesesCheck" style="font-size: 12px;color:blue" required="true" requiredMessage="Seleccione meses para generar el reporte"
+                                              value="#{panelUsuarioMB.selectedValues.mes}" layout="grid"
+                                              columns="3">
+                            <f:selectItems value="#{panelUsuarioMB.mesList}" var="mes"
+                                           itemLabel="#{mes.descMes}"
+                                           itemValue="#{mes.codMes}" 
+                                           itemDisabled="#{panelUsuarioMB.selectedValues.ano == currentYear and mes.codMes>4}"/>
+                        </p:selectManyCheckbox>
+                        </fieldset>
+            </td>
+            <td>
+           <fieldset>
+             <legend> Seleccione Tipo:</legend>
+                        <p:selectOneMenu value="#{panelUsuarioMB.selectedValues.tipo}" effect="fade" style="font-size: 12px;color:blue" required="true" requiredMessage="Seleccione un tipo">
+                            <f:selectItem itemLabel="Seleccion de tipo" itemValue="" />
+                            <f:selectItems value="#{panelUsuarioMB.avalaibleTipo}"
+                                           var="tipo" itemLabel="#{tipo.descTipo}" itemValue="#{tipo.codTipo}" />
+                        </p:selectOneMenu>
+                        </fieldset>
+            </td>
+            <td>
+            <fieldset>
+              <legend> Seleccionar/Deseleccionar Todo:</legend>
+                  	<p:selectBooleanCheckbox id="xxx" value="#{panelUsuarioMB.selecNoSelec}">
+           			<p:ajax update="mensajeSelecDeselec" listener="#{panelUsuarioMB.addMessage}" />
+        			</p:selectBooleanCheckbox>
+        	</fieldset>
+        	<fieldset>
+        	<legend>testjquery</legend>
+        	<p:selectBooleanCheckbox id="xxx2" value="#{panelUsuarioMB.selecNoSelec}">
+           			<p:ajax update="mensaje2asig" listener="#{panelUsuarioMB.addMessage}" />
+        			</p:selectBooleanCheckbox></fieldset>
+             </td>
+            </tr>
+            </table>
+             <fieldset> 
+              <legend>Generar informes:</legend> 
+           <table>
+              <tr>
+              <td>
+            <p:commandButton id="btnDescargar4" value="Imprimir Reporte PDF" ajax="false" style="float:left;background-color:darkslategray;color:white"
+                             process="@form" icon="ui-icon-arrowthick-1-s">
+                <p:fileDownload value="#{panelUsuarioMB.file}" />
+            </p:commandButton>
+           
+           </td>
+           <td>
+           
+            <p:commandButton id="btnDescargar5" value="Imprimir Reporte XLS" ajax="false" style="float:left;background-color:darkslategray;color:white"
+                             process="@form" icon="ui-icon-arrowthick-1-s">
+                <p:fileDownload value="#{panelUsuarioMB.file2}" />
+            </p:commandButton>
+            </td>
+           </tr>
+         
+           </table>
+              </fieldset>
+         </p:panelGrid>
+                 </h:form>
+          </h:body>
+    </html>

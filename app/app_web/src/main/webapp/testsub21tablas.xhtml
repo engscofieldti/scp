@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:rich="http://richfaces.org/rich">
+  
+  <h:head>
+          <script type="text/javascript">
+        function OnChangeRadio (radio) {
+            alert ("The " + radio.value + " radio is selected.");
+        }
+    </script>
+   
+<script type="text/javascript">
+onclick = document.getElementById('asignacionCheck');
+function foo(){
+  if(asignacionCheck.checked){
+    alert("meap");
+  };
+};
+</script>
+ <style>
+h4 {
+    border: 2px solid black;
+    padding: 9px;
+    width: 180px;
+    height: 30px;
+    text-align: center;
+    }
+   </style>
+   <style>
+ body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	/*	font-size:12px;*/
+	/*	line-height:140%;*/
+	color: #7f7f7f;
+	/*text-align:center;*/
+	margin: 0 0 0 0;
+	background-color: #000099;
+	background-image: /app_web/src/main/webapp/resources/image/rsz_presu3.jpg;
+	background-repeat: repeat-x;
+	margin-top: 50px;
+}
+   </style> 
+   <style>
+   legendxxx {
+ display: block;
+ font-weight:bold;
+  text-align:center;
+border:3px #b3b3ff;
+  border-bottom: 2px solid white;  
+   color:white;
+  margin-bottom: 20px;
+  background-color:#00CED1;
+   }
+    </style>
+    
+     <style>
+   legend {
+ display: block;
+ font-weight:bold;
+text-align:center;
+border:3px #b3b3ff;
+  border-bottom: 2px solid white;  
+  border-top: 2px solid white; 
+  border-left: 2px solid white; 
+  border-right: 2px solid white; 
+   color:white;
+  margin-bottom: 20px;
+ background: linear-gradient(to left,navy,skyblue);
+   }
+    </style>
+    <style>
+    .ui-selectmanycheckbox{
+    font-size: 10px;
+    font-weight:bold;
+    color:white;
+    }
+    </style>
+    <style>
+.right {
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    width: 300px;
+    border: 3px solid white;
+    padding: 20px;
+}
+</style>
+         <title>Modulo de Consulta y Reportes ...</title>
+                  <img src="resources/css/images/login/logo_gobierno_login.png" width="100" height="150" />
+                  <img src="resources/image/rsz_presu4.jpg" width="800" height="150" />
+                  <img src="resources/image/6.png" width="300" height="150" />
+                 <div class="right"> 
+       			<span style="font-weight:bold;color:white">Usuario conectado : -----></span> <h:outputText style="font-weight:bold;color:white" value="#{loginBean2.user}"/>
+				</div> 
+    </h:head>
+ 
+          <h:body  style="background: linear-gradient(to left,navy,skyblue);">
+                <h:form id="formTestsub21tablas" style="background: linear-gradient(to left,gray,white);">
+        <p:growl id="mensajeError" showDetail="true" sticky="false"/> 
+        <p:growl id="growl" showDetail="true" sticky="false"/> 
+        <c:set var="horasExtraSelected" value="#{panelUsuarioMB.horasExtraSelected}"/>
+        <c:set var="currentYear" value="#{panelUsuarioMB.currentYear}"/>
+         <c:set var="zonasSelected" value="#{panelUsuarioMB.zonasSelected}"/> 
+         <c:set var="dosAsignaciones" value="#{panelUsuarioMB.largoArregloMes}"/> 
+        <c:set var="currentMonth" value="#{panelUsuarioMB.currentMonth}"/>
+        <fieldset style=" border: solid 2px #FFFAFA;background: linear-gradient(to left,white,lightskyblue);">
+
+           <legend style="font-size:2em">MODULO DE SELECCIÓN DE VARIABLES PARA GENERAR INFORMES</legend>
+           <table style="border-spacing: 10px;">
+           <tr>
+           <td> 
+           <fieldset style=" border: solid 2px #FFFAFA;rendered:false;background: linear-gradient(to left,navy,skyblue);height: 170px">
+           <legend style="height:45px">Ingrese Subtitulo  :</legend>
+           <p:selectOneMenu value="#{panelUsuarioMB.selectedValues.subtitulo}" style="align:center;font-size: 12px;color:white" required="true" requiredMessage="Subtitulo Requerido"
+                                         effect="fade" >
+                            <f:selectItem itemLabel="Selecciona un subtitulo" itemValue="" style="font-size: 12px;"/>
+                            <f:selectItems value="#{panelUsuarioMB.availableSubtitulo}" 
+                                           var="subt" itemLabel="#{subt.nomSub}" itemValue="#{subt.cod}"/>
+           </p:selectOneMenu>
+           
+           </fieldset>
+           </td>
+           <td style="width:240px">
+           <fieldset style=" border: solid 2px #FFFAFA;background: linear-gradient(to left,navy,skyblue);height: 170px;width:205px;">
+           <legend style="height:45px">Marque un Item :</legend>
+           <p:selectManyCheckbox id="itemCheck" required="true" requiredMessage="Marque un Item"
+                                              value="#{panelUsuarioMB.selectedValues.item}" layout="grid"
+                                              columns="1" style="font-size: 12px;color:white">
+                            <f:selectItems value="#{panelUsuarioMB.item}" var="item" 
+                                           itemLabel="#{item.descItem}" itemValue="#{item.codItem}" />
+                                       <p:ajax  process="itemCheck" listener="#{panelUsuarioMB.inicializaResum}" 
+                                       update="asignacionCheck"/>
+                                     
+                        </p:selectManyCheckbox>
+                       
+    <p:tooltip id="toolTipItem" for="itemCheck" value="Seleccione un Item..."
+               showEffect="clip" hideEffect="explode" position="left"/>
+                        </fieldset>
+           </td>
+           <td>
+            <fieldset style=" border: solid 2px #FFFAFA;background: linear-gradient(to left,navy,skyblue);height: 240px;width:200px">
+            <legend style="height:45px">Marque una Asignación :</legend>
+                        <p:selectManyCheckbox  id="asignacionCheck"  style="font-size: 12px;color:white" required="true" requiredMessage="Marque una Asignación"
+                                               value="#{panelUsuarioMB.selectedValues.asignacion}" 
+                                              layout="grid"
+                                              columns="1" >
+                                              
+                            <f:selectItems value="#{panelUsuarioMB.asignacion}"
+                                           var="asignacion" 
+                                           itemLabel="#{asignacion.descAsig}"
+                                           itemValue="#{asignacion.codAsig}" 
+                                           itemDisabled="#{panelUsuarioMB.asignacionDisabled(asignacion.descAsig)}"
+                                           />
+                                           <p:ajax  process="asignacionCheck" event="change" listener="#{panelUsuarioMB.inicializaResum}" update="itemCheck,zonaResum,ueCheck"/>
+                                            <p:ajax  process="asignacionCheck" event="change" listener="#{panelUsuarioMB.asignacionDisabled2(asignacion.descAsig)}" update="asignacionCheck,zonaResum"/>
+                                           <ui:remove> <p:ajax process="@this" event="change" 
+                                          listener="#{panelUsuarioMB.grabarMensajeError(asignacion.descAsig)}" update="mensajeError"/></ui:remove>
+                                                                                    
+                        </p:selectManyCheckbox>
+                        <p:tooltip id="toolTipAsignacion" for="asignacionCheck" value="Seleccione una asignacion y luego Zonas..."
+               showEffect="clip" hideEffect="explode" position="left"/>
+                        </fieldset>
+           </td>
+           <td>
+           <fieldset style=" border: solid 2px #FFFAFA;background: linear-gradient(to left,navy,skyblue);height: 260px;width:180px">
+           <legend style="height:45px">Zonas :</legend>
+                        <p:selectManyCheckbox id="zonaResum" required="false" requiredMessage="Marque una Zona" style="font-size: 12px;color:white"
+                                              value="#{panelUsuarioMB.selectedValues.uniResum}" 
+                                              layout="grid"
+                                              columns="1">
+
+                         
+                            <f:selectItems value="#{panelUsuarioMB.uniResum}"
+                                           var="uniResum" 
+                                           itemLabel="#{uniResum.descUniResum}"
+                                           itemValue="#{uniResum.codUniResum}"
+                                           itemDisabled="#{!horasExtraSelected}"
+                                           />
+                              
+                              <p:ajax process="@this" event="change" listener="#{panelUsuarioMB.cargaUnidadesPorZona}" 
+                              update="zonaCheck,especialidadCheck"/>
+                              <p:ajax process="@this" event="change" listener="#{panelUsuarioMB.selectAllZonas}" update="zonaResum,zonaCheck"/>                                   
+                        </p:selectManyCheckbox>
+                                   <p:tooltip id="toolTipZona" for="zonaResum" value="Seleccione las Zonas aeroportuarias y luego las unidades..."
+               showEffect="clip" hideEffect="explode" position="left"/>
+                        </fieldset>
+           </td>
+          
+           <td>
+           <fieldset style=" border: solid 2px #FFFAFA;background: linear-gradient(to left,navy,skyblue);height: 260px">
+            <legend style="height:45px"> Unidades:</legend>
+                    	<p:scrollPanel id="zonaCheckPanel"  mode="native" style="width:250px;height:200px;background-color:skyblue" required="true" requiredMessage="Elija una o mas unidades">
+                        <p:selectManyCheckbox id="zonaCheck"
+                                              value="#{panelUsuarioMB.selectedValues.unidadZona}" layout="grid"
+                                              columns="1" style="font-size: 12px;">
+                            <f:selectItems  id="zonaCheckValues" value="#{panelUsuarioMB.unidadZona}" 
+                            			   var="unidad"
+                                           itemLabel="#{unidad.uniDes}" 
+                                           itemValue="#{unidad.codigoUni}" />
+                        </p:selectManyCheckbox>
+                        </p:scrollPanel>
+                       </fieldset>
+           </td>
+                   
+           </tr>
+            <tr>
+            <td>
+            <fieldset style=" border: solid 2px #FFFAFA;background: linear-gradient(to left,navy,skyblue);">
+            <legend style="height:45px"> Unidades Ejecutoras:</legend>
+                        <p:selectManyCheckbox id="ueCheck"
+                                              value="#{panelUsuarioMB.selectedValues.unidadEjec}" layout="grid" required="true" requiredMessage="Marque una Unidad Ejecutora"
+                                              columns="1" style="font-size: 12px;color:white">
+                            <f:selectItems value="#{panelUsuarioMB.unidadEjec}" var="unidadEj"
+                                           itemLabel="#{unidadEj.descUniEje}"
+                                           itemValue="#{unidadEj.codUniEje}" 
+                                           itemDisabled="#{panelUsuarioMB.unidadEjDisabled(unidadEj.codUniEje)}"/>
+                        </p:selectManyCheckbox>
+                        </fieldset>
+            </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td>
+            
+            <fieldset style=" border: solid 2px #FFFAFA;background: linear-gradient(to left,navy,skyblue);">
+            <legend style="height:45px"> Especialidades:</legend>
+            <p:scrollPanel id="especialidadCheckPanel"  mode="native" style="width:250px;height:200px;background-color:skyblue">
+                        <p:selectManyCheckbox id="especialidadCheck" style="font-size: 12px;color:white"
+                                              value="#{panelUsuarioMB.selectedValues.especialidades}" layout="grid" required="false" requiredMessage="Marque una Especialidad"
+                                              columns="1">
+                            <f:selectItems value="#{panelUsuarioMB.especialidades}" var="especialidad"
+                                           itemLabel="#{especialidad.descEspecialidades}"
+                                           itemValue="#{especialidad.descEspecialidades}" 
+                                           itemDisabled="#{!zonasSelected}"
+                                           
+                                          />
+                        </p:selectManyCheckbox>
+                           </p:scrollPanel>
+                        </fieldset>
+            </td>
+              </tr>
+            <tr>
+            <td>
+            <fieldset style=" border: solid 2px #FFFAFA;background: linear-gradient(to left,navy,skyblue);height: 200px">
+             <legend style="height:45px"> Seleccione un año:</legend>  
+                        <p:selectOneMenu value="#{panelUsuarioMB.selectedValues.ano}" style="font-size: 12px;color:white" effect="fade" required="true" requiredMessage="Seleccione un año" >
+                            <f:selectItem itemLabel="Selecciona un año" itemValue="" />
+                            <f:selectItems value="#{panelUsuarioMB.ano}"
+                                           var="year" itemLabel="#{year}" itemValue="#{year}" />
+                             <p:ajax update = "mesesCheck" process ="@this" partialSubmit="true"/> 
+                        </p:selectOneMenu> 
+                        </fieldset>
+            </td>
+            <td>
+            <fieldset style=" border: solid 2px #FFFAFA;background: linear-gradient(to left,navy,skyblue);">
+            <legend style="height:45px"> Seleccione uno o más Meses </legend>
+               <p:selectManyCheckbox id="mesesCheck" style="font-size: 12px;color:white" required="true" requiredMessage="Seleccione meses para generar el reporte"
+                                              value="#{panelUsuarioMB.selectedValues.mes}" layout="grid"
+                                              columns="3">
+                            <f:selectItems value="#{panelUsuarioMB.mesList}" var="mes"
+                                           itemLabel="#{mes.descMes}"
+                                           itemValue="#{mes.codMes}" 
+                                           itemDisabled="#{panelUsuarioMB.selectedValues.ano == currentYear and mes.codMes>7}"/>
+                                            <p:ajax listener="#{panelUsuarioMB.selectAllMeses2}" update="mesesCheck"/>
+                        </p:selectManyCheckbox>
+                        </fieldset>
+            </td>
+            <td>
+           <fieldset style=" border: solid 2px #FFFAFA;background: linear-gradient(to left,navy,skyblue);height: 200px">
+             <legend style="height:45px"> Seleccione Tipo:</legend>
+                        <p:selectOneMenu value="#{panelUsuarioMB.selectedValues.tipo}" effect="fade" style="font-size: 12px;color:white" required="true" requiredMessage="Seleccione un tipo">
+                            <f:selectItem itemLabel="Seleccion de tipo" itemValue="" />
+                            <f:selectItems value="#{panelUsuarioMB.avalaibleTipo}"
+                                           var="tipo" itemLabel="#{tipo.descTipo}" itemValue="#{tipo.codTipo}" />
+                        </p:selectOneMenu>
+                        </fieldset>
+            </td>
+           
+            </tr>
+           
+           </table>
+             <fieldset style=" border: solid 2px #FFFAFA;background: linear-gradient(to right,indigo,aliceblue);">  
+              <legend style="height:45px">Generar informes:</legend> 
+           <table>
+         
+            <tr>
+              <td>
+             
+                      <p:commandButton id="btnDescargar4" value="Imprimir Reporte PDF" ajax="false" style="float:left;background-color:white;color:blue"
+                             process="@form" icon="ui-icon-arrowthick-1-s">
+                <p:fileDownload value="#{panelUsuarioMB.file}" />
+            </p:commandButton>
+           
+           </td>
+           <td>
+            <p:commandButton id="btnDescargar5" value="Imprimir Reporte XLS" ajax="false" style="float:left;background-color:white;color:blue"
+                             process="@form" icon="ui-icon-arrowthick-1-s">
+                <p:fileDownload value="#{panelUsuarioMB.file2}" />
+            </p:commandButton>
+           
+            </td>
+           </tr>
+         
+           </table>
+              </fieldset>
+          </fieldset>
+                 </h:form>
+          </h:body>
+    </html>
+    
+   
